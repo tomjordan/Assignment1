@@ -5,8 +5,10 @@ public class Road {
     int width;
     int xinit;
     int yinit;
-    int xend;
-    int yend;
+    int xeast;
+    int xwest;
+    int ynorth;
+    int ysouth;
     String direction;
     int vehicle_ref = 0;
     int vehicles_on_road;
@@ -23,24 +25,32 @@ public class Road {
 
     public void makeRoad() {
         if (this.getDirection() == "North") {
-            yend = yinit + length;
-            xend = xinit + width;
+            ynorth = yinit + length;
+            ysouth = yinit;
+            xwest = xinit + width;
+            xeast = xinit;
         } else if (this.getDirection() == "South") {
-            yend = yinit - length;
-            xend = xinit + width;
+            ysouth = yinit - length;
+            ynorth = yinit;
+            xeast = xinit;
+            xwest = xinit + width;
         } else if (this.getDirection() == "East") {
-            xend = xinit + length;
-            yend = yinit + width;
+            xeast = xinit + length;
+            xwest = xinit;
+            ynorth = yinit + width;
+            ysouth = yinit;
         } else if (this.getDirection() == "West") {
-            xend = xinit - length;
-            yend = yinit + width;
+            xwest = xinit - length;
+            xeast = xinit;
+            ynorth = yinit + width;
+            ysouth = yinit;
         }
     }
 
     public void addVehicle(String type, String direction, int speed, int x, int y) {
         vehicles.add(new Vehicle(type, direction, speed, x, y));
         vehicles.get(vehicle_ref).intiDir();
-        vehicle_ref++;
+        vehicle_ref = vehicles.size();
         vehicles_on_road++;
     }
 
@@ -59,12 +69,44 @@ public class Road {
 
     public void moveVehicles() {
         for (int i = 0; i < vehicles.size(); i++) {
-            if (vehicles.get(i).xpos + vehicles.get(i).speed > xend) {
-                vehicles_on_road -= 1;
-                //vehicles.remove(i);
-                vehicles.remove(i);
-                i -=1;
-            } else vehicles.get(i).moveVehicle();
+
+            if (vehicles.get(i).getDirection() == "North"){
+                if (vehicles.get(i).ypos + vehicles.get(i).speed > ynorth) {
+                    vehicles_on_road -= 1;
+                    vehicles.remove(i);
+                    vehicle_ref = vehicles.size();
+                    i -=1;
+                } else vehicles.get(i).moveVehicle();
+
+            }
+            else if (vehicles.get(i).getDirection() == "South"){
+                if (vehicles.get(i).ypos - vehicles.get(i).speed < ysouth) {
+                    vehicles_on_road -= 1;
+                    vehicles.remove(i);
+                    vehicle_ref = vehicles.size();
+                    i -=1;
+                } else vehicles.get(i).moveVehicle();
+
+            }
+            else if (vehicles.get(i).getDirection() == "East"){
+                if (vehicles.get(i).xpos + vehicles.get(i).speed > xeast){
+                    vehicles_on_road -= 1;
+                    vehicles.remove(i);
+                    vehicle_ref = vehicles.size();
+                    i -=1;
+                } else vehicles.get(i).moveVehicle();
+
+            }
+            else if (vehicles.get(i).getDirection() == "West"){
+                if (vehicles.get(i).ypos - vehicles.get(i).speed < xwest) {
+                    vehicles_on_road -= 1;
+                    vehicles.remove(i);
+                    vehicle_ref = vehicles.size();
+                    i -=1;
+                } else vehicles.get(i).moveVehicle();
+
+            }
+
         }
     }
 
@@ -76,12 +118,6 @@ public class Road {
 
     public int getyPosition(int ref_num) {
         return vehicles.get(ref_num).ypos;
-
-    /*public void checkonroad(){
-        for (int i = 0; i < num_vehicles; i++) {
-            vehicles.get(i).moveVehicle();
-            if(vehicles.get(i).xpos + vehicles.get(i).speed > xend ){
-            }*/
 
     }
 }
