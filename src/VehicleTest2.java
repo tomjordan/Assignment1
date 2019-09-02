@@ -16,10 +16,11 @@ class VehicleTest2 {
     }
    @Test
    void testmovement() {
-       Vehicle vehicle = new Vehicle("Car", "North", 20, 1, 1);
+       Vehicle vehicle = new Vehicle("Bus", "North", 20, 1, 1);
        vehicle.intiDir();
+       assertEquals(7, vehicle.getYpos());
        vehicle.moveVehicle();
-
+       assertEquals(27, vehicle.getYpos());
     }
 
     @Test
@@ -32,12 +33,12 @@ class VehicleTest2 {
         assertEquals(4, bus.getSpeed());
         assertEquals(-10, bus.getXpos());
 
-        Vehicle moto = new Vehicle("Motorbike", "east", 25, 0, 0);
+        Vehicle moto = new Vehicle("Motorbike", "East", 25, 0, 0);
         moto.intiDir();
         moto.moveVehicle();
-        assertEquals("Motorbike", bus.getType());
-        assertEquals("East", bus.getDirection());
-        assertEquals(25, bus.getSpeed());
-        assertEquals(26, bus.getXpos());
+        assertEquals("Motorbike", moto.getType());
+        assertEquals("East", moto.getDirection());
+        assertEquals(25, moto.getSpeed());
+        assertEquals(26, moto.getXpos());
     }
 }
