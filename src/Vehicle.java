@@ -12,13 +12,12 @@ public class Vehicle {
     int yinit;
 
 
-    public Vehicle(int x, int y, String type, String direction, int speed) {
+    public Vehicle(String type, String direction, int speed, int x, int y) {
         this.type = type;
         this.xinit = x;
         this.yinit = y;
         this.direction = direction;
         this.speed = speed;
-        intiDir();
     }
 
     public int getLength() {
@@ -36,16 +35,20 @@ public class Vehicle {
 
     public void intiDir(){
         if (getDirection() == "North"){
-            ypos = yinit + getLength();
+            ypos = yinit + this.getLength();
+            xpos = xinit;
         }
         else if(getDirection() == "South"){
-            ypos = yinit - getLength();
+            ypos = yinit - this.getLength();
+            xpos = xinit;
         }
         else if(getDirection() == "East"){
-            xpos = xinit + getLength();
+            xpos = xinit + this.getLength();
+            ypos = yinit;
         }
         else if(getDirection() == "West"){
-            xpos = xinit - getLength();
+            xpos = xinit - this.getLength();
+            ypos = yinit;
         }
     }
 
@@ -77,6 +80,9 @@ public class Vehicle {
     }
     int getSpeed(){
         return speed;
+    }
+    String getType(){
+        return type;
     }
 }
 
