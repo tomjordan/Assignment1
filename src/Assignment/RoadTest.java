@@ -102,7 +102,17 @@ class RoadTest {
         road.moveVehicles();
         assertEquals(11, road.getVehicleOnRoad(1).getYpos());
 
-        
+        Road road2 = new Road(25, 10, "West", 0, 0);
+        road2.makeRoad();
+        road2.addVehicle("Car", 4);
+        road2.moveVehicles();
+        road2.moveVehicles();
+        assertEquals(-8, road2.getVehicleOnRoad(0).getXrear());
+        road2.addVehicle("Car", 15);
+        road2.moveVehicles();
+        assertEquals(-14, road2.getVehicleOnRoad(0).getXpos());
+        assertEquals(-11, road2.getVehicleOnRoad(1).getXpos());
+
 
     }
 }

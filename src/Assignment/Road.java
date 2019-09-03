@@ -169,8 +169,7 @@ public class Road {
                         vehicles.get(i).moveVehicle();
                     } else vehicles.get(i).setXpos(trafficLights.get(light_ref).getXpos());
 
-                }
-                if (vehicles.get(i).getYpos() - vehicles.get(i).getSpeed() < xwest) {
+                } else if (vehicles.get(i).getXpos() - vehicles.get(i).getSpeed() < xwest) {
                     vehicles_on_road -= 1;
                     vehicles.remove(i);
                     vehicle_ref = vehicles.size();
@@ -262,23 +261,6 @@ public class Road {
         return trafficLights.get(ref);
 
     }
-
-    /*public boolean checkCollision(int vRef) {
-        boolean status = false;
-        if (vehicles.size() > 1) {
-            if (vehicles.get(vRef).getXpos() + vehicles.get(vRef).getSpeed() >=
-                    vehicles.get(vRef - 1).getXrear()) {
-                status = true;
-            } else status = false;
-        }
-        return status;
-    }*/
-
-
-//vehicles.get(num).setSpeed(vehicles.get(num + 1).getSpeed());
-
-// for (int num = vehicles.size() - 1; num > 0; num--) {
-
 
     public boolean checkCollision(int vRef) {
         boolean status = false;

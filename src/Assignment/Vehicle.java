@@ -109,7 +109,6 @@ public class Vehicle {
             xpos = newposition;
             xrear = newposition - this.getLength();
         } else if (getDirection() == "West") {
-            xpos = xinit - this.getLength();
             xpos = newposition;
             xrear = newposition + this.getLength();
         }
