@@ -112,6 +112,28 @@ public class RoadMain {
         return roads.get(road_ref);
     }
 
+    public void checkCorners(){
+
+        for (int i = 0; i < roads.size(); i++){
+            if (roads.get(i).vehicles_off_road.size()>0){
+                Vehicle newVeh = roads.get(i).vehicles_off_road.get(0);
+                 int ref = newVeh.getRoad_ref();
+                 roads.get(ref).addVehicle(newVeh.getType(), newVeh.getSpeed());
+                roads.get(i).vehicles_off_road.remove(0);
+                }
+            }
+        }
+
+
+    public void addVehicle(String type, int speed){
+        roads.get(0).addVehicle(type, speed);
+    }
+public void moveVehicles(){
+
+        for (int i = 0; i < roads.size(); i++){
+            roads.get(i).moveVehicles();
+    }
+}
     /*public boolean checkOnRoad(int ref) {
         int y = vehicles.get(ref).getYpos();
         int x = vehicles.get(ref).getXpos();

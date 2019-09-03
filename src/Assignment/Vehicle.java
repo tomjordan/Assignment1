@@ -134,8 +134,8 @@ public int getRoad_ref(){
         return road_ref;
 
 }
-public void setRoad_ref(int num){
-        this.road_ref = num;
+public void setRoad_ref(){
+        this.road_ref ++;
 
 }
 }

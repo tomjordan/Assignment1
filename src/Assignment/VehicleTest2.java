@@ -44,4 +44,12 @@ class VehicleTest2 {
         assertEquals(25, moto.getSpeed());
         assertEquals(26, moto.getXpos());
     }
+
+    @Test
+    void testroadref() {
+        Vehicle bus = new Vehicle("Bus", "West", 4, 0, 0);
+        assertEquals(0, bus.getRoad_ref());
+        bus.setRoad_ref();
+        assertEquals(1, bus.getRoad_ref());
+    }
 }

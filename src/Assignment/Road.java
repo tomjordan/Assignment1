@@ -17,6 +17,7 @@ public class Road {
     private int tot_TrafficLights = 0;
     private int light_ref = 0;
     ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
+    ArrayList<Vehicle> vehicles_off_road = new ArrayList<Vehicle>();
     ArrayList<TrafficLight> trafficLights = new ArrayList<TrafficLight>();
 
 
@@ -108,64 +109,85 @@ public class Road {
     public int getNum_vehicles() {
         return vehicles_on_road;
     }
-
     public void moveVehicles() {
-        for (int i = 0; i < vehicles.size(); i++) {
-            if (checkOnRoad(i)) {
-                if (vehicles.get(i).getDirection() == "North") {
-                    if (checkCollision(i)) {
-                        vehicles.get(i).setSpeed(vehicles.get(i - 1).getSpeed());
-                        vehicles.get(i).setPos(vehicles.get(i - 1).getYrear() - 1);
-                    } else if (checkTrafficLights(i)) {
-                        if (trafficLights.get(light_ref).isGreen()) {
-                            vehicles.get(i).moveVehicle();
-                        } else vehicles.get(i).setPos(trafficLights.get(light_ref).getYpos() - 1);
+    for (int i = 0; i < vehicles.size(); i++) {
 
-                    } else vehicles.get(i).moveVehicle();
+        if (vehicles.get(i).getDirection() == "North") {
+            if (checkCollision(i)) {
+                vehicles.get(i).setSpeed(vehicles.get(i - 1).getSpeed());
+                vehicles.get(i).setPos(vehicles.get(i - 1).getYrear() - 1);
+            } else if (checkTrafficLights(i)) {
+                if (trafficLights.get(light_ref).isGreen()) {
+                    vehicles.get(i).moveVehicle();
+                } else vehicles.get(i).setPos(trafficLights.get(light_ref).getYpos()-1);
 
-                } else if (vehicles.get(i).getDirection() == "South") {
-                    if (checkCollision(i)) {
-                        vehicles.get(i).setSpeed(vehicles.get(i - 1).getSpeed());
-                        vehicles.get(i).setPos(vehicles.get(i - 1).getYrear() + 1);
-                    } else if (checkTrafficLights(i)) {
-                        if (trafficLights.get(light_ref).isGreen()) {
-                            vehicles.get(i).moveVehicle();
-                        } else vehicles.get(i).setPos(trafficLights.get(light_ref).getYpos() - 1);
-
-                    } else vehicles.get(i).moveVehicle();
-
-                } else if (vehicles.get(i).getDirection() == "East") {
-                    if (checkCollision(i)) {
-                        vehicles.get(i).setSpeed(vehicles.get(i - 1).getSpeed());
-                        vehicles.get(i).setPos(vehicles.get(i - 1).getXrear() - 1);
-                    } else if (checkTrafficLights(i)) {
-                        if (trafficLights.get(light_ref).isGreen()) {
-                            vehicles.get(i).moveVehicle();
-                        } else vehicles.get(i).setPos(trafficLights.get(light_ref).getXpos() - 1);
-
-                    } else if (vehicles.get(i).getXpos() + vehicles.get(i).getSpeed() > xeast) {
-                    } else vehicles.get(i).moveVehicle();
-
-                } else if (vehicles.get(i).getDirection() == "West") {
-                    if (checkCollision(i)) {
-                        vehicles.get(i).setSpeed(vehicles.get(i - 1).getSpeed());
-                        vehicles.get(i).setPos(vehicles.get(i - 1).getXrear() + 1);
-                    } else if (checkTrafficLights(i)) {
-                        if (trafficLights.get(light_ref).isGreen()) {
-                            vehicles.get(i).moveVehicle();
-                        } else vehicles.get(i).setPos(trafficLights.get(light_ref).getXpos() - 1);
-
-                    } else if (vehicles.get(i).getXpos() - vehicles.get(i).getSpeed() < xwest) {
-                    } else vehicles.get(i).moveVehicle();
-                } else vehicles.get(i).setRoad_ref(vehicles.get(i).getRoad_ref() + 1);
+            } else if (vehicles.get(i).getYpos() + vehicles.get(i).getSpeed() > ynorth) {
+                vehicles.get(i).setRoad_ref();
+                vehicles_off_road.add(vehicles.get(i));
                 vehicles_on_road -= 1;
                 vehicles.remove(i);
                 vehicle_ref = vehicles.size();
                 i -= 1;
-            }
+            } else vehicles.get(i).moveVehicle();
+
+        } else if (vehicles.get(i).getDirection() == "South") {
+            if (checkCollision(i)) {
+                vehicles.get(i).setSpeed(vehicles.get(i - 1).getSpeed());
+                vehicles.get(i).setPos(vehicles.get(i - 1).getYrear() + 1);
+            } else if (checkTrafficLights(i)) {
+                if (trafficLights.get(light_ref).isGreen()) {
+                    vehicles.get(i).moveVehicle();
+                } else vehicles.get(i).setPos(trafficLights.get(light_ref).getYpos()-1);
+
+            } else if (vehicles.get(i).getYpos() - vehicles.get(i).getSpeed() < ysouth) {
+                vehicles.get(i).setRoad_ref();
+                vehicles_off_road.add(vehicles.get(i));
+                vehicles_on_road -= 1;
+                vehicles.remove(i);
+                vehicle_ref = vehicles.size();
+                i -= 1;
+            } else vehicles.get(i).moveVehicle();
+
+        } else if (vehicles.get(i).getDirection() == "East") {
+            if (checkCollision(i)) {
+                vehicles.get(i).setSpeed(vehicles.get(i - 1).getSpeed());
+                vehicles.get(i).setPos(vehicles.get(i - 1).getXrear() - 1);
+            } else if (checkTrafficLights(i)) {
+                if (trafficLights.get(light_ref).isGreen()) {
+                    vehicles.get(i).moveVehicle();
+                } else vehicles.get(i).setPos(trafficLights.get(light_ref).getXpos()-1);
+
+            } else if (vehicles.get(i).getXpos() + vehicles.get(i).getSpeed() > xeast) {
+                vehicles.get(i).setRoad_ref();
+                vehicles_off_road.add(vehicles.get(i));
+                vehicles_on_road -= 1;
+                vehicles.remove(i);
+                vehicle_ref = vehicles.size();
+                i -= 1;
+            } else vehicles.get(i).moveVehicle();
+
+        } else if (vehicles.get(i).getDirection() == "West") {
+            if (checkCollision(i)) {
+                vehicles.get(i).setSpeed(vehicles.get(i - 1).getSpeed());
+                vehicles.get(i).setPos(vehicles.get(i - 1).getXrear() + 1);
+            } else if (checkTrafficLights(i)) {
+                if (trafficLights.get(light_ref).isGreen()) {
+                    vehicles.get(i).moveVehicle();
+                } else vehicles.get(i).setPos(trafficLights.get(light_ref).getXpos()-1);
+
+            } else if (vehicles.get(i).getXpos() - vehicles.get(i).getSpeed() < xwest) {
+                vehicles.get(i).setRoad_ref();
+                vehicles_off_road.add(vehicles.get(i));
+                vehicles_on_road -= 1;
+                vehicles.remove(i);
+                vehicle_ref = vehicles.size();
+                i -= 1;
+            } else vehicles.get(i).moveVehicle();
 
         }
+
     }
+}
 
 
     public Vehicle getVehicleOnRoad(int ref_num) {
@@ -173,126 +195,135 @@ public class Road {
 
     }
 
-    public boolean checkOnRoad(int ref) {
-        int y = vehicles.get(ref).getYpos();
-        int x = vehicles.get(ref).getXpos();
-        int speed = vehicles.get(ref).getSpeed();
-        String dir = vehicles.get(ref).getDirection();
-        if (dir == "East" || dir == "West"){
-        if (x + speed > xeast || x - speed < xwest) {
-            return false;}
-        else return true;
-        else if (dir == "North" || dir == "South"){
-        if (y + speed > ynorth || y - speed < ysouth) {
-            return false;
-        } else return true;
+    public boolean checkOnRoad(int i) {
 
-    }
-
-    public boolean checkTrafficLights(int ref) {
-        int speed = vehicles.get(ref).getSpeed();
-        int x = vehicles.get(ref).getXpos();
-        int y = vehicles.get(ref).getYpos();
-        String ori = vehicles.get(ref).getDirection();
         boolean status = false;
-        for (int i = 0; i < trafficLights.size(); i++) {
-            if (ori == "North") {
-                if (trafficLights.get(i).getOrientation().equals("NS")) {
-                    if (y + speed >= trafficLights.get(i).getYpos()) {
-                        status = true;
-                        light_ref = i;
-                    }
-                }
-            } else if (ori == "South") {
-                if (trafficLights.get(i).getOrientation().equals("NS")) {
-                    if (y - speed <= trafficLights.get(i).getYpos()) {
-                        status = true;
-                        light_ref = i;
-                    }
-                }
-            } else if (ori == "East") {
-                if (trafficLights.get(i).getOrientation().equals("EW")) {
-                    if (x + speed <= trafficLights.get(i).getXpos()) {
-                        status = true;
-                        light_ref = i;
-                    }
-                }
-            } else if (ori == "West") {
-                if (trafficLights.get(i).getOrientation().equals("EW")) {
-                    if (x - speed <= trafficLights.get(i).getXpos()) {
-                        status = true;
-                        light_ref = i;
-                    }
-                }
-            } else status = false;
+        if (direction == "East" ) {
+            if (vehicles.get(i).getXpos() + vehicles.get(i).getSpeed() > xeast) {
+                status = true;
+            }
+        }else if (direction == "West" ) {
+            if (vehicles.get(i).getXpos() - vehicles.get(i).getSpeed() < xwest) {
+                status = true;
+            }
+        }else if (direction == "North" ) {
+            if (vehicles.get(i).getYpos() + vehicles.get(i).getSpeed() > ynorth) {
+                status = true;
+            }
+        }else if (direction == "South" ) {
+            if (vehicles.get(i).getYpos() - vehicles.get(i).getSpeed() < ysouth) {
+                status = true;
+            }
         }
         return status;
     }
 
-    public int getXeast() {
-        return xeast;
-    }
-
-    public int getXwest() {
-        return xwest;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getYnorth() {
-        return ynorth;
-    }
-
-    public int getYsouth() {
-        return ysouth;
-    }
-
-    public TrafficLight getTrafficlight(int ref) {
-
-        return trafficLights.get(ref);
-
-    }
-
-    public boolean checkCollision(int vRef) {
-        boolean status = false;
-        if (vehicles.size() == 1) {
-            status = false;
-        } else if (vRef == 0) {
-            status = false;
-        } else {
-            if (direction == "North") {
-                if (vehicles.get(vRef).getYpos() + vehicles.get(vRef).getSpeed() >=
-                        vehicles.get(vRef - 1).getYrear()) {
-                    status = true;
+        public boolean checkTrafficLights ( int ref){
+            int speed = vehicles.get(ref).getSpeed();
+            int x = vehicles.get(ref).getXpos();
+            int y = vehicles.get(ref).getYpos();
+            String ori = vehicles.get(ref).getDirection();
+            boolean status = false;
+            for (int i = 0; i < trafficLights.size(); i++) {
+                if (ori == "North") {
+                    if (trafficLights.get(i).getOrientation().equals("NS")) {
+                        if (y + speed >= trafficLights.get(i).getYpos()) {
+                            status = true;
+                            light_ref = i;
+                        }
+                    }
+                } else if (ori == "South") {
+                    if (trafficLights.get(i).getOrientation().equals("NS")) {
+                        if (y - speed <= trafficLights.get(i).getYpos()) {
+                            status = true;
+                            light_ref = i;
+                        }
+                    }
+                } else if (ori == "East") {
+                    if (trafficLights.get(i).getOrientation().equals("EW")) {
+                        if (x + speed <= trafficLights.get(i).getXpos()) {
+                            status = true;
+                            light_ref = i;
+                        }
+                    }
+                } else if (ori == "West") {
+                    if (trafficLights.get(i).getOrientation().equals("EW")) {
+                        if (x - speed <= trafficLights.get(i).getXpos()) {
+                            status = true;
+                            light_ref = i;
+                        }
+                    }
                 } else status = false;
+            }
+            return status;
+        }
 
-            } else if (direction == "East") {
-                if (vehicles.get(vRef).getXpos() + vehicles.get(vRef).getSpeed() >=
-                        vehicles.get(vRef - 1).getXrear()) {
-                    status = true;
-                } else status = false;
+        public int getXeast () {
+            return xeast;
+        }
 
-            } else if (direction == "West") {
-                if (vehicles.get(vRef).getXpos() - vehicles.get(vRef).getSpeed() <=
-                        vehicles.get(vRef - 1).getXrear()) {
-                    status = true;
-                } else status = false;
+        public int getXwest () {
+            return xwest;
+        }
 
-            } else if (direction == "South") {
-                if (vehicles.get(vRef).getYpos() - vehicles.get(vRef).getSpeed() <=
-                        vehicles.get(vRef - 1).getYrear()) {
-                    status = true;
-                } else status = false;
+        public int getWidth () {
+            return width;
+        }
+
+        public int getYnorth () {
+            return ynorth;
+        }
+
+        public int getYsouth () {
+            return ysouth;
+        }
+
+        public TrafficLight getTrafficlight ( int ref){
+
+            return trafficLights.get(ref);
+
+        }
+
+        public boolean checkCollision ( int vRef){
+            boolean status = false;
+            if (vehicles.size() == 1) {
+                status = false;
+            } else if (vRef == 0) {
+                status = false;
+            } else {
+                if (direction == "North") {
+                    if (vehicles.get(vRef).getYpos() + vehicles.get(vRef).getSpeed() >=
+                            vehicles.get(vRef - 1).getYrear()) {
+                        status = true;
+                    } else status = false;
+
+                } else if (direction == "East") {
+                    if (vehicles.get(vRef).getXpos() + vehicles.get(vRef).getSpeed() >=
+                            vehicles.get(vRef - 1).getXrear()) {
+                        status = true;
+                    } else status = false;
+
+                } else if (direction == "West") {
+                    if (vehicles.get(vRef).getXpos() - vehicles.get(vRef).getSpeed() <=
+                            vehicles.get(vRef - 1).getXrear()) {
+                        status = true;
+                    } else status = false;
+
+                } else if (direction == "South") {
+                    if (vehicles.get(vRef).getYpos() - vehicles.get(vRef).getSpeed() <=
+                            vehicles.get(vRef - 1).getYrear()) {
+                        status = true;
+                    } else status = false;
+
+                }
 
             }
-
+            return status;
         }
-        return status;
+
+    public ArrayList<Vehicle> getVehicles_off_road() {
+        return vehicles_off_road;
     }
-
-
 }
 
 

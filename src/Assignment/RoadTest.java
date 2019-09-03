@@ -40,10 +40,12 @@ class RoadTest {
         Road road = new Road(25, 10, "North", 0, 0);
         road.makeRoad();
         road.addVehicle("Car", 10);
+        assertEquals(1, road.getNum_vehicles());
         road.moveVehicles();
         assertEquals(12, road.getVehicleOnRoad(0).getYpos());
         road.moveVehicles();
         road.addVehicle("Motorbike", 10);
+        assertEquals(true,road.checkOnRoad(0));
         assertEquals(2, road.getNum_vehicles());
         road.moveVehicles();
         assertEquals(1, road.getNum_vehicles());
