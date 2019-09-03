@@ -1,6 +1,6 @@
-import org.junit.jupiter.api.Test;
+package Assignment;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class TrafficLightTest {
 

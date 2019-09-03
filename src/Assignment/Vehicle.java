@@ -1,3 +1,5 @@
+package Assignment;
+
 public class Vehicle {
     int carlength = 2;
     int length;
