@@ -1,3 +1,4 @@
+import jdk.jfr.Timespan;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -48,4 +49,28 @@ class RoadTest {
 
 
     }
+
+    @Test
+    void testonroad() {
+        Road road = new Road(24, 10, "North", 0, 15);
+        road.makeRoad();
+        road.addVehicle("Motorbike", "North", 10, 0, 50);
+        road.addTrafficLight(5, 200, "NS", true);
+        road.addVehicle("Motorbike", "North", 10, 0, 25);
+
+    }
+
+    @Test
+    void trafficLighttest() {
+        Road road = new Road(30, 10, "North", 0, 0);
+        road.makeRoad();
+        road.addTrafficLight(5, 15, "NS", false);
+        road.addVehicle("Motorbike", "North", 7 , 0, 0);
+        road.moveVehicles();
+        road.moveVehicles();
+        road.moveVehicles();
+        road.moveVehicles();
+        assertEquals(15, road.getyPosition(0));
+    }
+
 }

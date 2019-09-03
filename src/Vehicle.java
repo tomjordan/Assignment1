@@ -72,18 +72,27 @@ public class Vehicle {
     public String getDirection(){
         return direction;
     }
+
     public int getXpos(){
         return xpos;
     }
+
     public int getYpos(){
         return ypos;
     }
+
     int getSpeed(){
         return speed;
     }
+
     String getType(){
         return type;
     }
+
+    public void setXpos(int x){this.xpos = x;}
+
+    public void setYpos(int y){this.ypos = y;}
+
 }
 
 
