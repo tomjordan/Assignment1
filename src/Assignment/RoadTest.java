@@ -33,28 +33,29 @@ class RoadTest {
         assertEquals(20, road.getxPosition(0));
 
 
-    }
+    }*/
 
     @Test
     void teststuff() {
-        Road road = new Road(24, 10, "North", 0, 15);
+        Road road = new Road(25, 10, "North", 0, 0);
         road.makeRoad();
-        assertEquals(39, road.getYnorth());
-        road.addVehicle("Motorbike", "North", 10, 0, 17);
-        assertEquals(18, road.getyPosition(0));
+        road.addVehicle("Car", 10);
         road.moveVehicles();
+        assertEquals(12, road.getVehicleOnRoad(0).getYpos());
         road.moveVehicles();
-        assertEquals(38, road.getyPosition(0));
+        road.addVehicle("Motorbike", 10);
+        assertEquals(2, road.getNum_vehicles());
         road.moveVehicles();
-        assertEquals(0, road.getNum_vehicles());
+        assertEquals(1, road.getNum_vehicles());
 
 
 
     }
 
 
+/*
 
-   *//*@Test
+   @Test
     void testonroad() {
         Road road = new Road(24, 10, "North", 0, 15);
         road.makeRoad();
@@ -62,7 +63,8 @@ class RoadTest {
         road.addTrafficLight(5, 200, "NS", true);
         road.addVehicle("Motorbike", "North", 10, 0, 25);
 
-    }*/
+    }
+*/
 
     @Test
     void trafficLighttest() {
@@ -115,6 +117,26 @@ class RoadTest {
         road2.moveVehicles();
         assertEquals(-18, road2.getVehicleOnRoad(0).getXpos());
         assertEquals(-11, road2.getVehicleOnRoad(1).getXpos());
+
+        Road road3 = new Road(50, 10, "North", 0, 0);
+        road3.makeRoad();
+        road3.addVehicle("Bus", 2);
+        road3.moveVehicles();
+        road3.moveVehicles();
+        road3.moveVehicles();
+        road3.addVehicle("Car", 5);
+        road3.moveVehicles();
+        assertEquals(8, road3.getVehicleOnRoad(0).getYrear());
+        assertEquals(7, road3.getVehicleOnRoad(1).getYpos());
+
+        road3.moveVehicles();
+        assertEquals(2, road3.getVehicleOnRoad(1).getSpeed());
+        road3.moveVehicles();
+        assertEquals(11, road3.getVehicleOnRoad(1).getYpos());
+        road3.moveVehicles();
+        assertEquals(20, road3.getVehicleOnRoad(0).getYpos());
+        assertEquals(13, road3.getVehicleOnRoad(1).getYpos());
+
 
 
 

@@ -22,7 +22,7 @@ class RoadMainTest {
                 b.getXeast() +"   " + b.getXwest());
         System.out.println(c.getYnorth() + "   " + c.getYsouth() +"   " +
                 c.getXeast() +"   " + c.getXwest());
-        
+
     }
 
 }

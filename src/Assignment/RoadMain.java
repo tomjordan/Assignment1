@@ -7,11 +7,11 @@ public class RoadMain {
     int num_roads = 0;
     ArrayList<Road> roads = new ArrayList<Road>();
 
-    public void main(String args[]) {
-        addnewRoad(20, 10, "North", 0, 0);
-        addConectingRoad(20, "East");
-        addConectingRoad(20, "North");
-
+    public static void main(String[] args) {
+        RoadMain roadMain = new RoadMain();
+        roadMain.addnewRoad(30, 10, "North", 0, 0);
+        roadMain.addConectingRoad(50, "West");
+        roadMain.addConectingRoad(40, "North");
     }
 
     public void change_roads(int road_ref) {
@@ -112,4 +112,17 @@ public class RoadMain {
         return roads.get(road_ref);
     }
 
+    /*public boolean checkOnRoad(int ref) {
+        int y = vehicles.get(ref).getYpos();
+        int x = vehicles.get(ref).getXpos();
+        int speed = vehicles.get(ref).getSpeed();
+        if (x + speed > xeast || x - speed < xwest) {
+            return false;
+        } else if (y + speed > ynorth || y - speed < ysouth) {
+            return false;
+        } else return true;
+
+
+    }*/
 }
+
