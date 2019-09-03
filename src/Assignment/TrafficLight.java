@@ -9,11 +9,12 @@ public class TrafficLight {
     boolean status;
 
 
-    public TrafficLight(int x, int y, String orientation, boolean status){
+
+    public TrafficLight(int x, int y, String orientation){
+
         this.xpos = x;
         this.ypos = y;
         this.orientation = orientation;
-        this.status = status;
     }
     public boolean isGreen(){
         return status; //True = green  False = red
@@ -26,6 +27,7 @@ public class TrafficLight {
         return orientation;
     }
 
+
     public void setStatus(boolean status) {
         this.status = status;
     }
@@ -36,5 +38,13 @@ public class TrafficLight {
 
     public int getYpos() {
         return ypos;
+    }
+
+    public void setXpos(int xpos) {
+        this.xpos = xpos;
+    }
+
+    public void setYpos(int ypos) {
+        this.ypos = ypos;
     }
 }

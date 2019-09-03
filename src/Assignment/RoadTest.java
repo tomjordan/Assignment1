@@ -1,16 +1,17 @@
 package Assignment;
 
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class RoadTest {
 
-    @Test
+    /*@Test
     void testMove() {
         Road road = new Road(24, 10, "East", 0, 0);
         road.makeRoad();
-        assertEquals(24, road.xeast);
+        assertEquals(24, road.getXeast());
         road.addVehicle("Bus", "East", 4, 0, 0);
         road.moveVehicles();
         road.addVehicle("Car", "East", 3, 0, 0);
@@ -38,7 +39,7 @@ class RoadTest {
     void teststuff() {
         Road road = new Road(24, 10, "North", 0, 15);
         road.makeRoad();
-        assertEquals(39, road.ynorth);
+        assertEquals(39, road.getYnorth());
         road.addVehicle("Motorbike", "North", 10, 0, 17);
         assertEquals(18, road.getyPosition(0));
         road.moveVehicles();
@@ -51,7 +52,9 @@ class RoadTest {
 
     }
 
-    @Test
+
+
+   *//*@Test
     void testonroad() {
         Road road = new Road(24, 10, "North", 0, 15);
         road.makeRoad();
@@ -59,19 +62,31 @@ class RoadTest {
         road.addTrafficLight(5, 200, "NS", true);
         road.addVehicle("Motorbike", "North", 10, 0, 25);
 
-    }
+    }*/
 
     @Test
     void trafficLighttest() {
         Road road = new Road(30, 10, "North", 0, 0);
         road.makeRoad();
-        road.addTrafficLight(5, 15, "NS", false);
-        road.addVehicle("Motorbike", "North", 7 , 0, 0);
+        road.addTrafficLight("End");
+        road.addVehicle("Motorbike", 10);
         road.moveVehicles();
         road.moveVehicles();
         road.moveVehicles();
         road.moveVehicles();
-        assertEquals(15, road.getyPosition(0));
+        road.moveVehicles();
+        assertEquals(30, road.getVehicleOnRoad(0).ypos);
     }
 
+    @Test
+    void testaddtrafficlight() {
+        Road road = new Road(25, 10, "North", 0, 0);
+        road.makeRoad();
+        road.addTrafficLight("End");
+        assertEquals(25,road.getTrafficlight(0).getYpos());
+        Road road2 = new Road(25, 10, "South", 0, 0);
+        road2.makeRoad();
+        road2.addTrafficLight("End");
+        assertEquals(-25,road2.getTrafficlight(0).getYpos());
+    }
 }

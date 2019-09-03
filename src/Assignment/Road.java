@@ -3,19 +3,19 @@ package Assignment;
 import java.util.ArrayList;
 
 public class Road {
-    int length;
-    int width;
-    int xinit;
-    int yinit;
-    int xeast;
-    int xwest;
-    int ynorth;
-    int ysouth;
-    String direction;
-    int vehicle_ref = 0;
-    int vehicles_on_road;
-    int tot_TrafficLights = 0;
-    int light_ref = 0;
+    private int length;
+    private int width;
+    private int xinit;
+    private int yinit;
+    private int xeast;
+    private int xwest;
+    private int ynorth;
+    private int ysouth;
+    private String direction;
+    private int vehicle_ref = 0;
+    private int vehicles_on_road;
+    private int tot_TrafficLights = 0;
+    private int light_ref = 0;
     ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
     ArrayList<TrafficLight> trafficLights = new ArrayList<TrafficLight>();
 
@@ -52,20 +52,47 @@ public class Road {
         }
     }
 
-    public void addVehicle(String type, String direction, int speed, int x, int y) {
-        if (checkOnRoad(x, y)) {
-            vehicles.add(new Vehicle(type, direction, speed, x, y));
-            vehicles.get(vehicle_ref).intiDir();
-            vehicle_ref = vehicles.size();
-            vehicles_on_road++;
-        } else System.out.println("The vehicle you tried to add isnt on the road!");
+    public void addVehicle(String type, int speed) {
+        if (direction == "North") {
+        vehicles.add(new Vehicle(type, "North", speed, xwest+width/2, ysouth));
+        } else if (direction == "South") {
+            vehicles.add(new Vehicle(type, "South", speed, xwest+width/2, ynorth));
+        } else if (direction == "East") {
+            vehicles.add(new Vehicle(type, "East", speed, xwest, ysouth+width/2));
+        } else if (direction == "West") {
+            vehicles.add(new Vehicle(type, "West", speed, xeast, ysouth+width/2));
+        }
+        vehicles.get(vehicle_ref).intiDir();
+        vehicle_ref = vehicles.size();
+        vehicles_on_road++;
     }
 
-    public void addTrafficLight(int xpos, int ypos, String ori, boolean status) {
-         if (checkOnRoad(xpos, ypos)) {
-        trafficLights.add(new TrafficLight(xpos, ypos, ori, status));
+    public void addTrafficLight(String which_end) {
+        if (which_end == "Start") {
+            if (direction == "North") {
+                trafficLights.add(new TrafficLight(xwest, ysouth, "NS"));
+            } else if (direction == "South") {
+                trafficLights.add(new TrafficLight(xeast, ynorth, "NS"));
+            } else if (direction == "East") {
+                trafficLights.add(new TrafficLight(xwest, ynorth, "EW"));
+            } else if (direction == "West") {
+                trafficLights.add(new TrafficLight(xeast, ysouth, "EW"));
+            }
+        } else if (which_end == "End") {
+            if (direction == "North") {
+                trafficLights.add(new TrafficLight(xwest, ynorth, "NS"));
+
+            } else if (direction == "South") {
+                trafficLights.add(new TrafficLight(xeast, ysouth, "NS"));
+
+            } else if (direction == "East") {
+                trafficLights.add(new TrafficLight(xeast, ynorth, "EW"));
+
+            } else if (direction == "West") {
+                trafficLights.add(new TrafficLight(xwest, ysouth, "EW"));
+            }
+        }
         tot_TrafficLights++;
-        } else System.out.println("The traffic light you tried to add isnt on the road!");
 
     }
 
@@ -143,14 +170,9 @@ public class Road {
         }
     }
 
-    public int getxPosition(int ref_num) {
-        return vehicles.get(ref_num).xpos;
 
-
-    }
-
-    public int getyPosition(int ref_num) {
-        return vehicles.get(ref_num).ypos;
+    public Vehicle getVehicleOnRoad(int ref_num) {
+        return vehicles.get(ref_num);
 
     }
 
@@ -201,6 +223,32 @@ public class Road {
             } else status = false;
         }
         return status;
+    }
+
+    public int getXeast() {
+        return xeast;
+    }
+
+    public int getXwest() {
+        return xwest;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getYnorth() {
+        return ynorth;
+    }
+
+    public int getYsouth() {
+        return ysouth;
+    }
+
+    public TrafficLight getTrafficlight(int ref) {
+
+        return trafficLights.get(ref);
+
     }
 }
 
