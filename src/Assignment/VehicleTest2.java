@@ -21,6 +21,7 @@ class VehicleTest2 {
        Vehicle vehicle = new Vehicle("Bus", "North", 20, 1, 1);
        vehicle.intiDir();
        assertEquals(7, vehicle.getYpos());
+       assertEquals(1, vehicle.getYrear());
        vehicle.moveVehicle();
        assertEquals(27, vehicle.getYpos());
     }

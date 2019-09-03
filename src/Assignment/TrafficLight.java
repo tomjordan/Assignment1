@@ -1,29 +1,31 @@
 package Assignment;
 
 import java.util.Random;
+
 public class TrafficLight {
 
-    int xpos;
-    int ypos;
-    String orientation;
-    boolean status;
+    private int xpos;
+    private int ypos;
+    private String orientation;
+    private boolean status;
 
 
-
-    public TrafficLight(int x, int y, String orientation){
+    public TrafficLight(int x, int y, String orientation) {
 
         this.xpos = x;
         this.ypos = y;
         this.orientation = orientation;
     }
-    public boolean isGreen(){
+
+    public boolean isGreen() {
         return status; //True = green  False = red
     /*public boolean isGreen(){
         Random status = new Random();
         return status.nextBoolean(); //True = green  False = red*/
 
     }
-    public String getOrientation(){
+
+    public String getOrientation() {
         return orientation;
     }
 
@@ -32,7 +34,7 @@ public class TrafficLight {
         this.status = status;
     }
 
-    public int getXpos(){
+    public int getXpos() {
         return xpos;
     }
 

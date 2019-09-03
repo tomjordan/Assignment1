@@ -75,7 +75,7 @@ class RoadTest {
         road.moveVehicles();
         road.moveVehicles();
         road.moveVehicles();
-        assertEquals(30, road.getVehicleOnRoad(0).ypos);
+        assertEquals(30, road.getVehicleOnRoad(0).getYpos());
     }
 
     @Test
@@ -83,10 +83,26 @@ class RoadTest {
         Road road = new Road(25, 10, "North", 0, 0);
         road.makeRoad();
         road.addTrafficLight("End");
-        assertEquals(25,road.getTrafficlight(0).getYpos());
+        assertEquals(25, road.getTrafficlight(0).getYpos());
         Road road2 = new Road(25, 10, "South", 0, 0);
         road2.makeRoad();
         road2.addTrafficLight("End");
-        assertEquals(-25,road2.getTrafficlight(0).getYpos());
+        assertEquals(-25, road2.getTrafficlight(0).getYpos());
+    }
+
+    @Test
+    void testcollisions() {
+        Road road = new Road(25, 10, "North", 0, 0);
+        road.makeRoad();
+        road.addVehicle("Car", 4);
+        road.moveVehicles();
+        road.moveVehicles();
+        assertEquals(8, road.getVehicleOnRoad(0).getYrear());
+        road.addVehicle("Car", 15);
+        road.moveVehicles();
+        assertEquals(11, road.getVehicleOnRoad(1).getYpos());
+
+        
+
     }
 }
