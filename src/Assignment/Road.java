@@ -16,6 +16,7 @@ public class Road {
     private int vehicles_on_road;
     private int tot_TrafficLights = 0;
     private int light_ref = 0;
+    Vehicle turning_vehicle;
     ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
     ArrayList<Vehicle> vehicles_off_road = new ArrayList<Vehicle>();
     ArrayList<TrafficLight> trafficLights = new ArrayList<TrafficLight>();
@@ -195,7 +196,7 @@ public class Road {
 
     }
 
-    public boolean checkOnRoad(int i) {
+    public boolean checkOffRoad(int i) {
 
         boolean status = false;
         if (direction == "East" ) {
@@ -323,6 +324,10 @@ public class Road {
 
     public ArrayList<Vehicle> getVehicles_off_road() {
         return vehicles_off_road;
+    }
+
+    public void setVehicles_off_road() {
+        this.vehicles_off_road = new ArrayList<Vehicle>();
     }
 }
 

@@ -51,5 +51,7 @@ class VehicleTest2 {
         assertEquals(0, bus.getRoad_ref());
         bus.setRoad_ref();
         assertEquals(1, bus.getRoad_ref());
+        bus.setRoad_ref();
+        assertEquals(2, bus.getRoad_ref());
     }
 }

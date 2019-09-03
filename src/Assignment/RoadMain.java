@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class RoadMain {
     int num_roads = 0;
     ArrayList<Road> roads = new ArrayList<Road>();
+    ArrayList<Vehicle> turningvehicles = new ArrayList<Vehicle>();
 
     public static void main(String[] args) {
         RoadMain roadMain = new RoadMain();
@@ -40,7 +41,6 @@ public class RoadMain {
                         roads.add(new Road(length, width_new,
                                 direction, west_end, north_end));
 
-                        num_roads++;
                     } else if (direction == "West") {
                         roads.add(new Road(length, width_new,
                                 direction, east_end, north_end));
@@ -112,7 +112,7 @@ public class RoadMain {
         return roads.get(road_ref);
     }
 
-    public void checkCorners(){
+    /*public void checkCorners(){
 
         for (int i = 0; i < roads.size(); i++){
             if (roads.get(i).vehicles_off_road.size()>0){
@@ -122,8 +122,7 @@ public class RoadMain {
                 roads.get(i).vehicles_off_road.remove(0);
                 }
             }
-        }
-
+        }*/
 
     public void addVehicle(String type, int speed){
         roads.get(0).addVehicle(type, speed);
@@ -132,6 +131,7 @@ public void moveVehicles(){
 
         for (int i = 0; i < roads.size(); i++){
             roads.get(i).moveVehicles();
+
     }
 }
     /*public boolean checkOnRoad(int ref) {

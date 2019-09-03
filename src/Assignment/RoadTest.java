@@ -45,8 +45,9 @@ class RoadTest {
         assertEquals(12, road.getVehicleOnRoad(0).getYpos());
         road.moveVehicles();
         road.addVehicle("Motorbike", 10);
-        assertEquals(true,road.checkOnRoad(0));
+        assertEquals(true,road.checkOffRoad(0));
         assertEquals(2, road.getNum_vehicles());
+        assertEquals("Car", road.vehicles_off_road.get(0).getType());
         road.moveVehicles();
         assertEquals(1, road.getNum_vehicles());
 
@@ -139,6 +140,20 @@ class RoadTest {
         assertEquals(20, road3.getVehicleOnRoad(0).getYpos());
         assertEquals(13, road3.getVehicleOnRoad(1).getYpos());
 
+    }
+        @Test
+        void testonroad() {
+            Road road = new Road(25, 10, "North", 0, 0);
+            road.makeRoad();
+            road.addVehicle("Car", 5);
+            road.moveVehicles();
+            assertEquals(false, road.checkOffRoad(0));
+            road.moveVehicles();
+            road.moveVehicles();
+            assertEquals(false, road.checkOffRoad(0));
+            road.moveVehicles();
+            assertEquals(false, road.checkOffRoad(0));
+            road.moveVehicles();
 
 
 
