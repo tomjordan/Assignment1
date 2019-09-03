@@ -11,9 +11,9 @@ public class Vehicle {
     private int xrear;
     private int yrear;
     private int speed;
-    private int reference = 0;
     private int xinit;
     private int yinit;
+    private int road_ref;
 
 
     public Vehicle(String type, String direction, int speed, int x, int y) {
@@ -130,7 +130,14 @@ public class Vehicle {
     public void setYpos(int y) {
         this.ypos = y;
     }
+public int getRoad_ref(){
+        return road_ref;
 
+}
+public void setRoad_ref(int num){
+        this.road_ref = num;
+
+}
 }
 
 

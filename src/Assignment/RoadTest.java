@@ -94,24 +94,29 @@ class RoadTest {
     void testcollisions() {
         Road road = new Road(25, 10, "North", 0, 0);
         road.makeRoad();
-        road.addVehicle("Car", 4);
+        road.addTrafficLight("End");
+        road.getTrafficlight(0).setStatus(false);
+        road.addVehicle("Car", 24);
         road.moveVehicles();
         road.moveVehicles();
-        assertEquals(8, road.getVehicleOnRoad(0).getYrear());
+        assertEquals(24, road.getVehicleOnRoad(0).getYpos());
         road.addVehicle("Car", 15);
         road.moveVehicles();
-        assertEquals(11, road.getVehicleOnRoad(1).getYpos());
+        road.moveVehicles();
+        assertEquals(21, road.getVehicleOnRoad(1).getYpos());
 
         Road road2 = new Road(25, 10, "West", 0, 0);
         road2.makeRoad();
-        road2.addVehicle("Car", 4);
+        road2.addVehicle("Bus", 4);
         road2.moveVehicles();
         road2.moveVehicles();
         assertEquals(-8, road2.getVehicleOnRoad(0).getXrear());
         road2.addVehicle("Car", 15);
         road2.moveVehicles();
-        assertEquals(-14, road2.getVehicleOnRoad(0).getXpos());
+        assertEquals(-18, road2.getVehicleOnRoad(0).getXpos());
         assertEquals(-11, road2.getVehicleOnRoad(1).getXpos());
+
+
 
 
     }

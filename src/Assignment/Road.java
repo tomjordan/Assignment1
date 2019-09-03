@@ -119,7 +119,7 @@ public class Road {
                 } else if (checkTrafficLights(i)) {
                     if (trafficLights.get(light_ref).isGreen()) {
                         vehicles.get(i).moveVehicle();
-                    } else vehicles.get(i).setYpos(trafficLights.get(light_ref).getYpos());
+                    } else vehicles.get(i).setPos(trafficLights.get(light_ref).getYpos()-1);
 
                 } else if (vehicles.get(i).getYpos() + vehicles.get(i).getSpeed() > ynorth) {
                     vehicles_on_road -= 1;
@@ -135,7 +135,7 @@ public class Road {
                 } else if (checkTrafficLights(i)) {
                     if (trafficLights.get(light_ref).isGreen()) {
                         vehicles.get(i).moveVehicle();
-                    } else vehicles.get(i).setYpos(trafficLights.get(light_ref).getYpos());
+                    } else vehicles.get(i).setPos(trafficLights.get(light_ref).getYpos()-1);
 
                 } else if (vehicles.get(i).getYpos() - vehicles.get(i).getSpeed() < ysouth) {
                     vehicles_on_road -= 1;
@@ -151,7 +151,7 @@ public class Road {
                 } else if (checkTrafficLights(i)) {
                     if (trafficLights.get(light_ref).isGreen()) {
                         vehicles.get(i).moveVehicle();
-                    } else vehicles.get(i).setXpos(trafficLights.get(light_ref).getXpos());
+                    } else vehicles.get(i).setPos(trafficLights.get(light_ref).getXpos()-1);
 
                 } else if (vehicles.get(i).getXpos() + vehicles.get(i).getSpeed() > xeast) {
                     vehicles_on_road -= 1;
@@ -167,7 +167,7 @@ public class Road {
                 } else if (checkTrafficLights(i)) {
                     if (trafficLights.get(light_ref).isGreen()) {
                         vehicles.get(i).moveVehicle();
-                    } else vehicles.get(i).setXpos(trafficLights.get(light_ref).getXpos());
+                    } else vehicles.get(i).setPos(trafficLights.get(light_ref).getXpos()-1);
 
                 } else if (vehicles.get(i).getXpos() - vehicles.get(i).getSpeed() < xwest) {
                     vehicles_on_road -= 1;
@@ -298,7 +298,11 @@ public class Road {
         }
         return status;
     }
-}
+
+
+
+    }
+
 
 
 
