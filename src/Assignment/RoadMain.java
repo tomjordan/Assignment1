@@ -128,16 +128,76 @@ public class RoadMain {
         roads.get(0).addVehicle(type, speed);
     }
 
+    public void addLight(int ref, String which_end) {
+        roads.get(ref).addTrafficLight(which_end);
+    }
+
+
     public void moveVehicles() {
 
         for (int i = 0; i < roads.size(); i++) {
             roads.get(i).moveVehicles();
-
+            checkTurns();
         }
     }
 
 
     public void checkTurns() {
+        for (int i = 0; i < roads.size()-1; i++) {
+                if (roads.get(i).vehicles_off_road.size() > 0) {
+                    int ref = roads.get(i).vehicles_off_road.get(0).getRoad_ref();
+                    int speed = roads.get(i).vehicles_off_road.get(0).getSpeed();
+                    String type = roads.get(i).vehicles_off_road.get(0).getType();
+                    int size = roads.get(i).vehicles_off_road.get(0).getLength();
+                    if (isEmpty(i, size)){
+                    roads.get(ref).addVehicle(type, speed);
+                    roads.get(ref).vehicles.get(roads.get(ref).vehicles.size() - 1).setRoad_ref(ref);
+                    roads.get(i).reset_offRoad();}
+
+
+
+            }
+        }
+
+    }
+
+    public boolean isEmpty(int i, int size) {
+        boolean status = false;
+        if (roads.get(i).vehicles.size() == 0) {
+            status = true;
+        }else if (i == roads.size()-1){
+            status = true;
+        } else if (roads.get(i).vehicles.size() > 0) {
+            if (roads.get(i).getDirection() == "North") {
+                if (roads.get(i).getVehicleOnRoad(roads.get(i).vehicles.size() - 1).getYrear()
+                        > roads.get(i).getYsouth() + size) {
+                    status = true;
+                }
+            } else if (roads.get(i).getDirection() == "South") {
+                if (roads.get(i).getVehicleOnRoad(roads.get(i).vehicles.size() - 1).getYrear()
+                        > roads.get(i).getYnorth() - size) {
+                    status = true;
+                }
+            } else if (roads.get(i).getDirection() == "East") {
+                if (roads.get(i).getVehicleOnRoad(roads.get(i).vehicles.size() - 1).getYrear()
+                        > roads.get(i).getXwest() + size) {
+                    status = true;
+                }
+            } else if (roads.get(i).getDirection() == "North") {
+                if (roads.get(i).getVehicleOnRoad(roads.get(i).vehicles.size() - 1).getYrear()
+                        > roads.get(i).getXeast() - size) {
+                    status = true;
+                }
+            }
+        }else status = false;
+
+
+            return status;
+        }
+    }
+
+
+   /* public void checkTurns() {
         for (int i = 0; i < roads.size(); i++) {
             if (i < roads.size() - 1) {
                 if (roads.get(i).vehicles_off_road.size() > 0) {
@@ -151,25 +211,4 @@ public class RoadMain {
 
 
             }
-        }
-
-
-    /*public boolean checkOnRoad(int ref) {
-        int y = vehicles.get(ref).getYpos();
-        int x = vehicles.get(ref).getXpos();
-        int speed = vehicles.get(ref).getSpeed();
-        if (x + speed > xeast || x - speed < xwest) {
-            return false;
-        } else if (y + speed > ynorth || y - speed < ysouth) {
-            return false;
-        } else return true;
-
-
-
-
-
-    }*/
-    }
-}
-
-
+        }*/
