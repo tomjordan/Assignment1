@@ -18,25 +18,28 @@ public class Vehicle {
     private int road_ref = 0;
 
 
-    public Vehicle(String type, String direction, int speed, int x, int y) {
-        this.type = type;
+    public Vehicle(String direction, int speed, int x, int y) {
         this.xinit = x;
         this.yinit = y;
         this.direction = direction;
         this.speed = speed;
     }
 
+    public void setLength(int length) {
+        this.length = length;
+    }
+
+    public int getCarlength() {
+        return carlength;
+    }
+
     public int getLength() {
-        if (this.type == "Car") {
-            length = carlength;
-        } else if (this.type == "Bus") {
-            length = carlength * 3;
-        } else if (this.type == "Motorbike") {
-            length = carlength / 2;
-        }
         return length;
     }
 
+    public void setCarlength(int carlength) {
+        this.carlength = carlength;
+    }
 
     public void intiDir() {
         if (getDirection() == "North") {
@@ -120,30 +123,31 @@ public class Vehicle {
         }
 
     }
+    public int getPos() {
+        int position = 0;
+        if (direction == "North" || direction == "South") {
+            position = ypos;
+        }else {
+            position = xpos;
+        }return position;
+    }
+
 
     int getSpeed() {
         return speed;
     }
 
-    String getType() {
-        return type;
-    }
-
-    public void setXpos(int x) {
-        this.xpos = x;
-    }
-
-    public void setYpos(int y) {
-        this.ypos = y;
-    }
-public int getRoad_ref(){
+    public int getRoad_ref(){
         return road_ref;
 
-}
-public void setRoad_ref(int num){
+    }
+    public void setRoad_ref(int num){
         this.road_ref = num;
 
-}
+    }
+
+
+
 }
 
 

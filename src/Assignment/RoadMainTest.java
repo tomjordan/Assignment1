@@ -1,3 +1,4 @@
+/*
 package Assignment;
 
 import org.junit.jupiter.api.Test;
@@ -25,7 +26,8 @@ class RoadMainTest {
 
     }
 
-    /*@Test
+    */
+/*@Test
     void testturning() {
         RoadMain roadMain = new RoadMain();
         roadMain.addnewRoad(20, 10, "East", 0, 0);
@@ -96,7 +98,8 @@ class RoadMainTest {
         roadMain.checkTurns();
         //assertEquals(18, roadMain.roads.get(2).vehicles.get(0).getXpos());
 
-    }*/
+    }*//*
+
 
 
     @Test
@@ -142,19 +145,21 @@ class RoadMainTest {
         assertEquals(12, roadMain.roads.get(0).vehicles.get(0).getXpos());
         assertEquals(9, roadMain.roads.get(1).vehicles.get(0).getYpos());
         roadMain.moveVehicles();
-        assertEquals(17, roadMain.roads.get(1).vehicles.get(1).getXpos());
+        assertEquals(7, roadMain.roads.get(1).vehicles.get(1).getYpos());
         assertEquals(10, roadMain.roads.get(1).vehicles.get(0).getYpos());
         roadMain.moveVehicles();
+        assertEquals(11, roadMain.roads.get(1).vehicles.get(0).getYpos());
+        assertEquals(8, roadMain.roads.get(1).vehicles.get(1).getYpos());
         roadMain.moveVehicles();
+        assertEquals(12, roadMain.roads.get(1).vehicles.get(0).getYpos());
+        assertEquals(11, roadMain.roads.get(1).vehicles.get(1).getYpos());
         roadMain.moveVehicles();
 
 
-        assertEquals(19, roadMain.roads.get(2).vehicles.get(0).getXpos());
+        assertEquals(19, roadMain.roads.get(2).vehicles.get(0).getYpos());
         assertEquals(7, roadMain.roads.get(1).vehicles.get(0).getYpos());
 
 
-        /*assertEquals(9, roadMain.roads.get(0).vehicles.get(0).getXpos());
-        assertEquals(9, roadMain.roads.get(0).vehicles.get(1).getXpos());
-*/
     }
+}*/
 }

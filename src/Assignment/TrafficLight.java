@@ -11,12 +11,8 @@ public class TrafficLight {
     String which_end;
 
 
-    public TrafficLight(int x, int y, String orientation, String which_end) {
-
-        this.xpos = x;
-        this.ypos = y;
-        this.orientation = orientation;
-        this.which_end = which_end;
+    public TrafficLight(String where) {
+        this.which_end = where;
     }
 
     public boolean isGreen() {
@@ -36,29 +32,29 @@ public class TrafficLight {
     }
 
 
-        public String getOrientation () {
-            return orientation;
-        }
-
-
-        public void setStatus ( boolean status){
-            this.status = status;
-        }
-
-        public int getXpos () {
-            return xpos;
-        }
-
-        public int getYpos () {
-            return ypos;
-        }
-
-        public void setXpos ( int xpos){
-            this.xpos = xpos;
-        }
-
-        public void setYpos ( int ypos){
-            this.ypos = ypos;
-        }
+    public String getOrientation () {
+        return orientation;
     }
+
+
+    public void setStatus ( boolean status){
+        this.status = status;
+    }
+
+    public int getXpos () {
+        return xpos;
+    }
+
+    public int getYpos () {
+        return ypos;
+    }
+
+    public void setXpos ( int xpos){
+        this.xpos = xpos;
+    }
+
+    public void setYpos ( int ypos){
+        this.ypos = ypos;
+    }
+}
 

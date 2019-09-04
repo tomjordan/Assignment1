@@ -2,6 +2,7 @@ package Assignment;
 
 import java.util.ArrayList;
 
+/*
 
 public class RoadMain {
     int num_roads = 0;
@@ -112,7 +113,8 @@ public class RoadMain {
         return roads.get(road_ref);
     }
 
-    /*public void checkCorners(){
+*/
+/*public void checkCorners(){
 
         for (int i = 0; i < roads.size(); i++){
             if (roads.get(i).vehicles_off_road.size()>0){
@@ -122,7 +124,10 @@ public class RoadMain {
                 roads.get(i).vehicles_off_road.remove(0);
                 }
             }
-        }*/
+        }*//*
+ */
+/*
+
 
     public void addVehicle(String type, int speed) {
         roads.get(0).addVehicle(type, speed);
@@ -203,7 +208,8 @@ public class RoadMain {
 }
 
 
-   /* public void checkTurns() {
+
+ public void checkTurns() {
         for (int i = 0; i < roads.size(); i++) {
             if (i < roads.size() - 1) {
                 if (roads.get(i).vehicles_off_road.size() > 0) {
@@ -217,4 +223,6 @@ public class RoadMain {
 
 
             }
-        }*/
+        }
+
+*/
