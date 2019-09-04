@@ -157,6 +157,7 @@ public class RoadMain {
                         roads.get(i).setVehicle_ref(roads.get(i).vehicles.size());
                         roads.get(ref).addVehicle(type, speed);
                         roads.get(ref).vehicles.get(roads.get(ref).vehicles.size() - 1).setRoad_ref(ref);
+                        roads.get(i).vehicles_off_road.remove(n);
                     } else roads.get(i).vehicles.get(0).setPos(roads.get(i).getMax());
                     roads.get(i).reset_offRoad();
 

@@ -129,6 +129,28 @@ class RoadMainTest {
         roadMain.moveVehicles();
         assertEquals(12, roadMain.roads.get(0).vehicles.get(0).getXpos());
         assertEquals(5, roadMain.roads.get(1).vehicles.get(0).getYpos());
+        roadMain.moveVehicles();
+        assertEquals(12, roadMain.roads.get(0).vehicles.get(0).getXpos());
+        assertEquals(6, roadMain.roads.get(1).vehicles.get(0).getYpos());
+        roadMain.moveVehicles();
+        assertEquals(12, roadMain.roads.get(0).vehicles.get(0).getXpos());
+        assertEquals(7, roadMain.roads.get(1).vehicles.get(0).getYpos());
+        roadMain.moveVehicles();
+        assertEquals(12, roadMain.roads.get(0).vehicles.get(0).getXpos());
+        assertEquals(8, roadMain.roads.get(1).vehicles.get(0).getYpos());
+        roadMain.moveVehicles();
+        assertEquals(12, roadMain.roads.get(0).vehicles.get(0).getXpos());
+        assertEquals(9, roadMain.roads.get(1).vehicles.get(0).getYpos());
+        roadMain.moveVehicles();
+        assertEquals(17, roadMain.roads.get(1).vehicles.get(1).getXpos());
+        assertEquals(10, roadMain.roads.get(1).vehicles.get(0).getYpos());
+        roadMain.moveVehicles();
+        roadMain.moveVehicles();
+        roadMain.moveVehicles();
+
+
+        assertEquals(19, roadMain.roads.get(2).vehicles.get(0).getXpos());
+        assertEquals(7, roadMain.roads.get(1).vehicles.get(0).getYpos());
 
 
         /*assertEquals(9, roadMain.roads.get(0).vehicles.get(0).getXpos());
