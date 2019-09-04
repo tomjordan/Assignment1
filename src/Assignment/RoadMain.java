@@ -136,6 +136,7 @@ public class RoadMain {
     public void moveVehicles() {
 
         for (int i = 0; i < roads.size(); i++) {
+
             roads.get(i).moveVehicles();
             checkTurns();
         }
@@ -143,19 +144,23 @@ public class RoadMain {
 
 
     public void checkTurns() {
-        for (int i = 0; i < roads.size()-1; i++) {
-                if (roads.get(i).vehicles_off_road.size() > 0) {
-                    int ref = roads.get(i).vehicles_off_road.get(0).getRoad_ref();
-                    int speed = roads.get(i).vehicles_off_road.get(0).getSpeed();
-                    String type = roads.get(i).vehicles_off_road.get(0).getType();
-                    int size = roads.get(i).vehicles_off_road.get(0).getLength();
-                    if (isEmpty(i, size)){
-                    roads.get(ref).addVehicle(type, speed);
-                    roads.get(ref).vehicles.get(roads.get(ref).vehicles.size() - 1).setRoad_ref(ref);
-                    roads.get(i).reset_offRoad();}
+        for (int i = 0; i < roads.size() - 1; i++) {
+            if (roads.get(i).vehicles_off_road.size() > 0) {
+                for (int n = 0; n < roads.get(i).vehicles_off_road.size(); n++) {
+                    int ref = roads.get(i).vehicles_off_road.get(n).getRoad_ref();
+                    int speed = roads.get(i).vehicles_off_road.get(n).getSpeed();
+                    String type = roads.get(i).vehicles_off_road.get(n).getType();
+                    int size = roads.get(i).vehicles_off_road.get(n).getLength();
+                    if (isEmpty(ref, size)) {
+                        roads.get(i).setVehicles_on_road(roads.get(i).getNum_vehicles() - 1);
+                        roads.get(i).vehicles.remove(i);
+                        roads.get(i).setVehicle_ref(roads.get(i).vehicles.size());
+                        roads.get(ref).addVehicle(type, speed);
+                        roads.get(ref).vehicles.get(roads.get(ref).vehicles.size() - 1).setRoad_ref(ref);
+                    } else roads.get(i).vehicles.get(0).setPos(roads.get(i).getMax());
+                    roads.get(i).reset_offRoad();
 
-
-
+                }
             }
         }
 
@@ -165,7 +170,7 @@ public class RoadMain {
         boolean status = false;
         if (roads.get(i).vehicles.size() == 0) {
             status = true;
-        }else if (i == roads.size()-1){
+        } else if (i == roads.size() - 1) {
             status = true;
         } else if (roads.get(i).vehicles.size() > 0) {
             if (roads.get(i).getDirection() == "North") {
@@ -189,12 +194,12 @@ public class RoadMain {
                     status = true;
                 }
             }
-        }else status = false;
+        } else status = false;
 
 
-            return status;
-        }
+        return status;
     }
+}
 
 
    /* public void checkTurns() {

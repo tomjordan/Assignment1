@@ -16,6 +16,7 @@ public class Road {
     private int vehicles_on_road;
     private int tot_TrafficLights = 0;
     private int light_ref = 0;
+    private int max;
     Vehicle turning_vehicle;
     ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
     ArrayList<Vehicle> vehicles_off_road = new ArrayList<Vehicle>();
@@ -85,13 +86,13 @@ public class Road {
                 trafficLights.add(new TrafficLight(xwest, ynorth, "NS", "End"));
 
             } else if (direction == "South") {
-                trafficLights.add(new TrafficLight(xeast, ysouth, "NS","End"));
+                trafficLights.add(new TrafficLight(xeast, ysouth, "NS", "End"));
 
             } else if (direction == "East") {
-                trafficLights.add(new TrafficLight(xeast, ynorth, "EW","End"));
+                trafficLights.add(new TrafficLight(xeast, ynorth, "EW", "End"));
 
             } else if (direction == "West") {
-                trafficLights.add(new TrafficLight(xwest, ysouth, "EW","End"));
+                trafficLights.add(new TrafficLight(xwest, ysouth, "EW", "End"));
             }
         }
         tot_TrafficLights++;
@@ -111,6 +112,14 @@ public class Road {
         return vehicles_on_road;
     }
 
+    public void setVehicles_on_road(int vehicles_on_road) {
+        this.vehicles_on_road = vehicles_on_road;
+    }
+
+    public void setVehicle_ref(int vehicle_ref) {
+        this.vehicle_ref = vehicle_ref;
+    }
+
     public void moveVehicles() {
         for (int i = 0; i < vehicles.size(); i++) {
 
@@ -120,15 +129,14 @@ public class Road {
                     vehicles.get(i).setPos(vehicles.get(i - 1).getYrear() - 1);
                 } else if (checkTrafficLights(i)) {
                     if (trafficLights.get(light_ref).isGreen()) {
-                        if (trafficLights.get(light_ref).isEnd()){
-                        isOffRoad(i, vehicles.get(i).getRoad_ref()+1);
-
-                        i -= 1;}
+                        if (trafficLights.get(light_ref).isEnd()) {
+                            isOffRoad(i, vehicles.get(i).getRoad_ref() + 1);
+                        }
                     } else vehicles.get(i).setPos(trafficLights.get(light_ref).getYpos() - 1);
 
                 } else if (vehicles.get(i).getYpos() + vehicles.get(i).getSpeed() > ynorth) {
-                    isOffRoad(i, vehicles.get(i).getRoad_ref()+1);
-                    i -= 1;
+                    isOffRoad(i, vehicles.get(i).getRoad_ref() + 1);
+
                 } else vehicles.get(i).moveVehicle();
 
             } else if (vehicles.get(i).getDirection() == "South") {
@@ -137,17 +145,14 @@ public class Road {
                     vehicles.get(i).setPos(vehicles.get(i - 1).getYrear() + 1);
                 } else if (checkTrafficLights(i)) {
                     if (trafficLights.get(light_ref).isGreen()) {
-                        if (trafficLights.get(light_ref).isEnd()){
-                            isOffRoad(i, vehicles.get(i).getRoad_ref()+1);
-                            vehicles_on_road -= 1;
-                            vehicles.remove(i);
-                            vehicle_ref = vehicles.size();
-                            i -= 1;}
+                        if (trafficLights.get(light_ref).isEnd()) {
+                            isOffRoad(i, vehicles.get(i).getRoad_ref() + 1);
+                        }
                     } else vehicles.get(i).setPos(trafficLights.get(light_ref).getYpos() - 1);
 
                 } else if (vehicles.get(i).getYpos() - vehicles.get(i).getSpeed() < ysouth) {
-                    isOffRoad(i, vehicles.get(i).getRoad_ref()+1);
-                    i -= 1;
+                    isOffRoad(i, vehicles.get(i).getRoad_ref() + 1);
+
                 } else vehicles.get(i).moveVehicle();
 
             } else if (vehicles.get(i).getDirection() == "East") {
@@ -156,14 +161,13 @@ public class Road {
                     vehicles.get(i).setPos(vehicles.get(i - 1).getXrear() - 1);
                 } else if (checkTrafficLights(i)) {
                     if (trafficLights.get(light_ref).isGreen()) {
-                        if (trafficLights.get(light_ref).isEnd()){
-                            isOffRoad(i, vehicles.get(i).getRoad_ref()+1);
-                            i -= 1;}
+                        if (trafficLights.get(light_ref).isEnd()) {
+                            isOffRoad(i, vehicles.get(i).getRoad_ref() + 1);
+                        }
                     } else vehicles.get(i).setPos(trafficLights.get(light_ref).getXpos() - 1);
 
                 } else if (vehicles.get(i).getXpos() + vehicles.get(i).getSpeed() > xeast) {
-                    isOffRoad(i, vehicles.get(i).getRoad_ref()+1);
-                    i -= 1;
+                    isOffRoad(i, vehicles.get(i).getRoad_ref() + 1);
                 } else vehicles.get(i).moveVehicle();
 
             } else if (vehicles.get(i).getDirection() == "West") {
@@ -172,15 +176,13 @@ public class Road {
                     vehicles.get(i).setPos(vehicles.get(i - 1).getXrear() + 1);
                 } else if (checkTrafficLights(i)) {
                     if (trafficLights.get(light_ref).isGreen()) {
-                        if (trafficLights.get(light_ref).isEnd()){
-                            isOffRoad(i, vehicles.get(i).getRoad_ref()+1);
-                            i -= 1;}
-                        else vehicles.get(i).moveVehicle();
+                        if (trafficLights.get(light_ref).isEnd()) {
+                            isOffRoad(i, vehicles.get(i).getRoad_ref() + 1);
+                        } else vehicles.get(i).moveVehicle();
                     } else vehicles.get(i).setPos(trafficLights.get(light_ref).getXpos() - 1);
 
                 } else if (vehicles.get(i).getXpos() - vehicles.get(i).getSpeed() < xwest) {
-                    isOffRoad(i, vehicles.get(i).getRoad_ref()+1);
-                    i -= 1;
+                    isOffRoad(i, vehicles.get(i).getRoad_ref() + 1);
                 } else vehicles.get(i).moveVehicle();
 
             }
@@ -189,6 +191,23 @@ public class Road {
     }
 
 
+    public int getMax() {
+        if (direction == "North") {
+            this.max = ynorth;
+        }
+        if (direction == "South") {
+            this.max = ysouth;
+        }
+        if (direction == "East") {
+            this.max = xeast;
+        }
+        if (direction == "West") {
+            this.max = xwest;
+        }return max;
+
+
+    }
+
     public Vehicle getVehicleOnRoad(int ref_num) {
         return vehicles.get(ref_num);
 
@@ -196,9 +215,6 @@ public class Road {
 
 
     public void isOffRoad(int i, int rd_ref) {
-        vehicles_on_road -= 1;
-        vehicles.remove(i);
-        vehicle_ref = vehicles.size();
         String type = vehicles.get(i).getType();
         int speed = vehicles.get(i).getSpeed();
         vehicles_off_road.add(new Vehicle(type, "", speed, 0, 0));
@@ -316,7 +332,8 @@ public class Road {
     public void setVehicles_off_road() {
         this.vehicles_off_road = new ArrayList<Vehicle>();
     }
-    public void reset_offRoad(){
+
+    public void reset_offRoad() {
         vehicles_off_road.clear();
     }
 

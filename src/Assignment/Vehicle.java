@@ -8,6 +8,8 @@ public class Vehicle {
     private String type;
     private int xpos;
     private int ypos;
+    private int xprev;
+    private int yprev;
     private int xrear;
     private int yrear;
     private int speed;
@@ -59,15 +61,19 @@ public class Vehicle {
     public void moveVehicle() {
 
         if (direction == "North") {
+            yprev = ypos;
             ypos = ypos + speed;
             yrear = yrear + speed;
         } else if (this.direction == "South") {
+            yprev = ypos;
             ypos = ypos - speed;
             yrear = yrear - speed;
         } else if (this.direction == "East") {
+            xprev = xpos;
             xpos = xpos + speed;
             xrear = xrear + speed;
         } else if (this.direction == "West") {
+            xprev = xpos;
             xpos = xpos - speed;
             xrear = xrear - speed;
         }

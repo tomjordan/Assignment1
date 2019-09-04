@@ -124,9 +124,11 @@ class RoadMainTest {
         assertEquals(4, roadMain.roads.get(1).vehicles.get(0).getYpos());
         assertEquals(false, roadMain.isEmpty(0, 6));
 
-        assertEquals(11, roadMain.roads.get(0).vehicles.get(0).getXpos());
-        assertEquals(3, roadMain.roads.get(1).vehicles.get(1).getYpos());
-
+        assertEquals(12, roadMain.roads.get(0).vehicles.get(0).getXpos());
+        assertEquals(4, roadMain.roads.get(1).vehicles.get(0).getYpos());
+        roadMain.moveVehicles();
+        assertEquals(12, roadMain.roads.get(0).vehicles.get(0).getXpos());
+        assertEquals(5, roadMain.roads.get(1).vehicles.get(0).getYpos());
 
 
         /*assertEquals(9, roadMain.roads.get(0).vehicles.get(0).getXpos());
