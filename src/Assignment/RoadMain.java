@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class RoadMain {
     int num_roads = 0;
     ArrayList<Road> roads = new ArrayList<Road>();
-    ArrayList<Vehicle> turningvehicles = new ArrayList<Vehicle>();
+
 
     public static void main(String[] args) {
         RoadMain roadMain = new RoadMain();
@@ -108,7 +108,7 @@ public class RoadMain {
         num_roads++;
     }
 
-    public Road getRoad(int road_ref){
+    public Road getRoad(int road_ref) {
         return roads.get(road_ref);
     }
 
@@ -124,16 +124,36 @@ public class RoadMain {
             }
         }*/
 
-    public void addVehicle(String type, int speed){
+    public void addVehicle(String type, int speed) {
         roads.get(0).addVehicle(type, speed);
     }
-public void moveVehicles(){
 
-        for (int i = 0; i < roads.size(); i++){
+    public void moveVehicles() {
+
+        for (int i = 0; i < roads.size(); i++) {
             roads.get(i).moveVehicles();
 
+        }
     }
-}
+
+
+    public void checkTurns() {
+        for (int i = 0; i < roads.size(); i++) {
+            if (i < roads.size() - 1) {
+                if (roads.get(i).vehicles_off_road.size() > 0) {
+                    int ref = roads.get(i).vehicles_off_road.get(0).getRoad_ref();
+                    int speed = roads.get(i).vehicles_off_road.get(0).getSpeed();
+                    String type = roads.get(i).vehicles_off_road.get(0).getType();
+                    roads.get(ref).addVehicle(type, speed);
+                    roads.get(ref).vehicles.get(roads.get(ref).vehicles.size() - 1).setRoad_ref(ref);
+                    roads.get(i).reset_offRoad();
+                }
+
+
+            }
+        }
+
+
     /*public boolean checkOnRoad(int ref) {
         int y = vehicles.get(ref).getYpos();
         int x = vehicles.get(ref).getXpos();
@@ -145,6 +165,11 @@ public void moveVehicles(){
         } else return true;
 
 
+
+
+
     }*/
+    }
 }
+
 

@@ -49,9 +49,9 @@ class VehicleTest2 {
     void testroadref() {
         Vehicle bus = new Vehicle("Bus", "West", 4, 0, 0);
         assertEquals(0, bus.getRoad_ref());
-        bus.setRoad_ref();
+        bus.setRoad_ref(1);
         assertEquals(1, bus.getRoad_ref());
-        bus.setRoad_ref();
+        bus.setRoad_ref(2);
         assertEquals(2, bus.getRoad_ref());
     }
 }
