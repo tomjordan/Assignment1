@@ -30,10 +30,16 @@ class RoadTest {
         road.addCar( 3);
         road.moveVehicles();
         road.moveVehicles();
-        assertEquals(9, road.vehicles.get(0).);
-        road.addMotorbike(10);
+        assertEquals(8, road.vehicles.get(0).getPos());
+        road.addMotorbike(8);
 
-        assertEquals(1, road.getNum_vehicles());
+        road.moveVehicles();
+        assertEquals(11, road.vehicles.get(0).getPos());
+        assertEquals(8, road.vehicles.get(1).getPos());
+        road.moveVehicles();
+        assertEquals(14, road.vehicles.get(0).getPos());
+        assertEquals(11, road.vehicles.get(1).getPos());
+        assertEquals(2, road.getNum_vehicles());
 
     }
 

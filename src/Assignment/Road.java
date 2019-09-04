@@ -113,26 +113,24 @@ public class Road {
         }
     }
 
+    public void moveVehicles() {
+        for (int i = 0; i < vehicles.size(); i++) {
+            if (checkCollision(i)) {
+                vehicles.get(i).setSpeed(vehicles.get(i - 1).getSpeed());
+                vehicles.get(i).setPos(vehicles.get(i - 1).getYrear() - 1);
+            } else if (checkMovement(i)) {
+                if (trafficLightend) {
+                    if (endLight.isGreen()) {
+                        isOffRoad(i, vehicles.get(i).getRoad_ref() + 1);
+                    }
+                } else vehicles.get(i).setPos(getRoadEnd());
+            } else vehicles.get(i).moveVehicle();
 
-    public int getLength() {
-        return length;
+        }
     }
 
-    public String getDirection() {
-        return direction;
-    }
 
-    public int getNum_vehicles() {
-        return vehicles_on_road;
-    }
 
-    public void setVehicles_on_road(int vehicles_on_road) {
-        this.vehicles_on_road = vehicles_on_road;
-    }
-
-    public void setVehicle_ref(int vehicle_ref) {
-        this.vehicle_ref = vehicle_ref;
-    }
 
     public boolean checkMovement(int i) {
         boolean status = false;
@@ -191,26 +189,6 @@ public class Road {
     }
 
 
-    public int getXeast() {
-        return xeast;
-    }
-
-    public int getXwest() {
-        return xwest;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getYnorth() {
-        return ynorth;
-    }
-
-    public int getYsouth() {
-        return ysouth;
-    }
-
 
     public boolean checkCollision(int vRef) {
         boolean status = false;
@@ -268,22 +246,47 @@ public class Road {
     public TrafficLight getStartLight() {
         return startLight;
     }
-
-    public void moveVehicles() {
-        for (int i = 0; i < vehicles.size(); i++) {
-            if (checkCollision(i)) {
-                vehicles.get(i).setSpeed(vehicles.get(i - 1).getSpeed());
-                vehicles.get(i).setPos(vehicles.get(i - 1).getYrear() - 1);
-            } else if (checkMovement(i)) {
-                if (trafficLightend) {
-                    if (endLight.isGreen()) {
-                        isOffRoad(i, vehicles.get(i).getRoad_ref() + 1);
-                    }
-                } else vehicles.get(i).setPos(getRoadEnd());
-            } else vehicles.get(i).moveVehicle();
-
-        }
+    public int getLength() {
+        return length;
     }
+
+    public String getDirection() {
+        return direction;
+    }
+
+    public int getNum_vehicles() {
+        return vehicles_on_road;
+    }
+
+    public void setVehicles_on_road(int vehicles_on_road) {
+        this.vehicles_on_road = vehicles_on_road;
+    }
+
+    public void setVehicle_ref(int vehicle_ref) {
+        this.vehicle_ref = vehicle_ref;
+    }
+
+
+    public int getXeast() {
+        return xeast;
+    }
+
+    public int getXwest() {
+        return xwest;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getYnorth() {
+        return ynorth;
+    }
+
+    public int getYsouth() {
+        return ysouth;
+    }
+
 }
 
 

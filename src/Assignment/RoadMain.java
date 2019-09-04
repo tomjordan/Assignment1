@@ -2,7 +2,6 @@ package Assignment;
 
 import java.util.ArrayList;
 
-/*
 
 public class RoadMain {
     int num_roads = 0;
@@ -112,8 +111,9 @@ public class RoadMain {
     public Road getRoad(int road_ref) {
         return roads.get(road_ref);
     }
+}
 
-*/
+
 /*public void checkCorners(){
 
         for (int i = 0; i < roads.size(); i++){
