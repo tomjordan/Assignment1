@@ -132,6 +132,16 @@ public class Vehicle {
         }return position;
     }
 
+    public int getRear(){
+        int position = 0;
+        if (direction == "North" || direction == "South") {
+            position = yrear;
+        }else {
+            position = xrear;
+        }return position;
+
+    }
+
 
     int getSpeed() {
         return speed;

@@ -25,14 +25,14 @@ public class RoadMain {
         num_roads++;
     }
 
-    public void addConectingRoad(int length, String direction) {
+    public void addConectingRoad(int roadRef, int length, String direction) {
 
-        String dir = roads.get(num_roads - 1).getDirection();
-        int north_end = roads.get(num_roads - 1).getYnorth();
-        int south_end = roads.get(num_roads - 1).getYsouth();
-        int east_end = roads.get(num_roads - 1).getXeast();
-        int west_end = roads.get(num_roads - 1).getXwest();
-        int width_new = roads.get(num_roads - 1).getWidth();
+        String dir = roads.get(roadRef).getDirection();
+        int north_end = roads.get(roadRef).getYnorth();
+        int south_end = roads.get(roadRef).getYsouth();
+        int east_end = roads.get(roadRef).getXeast();
+        int west_end = roads.get(roadRef).getXwest();
+        int width_new = roads.get(roadRef).getWidth();
         if (num_roads > 0) {
             if (dir == "North") {
                 if (direction != "South") {
@@ -111,10 +111,88 @@ public class RoadMain {
     public Road getRoad(int road_ref) {
         return roads.get(road_ref);
     }
-}
 
 
-/*public void checkCorners(){
+    public void addIntersection(int roadRef, String intersectionType, int length) {
+        String dir = roads.get(roadRef).getDirection();
+        int north_end = roads.get(roadRef).getYnorth();
+        int south_end = roads.get(roadRef).getYsouth();
+        int east_end = roads.get(roadRef).getXeast();
+        int west_end = roads.get(roadRef).getXwest();
+        int width_new = roads.get(roadRef).getWidth();
+        if (num_roads > 0) {
+            if (dir == "North") {
+                if (intersectionType == "+") {
+                    roads.add(new Road(length, width_new,
+                            "East", west_end, north_end));
+                    roads.add(new Road(length, width_new,
+                            "West", east_end, north_end));
+                    roads.add(new Road(length, width_new,
+                            "North", east_end, north_end));
+                } else if (intersectionType == "T") {
+                    roads.add(new Road(length, width_new,
+                            "East", west_end, north_end));
+                    roads.add(new Road(length, width_new,
+                            "West", east_end, north_end));
+                }
+            }
+            if (dir == "South") {
+                if (intersectionType == "+") {
+                    roads.add(new Road(length, width_new,
+                            "East", west_end, south_end - width_new));
+                    roads.add(new Road(length, width_new,
+                            "West", west_end, south_end - width_new));
+                    roads.add(new Road(length, width_new,
+                            "South", east_end, south_end));
+                } else if (intersectionType == "T") {
+                    roads.add(new Road(length, width_new,
+                            "East", west_end, south_end - width_new));
+                    roads.add(new Road(length, width_new,
+                            "West", west_end, south_end - width_new));
+                }
+            }
+
+
+            if (dir == "East") {
+
+                if (intersectionType == "+") {
+                    roads.add(new Road(length, width_new,
+                            "North", east_end, south_end));
+                    roads.add(new Road(length, width_new,
+                            "South", east_end, north_end));
+                    roads.add(new Road(length, width_new,
+                            "East", east_end, south_end));
+                } else if (intersectionType == "T") {
+                    roads.add(new Road(length, width_new,
+                            "North", east_end, south_end));
+                    roads.add(new Road(length, width_new,
+                            "South", east_end, north_end));
+                }
+            }
+
+            if (dir == "West") {
+
+                if (intersectionType == "+") {
+                    roads.add(new Road(length, width_new,
+                            "North", west_end - width_new, south_end));
+                    roads.add(new Road(length, width_new,
+                            "South", west_end - width_new, north_end));
+                    roads.add(new Road(length, width_new,
+                            "West", east_end, south_end));
+                } else if (intersectionType == "T") {
+                    roads.add(new Road(length, width_new,
+                            "North", west_end - width_new, south_end));
+                    roads.add(new Road(length, width_new,
+                            "South", west_end - width_new, north_end));
+                }
+            }
+
+
+        }
+    }
+
+
+public void checkCorners(){
 
         for (int i = 0; i < roads.size(); i++){
             if (roads.get(i).vehicles_off_road.size()>0){
@@ -124,9 +202,9 @@ public class RoadMain {
                 roads.get(i).vehicles_off_road.remove(0);
                 }
             }
-        }*//*
- */
-/*
+        }
+
+
 
 
     public void addVehicle(String type, int speed) {
@@ -163,7 +241,7 @@ public class RoadMain {
                         roads.get(ref).addVehicle(type, speed);
                         roads.get(ref).vehicles.get(roads.get(ref).vehicles.size() - 1).setRoad_ref(ref);
                         roads.get(i).vehicles_off_road.remove(n);
-                    } else roads.get(i).vehicles.get(0).setPos(roads.get(i).getMax());
+                    } else roads.get(i).vehicles.get(0).setPos(roads.get(i).getRoadEnd());
                     roads.get(i).reset_offRoad();
 
                 }
@@ -208,6 +286,7 @@ public class RoadMain {
 }
 
 
+/*
 
  public void checkTurns() {
         for (int i = 0; i < roads.size(); i++) {
@@ -224,5 +303,6 @@ public class RoadMain {
 
             }
         }
+*/
 
 */

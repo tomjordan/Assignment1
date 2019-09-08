@@ -117,7 +117,7 @@ public class Road {
         for (int i = 0; i < vehicles.size(); i++) {
             if (checkCollision(i)) {
                 vehicles.get(i).setSpeed(vehicles.get(i - 1).getSpeed());
-                vehicles.get(i).setPos(vehicles.get(i - 1).getYrear() - 1);
+                vehicles.get(i).setPos(vehicles.get(i - 1).getRear());
             } else if (checkMovement(i)) {
                 if (trafficLightend) {
                     if (endLight.isGreen()) {
@@ -126,6 +126,16 @@ public class Road {
                 } else vehicles.get(i).setPos(getRoadEnd());
             } else vehicles.get(i).moveVehicle();
 
+        }
+    }
+
+    public void addVehicle(String type, int speed){
+        if (type == "Car"){
+            addCar(speed);
+        }else if (type == "Bus"){
+            addBus(speed);
+        }else if (type =="Motorbike"){
+            addMotorbike(speed);
         }
     }
 
@@ -290,8 +300,8 @@ public class Road {
 }
 
 
-/*
 
+/*
     public void addTrafficLight(String which_end) {
         if (which_end == "Start") {
             if (direction == "North") {
