@@ -28,7 +28,7 @@ public class Road {
     ArrayList<Vehicle> vehicles_off_road = new ArrayList<Vehicle>();
 
 
-    public Road(int length, int width, String direction, int xinit, int yinit) {
+    Road(int length, int width, String direction, int xinit, int yinit) {
         this.direction = direction;
         this.length = length;
         this.width = width;

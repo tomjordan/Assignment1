@@ -3,6 +3,8 @@ package Assignment;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class RoadMain {
     int num_roads = 0;
@@ -127,7 +129,7 @@ public class RoadMain {
 
     public void moveVehicles() {
 
-        for (int i = 0; i < roads.size(); i++) {
+        for (int i = roads.size() - 1; i >= 0; i--) {
 
             roads.get(i).moveVehicles();
             checkTurns();
@@ -231,7 +233,21 @@ public class RoadMain {
             roads.get(roadRef).addMotorbike(speed);
         }
     }
+
+    public void printPos() {
+
+        {
+            for (int v = 0; v < roads.size(); v++) {
+                for (int x = 0; x < roads.get(v).vehicles.size(); x++) {
+                    System.out.println(roads.get(v).vehicles.get(x).getDirection());
+                    System.out.println(roads.get(v).vehicles.get(x).getPos());
+                    System.out.println(roads.get(v).vehicles.get(x).getRoad_ref());
+                }
+            }
+        }
+    }
 }
+
 
 /*
 
