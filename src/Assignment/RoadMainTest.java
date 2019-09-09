@@ -12,17 +12,27 @@ class RoadMainTest {
         RoadMain roadMain = new RoadMain();
 
         roadMain.addnewRoad(20, 10, "North", 0, 0);
-        roadMain.addConectingRoad(20, "West");
-        roadMain.addConectingRoad(20, "South");
-        Road a = roadMain.getRoad(0);
-        Road b = roadMain.getRoad(1);
-        Road c = roadMain.getRoad(2);
-        System.out.println(a.getYnorth() + "   " + a.getYsouth() + "   " +
-                a.getXeast() + "   " + a.getXwest());
-        System.out.println(b.getYnorth() + "   " + b.getYsouth() + "   " +
-                b.getXeast() + "   " + b.getXwest());
-        System.out.println(c.getYnorth() + "   " + c.getYsouth() + "   " +
-                c.getXeast() + "   " + c.getXwest());
+        roadMain.addConectingRoad(0,20, "North");
+        roadMain.addConectingRoad(0,20, "East");
+        roadMain.addConectingRoad(0,20, "West");
+
+
+        assertEquals(1, roadMain.roads.get(0).connectedRoads.get(0));
+        assertEquals(2, roadMain.roads.get(0).connectedRoads.get(1));
+        assertEquals(3, roadMain.roads.get(0).connectedRoads.get(2));
+        roadMain.addConectingRoad(2,20, "North");
+        roadMain.addConectingRoad(2,20, "South");
+
+        assertEquals(4, roadMain.roads.get(2).connectedRoads.get(0));
+        assertEquals(5, roadMain.roads.get(2).connectedRoads.get(1));
+
+
+
+
+
+
+
+
 
     }
 }

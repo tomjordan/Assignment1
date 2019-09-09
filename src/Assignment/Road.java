@@ -1,6 +1,7 @@
 package Assignment;
 
 import java.util.ArrayList;
+import java.util.*;
 
 public class Road {
     private int length;
@@ -20,7 +21,9 @@ public class Road {
     private boolean trafficLightend = false;
     private TrafficLight startLight;
     private TrafficLight endLight;
+    int index = 0;
 
+    ArrayList<Integer> connectedRoads = new ArrayList<Integer>();
     Vehicle turning_vehicle;
     ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
     ArrayList<Vehicle> vehicles_off_road = new ArrayList<Vehicle>();
@@ -56,6 +59,15 @@ public class Road {
             ynorth = yinit + width;
             ysouth = yinit;
         }
+    }
+
+    public ArrayList<Integer> getConnectedRoads() {
+        return this.connectedRoads;
+    }
+
+    public void setConnectedRoads(int connectedRoads) {
+        this.connectedRoads.add(connectedRoads);
+               this.index++;
     }
 
     public void addCar(int speed) {
@@ -121,7 +133,7 @@ public class Road {
             } else if (checkMovement(i)) {
                 if (trafficLightend) {
                     if (endLight.isGreen()) {
-                        isOffRoad(i, vehicles.get(i).getRoad_ref() + 1);
+                        isOffRoad(i);
                     }
                 } else vehicles.get(i).setPos(getRoadEnd());
             } else vehicles.get(i).moveVehicle();
@@ -193,9 +205,8 @@ public class Road {
     }
 
 
-    public void isOffRoad(int i, int rd_ref) {
+    public void isOffRoad(int i) {
         vehicles_off_road.add(vehicles.get(i));
-        vehicles_off_road.get(i).setRoad_ref(rd_ref);
     }
 
 

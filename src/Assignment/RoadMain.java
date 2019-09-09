@@ -1,12 +1,16 @@
 package Assignment;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class RoadMain {
     int num_roads = 0;
     ArrayList<Road> roads = new ArrayList<Road>();
+    private Random random = new Random();
 
+
+/*
 
     public static void main(String[] args) {
         RoadMain roadMain = new RoadMain();
@@ -14,6 +18,7 @@ public class RoadMain {
         roadMain.addConectingRoad(50, "West");
         roadMain.addConectingRoad(40, "North");
     }
+*/
 
     public void change_roads(int road_ref) {
 
@@ -105,6 +110,8 @@ public class RoadMain {
             }
         }
         roads.get(num_roads).makeRoad();
+        roads.get(roadRef).setConnectedRoads(num_roads);
+
         num_roads++;
     }
 
@@ -113,7 +120,7 @@ public class RoadMain {
     }
 
 
-    public void addIntersection(int roadRef, String intersectionType, int length) {
+    /*public void addIntersection(int roadRef, String intersectionType, int length) {
         String dir = roads.get(roadRef).getDirection();
         int north_end = roads.get(roadRef).getYnorth();
         int south_end = roads.get(roadRef).getYsouth();
@@ -129,11 +136,27 @@ public class RoadMain {
                             "West", east_end, north_end));
                     roads.add(new Road(length, width_new,
                             "North", east_end, north_end));
+                    roads.get(roadRef).setConnectedRoads(num_roads);
+                    roads.get(roadRef).setConnectedRoads(num_roads + 1);
+                    roads.get(roadRef).setConnectedRoads(num_roads + 2);
+                    roads.get(num_roads).makeRoad();
+                    roads.get(num_roads + 1).makeRoad();
+                    roads.get(num_roads + 2).makeRoad();
+                    num_roads += 3;
+
                 } else if (intersectionType == "T") {
                     roads.add(new Road(length, width_new,
                             "East", west_end, north_end));
                     roads.add(new Road(length, width_new,
                             "West", east_end, north_end));
+                    roads.get(roadRef).setConnectedRoads(num_roads);
+                    roads.get(roadRef).setConnectedRoads(num_roads + 1);
+                    roads.get(roadRef).setConnectedRoads(num_roads + 2);
+                    roads.get(num_roads).makeRoad();
+                    roads.get(num_roads + 1).makeRoad();
+                    num_roads += 2;
+
+
                 }
             }
             if (dir == "South") {
@@ -144,58 +167,116 @@ public class RoadMain {
                             "West", west_end, south_end - width_new));
                     roads.add(new Road(length, width_new,
                             "South", east_end, south_end));
+                    roads.get(roadRef).setConnectedRoads(num_roads);
+                    roads.get(roadRef).setConnectedRoads(num_roads + 1);
+                    roads.get(roadRef).setConnectedRoads(num_roads + 2);
+                    roads.get(num_roads).makeRoad();
+                    roads.get(num_roads + 1).makeRoad();
+                    roads.get(num_roads + 2).makeRoad();
+                    num_roads += 3;
+
                 } else if (intersectionType == "T") {
                     roads.add(new Road(length, width_new,
                             "East", west_end, south_end - width_new));
+
                     roads.add(new Road(length, width_new,
                             "West", west_end, south_end - width_new));
+                    roads.get(roadRef).setConnectedRoads(num_roads);
+                    roads.get(roadRef).setConnectedRoads(num_roads + 1);
+                    roads.get(roadRef).setConnectedRoads(num_roads + 2);
+                    roads.get(num_roads).makeRoad();
+                    roads.get(num_roads + 1).makeRoad();
+                    num_roads += 2;
                 }
-            }
 
 
-            if (dir == "East") {
+                if (dir == "East") {
 
-                if (intersectionType == "+") {
-                    roads.add(new Road(length, width_new,
-                            "North", east_end, south_end));
-                    roads.add(new Road(length, width_new,
-                            "South", east_end, north_end));
-                    roads.add(new Road(length, width_new,
-                            "East", east_end, south_end));
-                } else if (intersectionType == "T") {
-                    roads.add(new Road(length, width_new,
-                            "North", east_end, south_end));
-                    roads.add(new Road(length, width_new,
-                            "South", east_end, north_end));
+                    if (intersectionType == "+") {
+                        roads.add(new Road(length, width_new,
+                                "North", east_end, south_end));
+
+                        roads.add(new Road(length, width_new,
+                                "South", east_end, north_end));
+
+                        roads.add(new Road(length, width_new,
+                                "East", east_end, south_end));
+                        roads.get(roadRef).setConnectedRoads(num_roads);
+                        roads.get(roadRef).setConnectedRoads(num_roads + 1);
+                        roads.get(roadRef).setConnectedRoads(num_roads + 2);
+                        roads.get(num_roads).makeRoad();
+                        roads.get(num_roads + 1).makeRoad();
+                        roads.get(num_roads + 2).makeRoad();
+                        num_roads += 3;
+                    } else if (intersectionType == "T") {
+                        roads.add(new Road(length, width_new,
+                                "North", east_end, south_end));
+
+                        roads.add(new Road(length, width_new,
+                                "South", east_end, north_end));
+                        roads.get(roadRef).setConnectedRoads(num_roads);
+                        roads.get(roadRef).setConnectedRoads(num_roads + 1);
+                        roads.get(roadRef).setConnectedRoads(num_roads + 2);
+                        roads.get(num_roads).makeRoad();
+                        roads.get(num_roads + 1).makeRoad();
+                        num_roads += 2;
+                    }
                 }
-            }
 
-            if (dir == "West") {
+                if (dir == "West") {
 
-                if (intersectionType == "+") {
-                    roads.add(new Road(length, width_new,
-                            "North", west_end - width_new, south_end));
-                    roads.add(new Road(length, width_new,
-                            "South", west_end - width_new, north_end));
-                    roads.add(new Road(length, width_new,
-                            "West", east_end, south_end));
-                } else if (intersectionType == "T") {
-                    roads.add(new Road(length, width_new,
-                            "North", west_end - width_new, south_end));
-                    roads.add(new Road(length, width_new,
-                            "South", west_end - width_new, north_end));
+                    if (intersectionType == "+") {
+                        roads.add(new Road(length, width_new,
+                                "North", west_end - width_new, south_end));
+
+                        roads.add(new Road(length, width_new,
+                                "South", west_end - width_new, north_end));
+
+                        roads.add(new Road(length, width_new,
+                                "West", east_end, south_end));
+                        roads.get(roadRef).setConnectedRoads(num_roads);
+                        roads.get(roadRef).setConnectedRoads(num_roads + 1);
+                        roads.get(roadRef).setConnectedRoads(num_roads + 2);
+                        roads.get(num_roads).makeRoad();
+                        roads.get(num_roads + 1).makeRoad();
+                        roads.get(num_roads + 2).makeRoad();
+                        num_roads += 3;
+                    } else if (intersectionType == "T") {
+                        roads.add(new Road(length, width_new,
+                                "North", west_end - width_new, south_end));
+
+                        roads.add(new Road(length, width_new,
+                                "South", west_end - width_new, north_end));
+                        roads.get(roadRef).setConnectedRoads(num_roads);
+                        roads.get(roadRef).setConnectedRoads(num_roads + 1);
+                        roads.get(roadRef).setConnectedRoads(num_roads + 2);
+                        roads.get(num_roads).makeRoad();
+                        roads.get(num_roads + 1).makeRoad();
+                        num_roads += 2;
+                    }
                 }
+
+
             }
-
-
         }
-    }
+    }*/
+}
 
+/*
 
 public void checkCorners(){
 
         for (int i = 0; i < roads.size(); i++){
             if (roads.get(i).vehicles_off_road.size()>0){
+                if (roads.get(i).connectedRoads.size() == 3){
+                    int randomInteger = random.nextInt(3);
+                    int newRoad = roads.get(i).connectedRoads.get(randomInteger);
+                    roads.get(newRoad).add()
+
+                }
+            }
+                else if (roads.get(i).connectedRoads.size() == 2){}
+                else {
                 Vehicle newVeh = roads.get(i).vehicles_off_road.get(0);
                  int ref = newVeh.getRoad_ref();
                  roads.get(ref).addVehicle(newVeh.getType(), newVeh.getSpeed());
@@ -228,11 +309,23 @@ public void checkCorners(){
 
     public void checkTurns() {
         for (int i = 0; i < roads.size() - 1; i++) {
-            if (roads.get(i).vehicles_off_road.size() > 0) {
+            int size = roads.get(i).vehicles_off_road.get(0).getLength();
+
+                if (roads.get(i).vehicles_off_road.size()>0){
+                    if (roads.get(i).connectedRoads.size() == 3){
+                        int randomInteger = random.nextInt(3);
+                        int newRoad = roads.get(i).connectedRoads.get(randomInteger);
+                        if (isEmpty(newRoad, size)) {
+                            roads.get(i).vehicles_off_road.get(0).setRoad_ref(newRoad);
+                            roads.get(newRoad).vehicles.add(roads.get(i).vehicles_off_road.get(0));
+                        }
+                    }
+                }
+                else if (roads.get(i).connectedRoads.size() == 2){}
+                else {
                 for (int n = 0; n < roads.get(i).vehicles_off_road.size(); n++) {
                     int ref = roads.get(i).vehicles_off_road.get(n).getRoad_ref();
                     int speed = roads.get(i).vehicles_off_road.get(n).getSpeed();
-                    String type = roads.get(i).vehicles_off_road.get(n).getType();
                     int size = roads.get(i).vehicles_off_road.get(n).getLength();
                     if (isEmpty(ref, size)) {
                         roads.get(i).setVehicles_on_road(roads.get(i).getNum_vehicles() - 1);
@@ -284,6 +377,7 @@ public void checkCorners(){
         return status;
     }
 }
+*/
 
 
 /*
@@ -303,6 +397,4 @@ public void checkCorners(){
 
             }
         }
-*/
-
 */
