@@ -37,9 +37,6 @@ public class Vehicle {
         return length;
     }
 
-    public void setCarlength(int carlength) {
-        this.carlength = carlength;
-    }
 
     public void intiDir() {
         if (getDirection() == "North") {

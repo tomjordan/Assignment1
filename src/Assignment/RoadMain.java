@@ -116,6 +116,9 @@ public class RoadMain {
 
         numRoads++;
     }
+    public void addTrafficLight(int roadRef, String whichEnd){
+        roads.get(roadRef).addTrafficLight(whichEnd);
+    }
 
     public Road getRoad(int road_ref) {
         return roads.get(road_ref);

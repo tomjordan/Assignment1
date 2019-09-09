@@ -36,6 +36,7 @@ public class Road {
     }
 
     public void makeRoad() {
+        /*Builds the road based on initial positions */
         if (this.getDirection() == "North") {
             ynorth = yinit + length;
             ysouth = yinit;
@@ -64,6 +65,8 @@ public class Road {
     }
 
     public void setConnectedRoads(int connectedRoads) {
+        /*Adds reference number to keep track of what roads are connected to the end
+        * of current road */
         this.connectedRoads.add(connectedRoads);
                this.index++;
     }
@@ -116,11 +119,21 @@ public class Road {
     public void addTrafficLight(String which_end) {
         if (which_end == "Start") {
             this.trafficLightStart = true;
+            this.startLight = new TrafficLight("Start");
             totTrafficLights++;
         } else if (which_end == "End") {
+            this.endLight = new TrafficLight("End");
             this.trafficLightend = true;
             totTrafficLights++;
         }
+    }
+
+    public void setEndLight(boolean status){
+        endLight.setStatus(status);
+    }
+
+    public void setStartLight(boolean status){
+        startLight.setStatus(status);
     }
 
     public void moveVehicles() {
@@ -139,19 +152,11 @@ public class Road {
         }
     }
 
-    public void addVehicle(String type, int speed){
-        if (type == "Car"){
-            addCar(speed);
-        }else if (type == "Bus"){
-            addBus(speed);
-        }else if (type =="Motorbike"){
-            addMotorbike(speed);
-        }
-    }
-
-
 
     public boolean checkMovement(int i) {
+
+        /* Checks to see if the vehicle will be moving off the current road*/
+
         boolean status = false;
 
         if (vehicles.get(i).getDirection() == "North") {
@@ -209,6 +214,9 @@ public class Road {
 
 
     public boolean checkCollision(int vRef) {
+        /*Returns true if a vehicle will move past the vehicle
+        * in front of it. If it does, position is set to the end of front vehicle
+        * and speed is set to the first vehicles speed in move vehicles function */
         boolean status = false;
         if (vehicles.size() == 1) {
             status = false;
@@ -308,7 +316,7 @@ public class Road {
 }
 
 
-
+/*Old code i wasnt ready to delete   */
 /*
     public void addTrafficLight(String which_end) {
         if (which_end == "Start") {
@@ -409,5 +417,16 @@ public class Road {
 
             }
 
+        }
+    }*/
+
+ /*
+    public void addVehicle(String type, int speed){
+        if (type == "Car"){
+            addCar(speed);
+        }else if (type == "Bus"){
+            addBus(speed);
+        }else if (type =="Motorbike"){
+            addMotorbike(speed);
         }
     }*/
