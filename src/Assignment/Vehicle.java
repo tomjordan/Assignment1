@@ -15,7 +15,7 @@ public class Vehicle {
     private int speed;
     private int xinit;
     private int yinit;
-    private int road_ref = 0;
+    private int roadRef = 0;
 
 
     public Vehicle(String direction, int speed, int x, int y) {
@@ -155,12 +155,12 @@ public class Vehicle {
         return speed;
     }
 
-    public int getRoad_ref(){
-        return road_ref;
+    public int getRoadRef(){
+        return roadRef;
 
     }
-    public void setRoad_ref(int num){
-        this.road_ref = num;
+    public void setRoadRef(int num){
+        this.roadRef = num;
 
     }
 

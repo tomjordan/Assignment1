@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class RoadMain {
-    int num_roads = 0;
+    int numRoads = 0;
     ArrayList<Road> roads = new ArrayList<Road>();
     private Random random = new Random();
 
@@ -28,8 +28,8 @@ public class RoadMain {
 
     public void addnewRoad(int length, int width, String direction, int xinit, int yinit) {
         roads.add(new Road(length, width, direction, xinit, yinit));
-        roads.get(num_roads).makeRoad();
-        num_roads++;
+        roads.get(numRoads).makeRoad();
+        numRoads++;
     }
 
     public void addConectingRoad(int roadRef, int length, String direction) {
@@ -40,7 +40,7 @@ public class RoadMain {
         int east_end = roads.get(roadRef).getXeast();
         int west_end = roads.get(roadRef).getXwest();
         int width_new = roads.get(roadRef).getWidth();
-        if (num_roads > 0) {
+        if (numRoads > 0) {
             if (dir == "North") {
                 if (direction != "South") {
 
@@ -111,10 +111,10 @@ public class RoadMain {
                 }
             }
         }
-        roads.get(num_roads).makeRoad();
-        roads.get(roadRef).setConnectedRoads(num_roads);
+        roads.get(numRoads).makeRoad();
+        roads.get(roadRef).setConnectedRoads(numRoads);
 
-        num_roads++;
+        numRoads++;
     }
 
     public Road getRoad(int road_ref) {
@@ -151,7 +151,6 @@ public class RoadMain {
                             roads.get(i).vehicles_off_road.get(0).getLength())) {
                         ref = roads.get(i).connectedRoads.get(j);
                         addVehicle(type, speed, ref);
-                        //roads.get((roads.get(i).connectedRoads.get(j))).addVehicle(type, speed);
                         roads.get(i).vehicles.remove(0);
                         roads.get(i).reset_offRoad();
 
@@ -227,10 +226,15 @@ public class RoadMain {
     public void addVehicle(String type, int speed, int roadRef) {
         if (type == "Car") {
             roads.get(roadRef).addCar(speed);
+            roads.get(roadRef).vehicles.get(roads.get(roadRef).vehicles.size() - 1).setRoadRef(roadRef);
         } else if (type == "Bus") {
             roads.get(roadRef).addBus(speed);
+            roads.get(roadRef).vehicles.get(roads.get(roadRef).vehicles.size() - 1).setRoadRef(roadRef);
+
         } else if (type == "Motorbike") {
             roads.get(roadRef).addMotorbike(speed);
+            roads.get(roadRef).vehicles.get(roads.get(roadRef).vehicles.size()-1).setRoadRef(roadRef);
+
         }
     }
 
@@ -239,9 +243,10 @@ public class RoadMain {
         {
             for (int v = 0; v < roads.size(); v++) {
                 for (int x = 0; x < roads.get(v).vehicles.size(); x++) {
+                    System.out.println(roads.get(v).vehicles.get(x).getType());
                     System.out.println(roads.get(v).vehicles.get(x).getDirection());
                     System.out.println(roads.get(v).vehicles.get(x).getPos());
-                    System.out.println(roads.get(v).vehicles.get(x).getRoad_ref());
+                    System.out.println(roads.get(v).vehicles.get(x).getRoadRef());
                 }
             }
         }

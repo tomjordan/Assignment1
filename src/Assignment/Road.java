@@ -13,10 +13,9 @@ public class Road {
     private int ynorth;
     private int ysouth;
     private String direction;
-    private int vehicle_ref = 0;
-    private int vehicles_on_road;
-    private int tot_TrafficLights = 0;
-    private int light_ref = 0;
+    private int vehicleRef = 0;
+    private int vehiclesOnRoad;
+    private int totTrafficLights = 0;
     private boolean trafficLightStart = false;
     private boolean trafficLightend = false;
     private TrafficLight startLight;
@@ -79,9 +78,9 @@ public class Road {
         } else if (direction == "West") {
             vehicles.add(new Car("West", speed, xeast, ysouth + width / 2));
         }
-        vehicles.get(vehicle_ref).intiDir();
-        vehicle_ref = vehicles.size();
-        vehicles_on_road++;
+        vehicles.get(vehicleRef).intiDir();
+        vehicleRef = vehicles.size();
+        vehiclesOnRoad++;
     }
 
     public void addMotorbike(int speed) {
@@ -94,9 +93,9 @@ public class Road {
         } else if (direction == "West") {
             vehicles.add(new Motorbike("West", speed, xeast, ysouth + width / 2));
         }
-        vehicles.get(vehicle_ref).intiDir();
-        vehicle_ref = vehicles.size();
-        vehicles_on_road++;
+        vehicles.get(vehicleRef).intiDir();
+        vehicleRef = vehicles.size();
+        vehiclesOnRoad++;
     }
 
     public void addBus(int speed) {
@@ -109,18 +108,18 @@ public class Road {
         } else if (direction == "West") {
             vehicles.add(new Bus("West", speed, xeast, ysouth + width / 2));
         }
-        vehicles.get(vehicle_ref).intiDir();
-        vehicle_ref = vehicles.size();
-        vehicles_on_road++;
+        vehicles.get(vehicleRef).intiDir();
+        vehicleRef = vehicles.size();
+        vehiclesOnRoad++;
     }
 
     public void addTrafficLight(String which_end) {
         if (which_end == "Start") {
             this.trafficLightStart = true;
-            tot_TrafficLights++;
+            totTrafficLights++;
         } else if (which_end == "End") {
             this.trafficLightend = true;
-            tot_TrafficLights++;
+            totTrafficLights++;
         }
     }
 
@@ -274,15 +273,15 @@ public class Road {
     }
 
     public int getNum_vehicles() {
-        return vehicles_on_road;
+        return vehiclesOnRoad;
     }
 
     public void setVehicles_on_road(int vehicles_on_road) {
-        this.vehicles_on_road = vehicles_on_road;
+        this.vehiclesOnRoad = vehicles_on_road;
     }
 
     public void setVehicle_ref(int vehicle_ref) {
-        this.vehicle_ref = vehicle_ref;
+        this.vehicleRef = vehicle_ref;
     }
 
 
