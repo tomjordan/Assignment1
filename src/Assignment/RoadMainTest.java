@@ -35,6 +35,36 @@ class RoadMainTest {
 
 
     }
+    @Test
+    void testTurns() {
+        RoadMain roadMain = new RoadMain();
+
+        roadMain.addnewRoad(25, 10, "North", 0, 0);
+        roadMain.addConectingRoad(0, 25, "East");
+        assertEquals(1, roadMain.roads.get(0).connectedRoads.get(0));
+        roadMain.addVehicle("Car", 5, 0);
+        roadMain.moveVehicles();
+        assertEquals(7, roadMain.roads.get(0).vehicles.get(0).getPos());
+        roadMain.moveVehicles();
+        assertEquals(12, roadMain.roads.get(0).vehicles.get(0).getPos());
+        roadMain.moveVehicles();
+        assertEquals(17, roadMain.roads.get(0).vehicles.get(0).getPos());
+        roadMain.moveVehicles();
+        assertEquals(22, roadMain.roads.get(0).vehicles.get(0).getPos());
+        roadMain.moveVehicles();
+        assertEquals(30, roadMain.roads.get(1).vehicles.get(0).getYpos());
+        assertEquals(2, roadMain.roads.get(1).vehicles.get(0).getPos());
+        roadMain.moveVehicles();
+        assertEquals(30, roadMain.roads.get(1).vehicles.get(0).getYpos());
+        assertEquals(12, roadMain.roads.get(1).vehicles.get(0).getPos());
+        roadMain.moveVehicles();
+        assertEquals(22, roadMain.roads.get(1).vehicles.get(0).getXpos());
+        roadMain.moveVehicles();
+        roadMain.moveVehicles();
+        assertEquals(20, roadMain.roads.get(1).vehicles.get(0).getPos());
+        assertEquals(1, roadMain.roads.get(0).connectedRoads.get(0));
+
+    }
 }
 
 

@@ -21,10 +21,9 @@ public class Road {
     private boolean trafficLightend = false;
     private TrafficLight startLight;
     private TrafficLight endLight;
-    int index = 0;
+    private int index = 0;
 
     ArrayList<Integer> connectedRoads = new ArrayList<Integer>();
-    Vehicle turning_vehicle;
     ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
     ArrayList<Vehicle> vehicles_off_road = new ArrayList<Vehicle>();
 
@@ -134,8 +133,8 @@ public class Road {
                 if (trafficLightend) {
                     if (endLight.isGreen()) {
                         isOffRoad(i);
-                    }
-                } else vehicles.get(i).setPos(getRoadEnd());
+                    }vehicles.get(i).setPos(getRoadEnd());
+                } else isOffRoad(i);
             } else vehicles.get(i).moveVehicle();
 
         }
@@ -150,7 +149,6 @@ public class Road {
             addMotorbike(speed);
         }
     }
-
 
 
 

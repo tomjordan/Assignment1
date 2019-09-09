@@ -27,7 +27,7 @@ class RoadTest {
     void testCollisions() {
         Road road = new Road(25, 10, "North", 0, 0);
         road.makeRoad();
-        road.addCar( 3);
+        road.addCar(3);
         road.moveVehicles();
         road.moveVehicles();
         assertEquals(8, road.vehicles.get(0).getPos());
@@ -35,13 +35,30 @@ class RoadTest {
 
         road.moveVehicles();
         assertEquals(11, road.vehicles.get(0).getPos());
-        assertEquals(8, road.vehicles.get(1).getPos());
+        assertEquals(9, road.vehicles.get(1).getPos());
         road.moveVehicles();
         assertEquals(14, road.vehicles.get(0).getPos());
-        assertEquals(11, road.vehicles.get(1).getPos());
+        assertEquals(12, road.vehicles.get(1).getPos());
         assertEquals(2, road.getNum_vehicles());
 
     }
+
+    @Test
+    void testonRoad() {
+        Road road = new Road(25, 10, "North", 0, 0);
+        road.makeRoad();
+        road.addCar(10);
+        road.moveVehicles();
+        road.moveVehicles();
+        road.moveVehicles();
+        assertEquals(1, road.vehicles_off_road.size());
+
+    }
+
+
+
+
+
 
     /*
 

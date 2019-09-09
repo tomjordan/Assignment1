@@ -83,6 +83,14 @@ public class Vehicle {
 
     }
 
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
     public String getDirection() {
         return direction;
     }
