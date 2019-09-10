@@ -2,6 +2,7 @@ package Assignment;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -13,15 +14,46 @@ public class RoadMain {
     private Random random = new Random();
 
 
-/*
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+        /*Basic simulator with a specified road and one traffic light. New vehicles are added at random.
+        * The traffic light changes status at random.*/
         RoadMain roadMain = new RoadMain();
-        roadMain.addnewRoad(30, 10, "North", 0, 0);
-        roadMain.addConectingRoad(50, "West");
-        roadMain.addConectingRoad(40, "North");
+        roadMain.addnewRoad(25, 10, "North", 0, 0);
+        roadMain.addConectingRoad(0, 25, "East");
+        roadMain.addConectingRoad(0, 25, "North");
+        roadMain.addConectingRoad(0, 25, "West");
+        roadMain.addConectingRoad(1, 25, "South");
+
+        roadMain.roads.get(0).addTrafficLight("End");
+        roadMain.roads.get(0).setEndLight(false);
+        for (; ; ) {
+            roadMain.printPos();
+            TimeUnit.SECONDS.sleep(1);
+            Random r = new Random();
+            int j = r.nextInt(8);
+            if (j == 0) {
+                roadMain.addVehicle("Car", 5, 0);
+
+            } else if (j == 1) {
+                roadMain.addVehicle("Motorbike", 5, 0);
+
+            } else if (j == 2) {
+                roadMain.addVehicle("Bus", 5, 0);
+
+            }
+            int i = r.nextInt(5);
+            if (i == 0 || i == 2 || i == 3) {
+                roadMain.roads.get(0).setEndLight(false);
+
+            } else if (i == 1) {
+                roadMain.roads.get(0).setEndLight(true);
+            }
+            roadMain.moveVehicles();
+
+        }
+
     }
-*/
+
 
     public void change_roads(int road_ref) {
 
@@ -146,7 +178,7 @@ public class RoadMain {
 
     public void checkTurns() {
         /*Checks if a vehicle has moved off its current road. If it has and there are connected roads, the vehicle will turn (be added to next road
-        * if there are multiple connected roads (intersection) the vehicles turn randomly to one of the new roads   */
+         * if there are multiple connected roads (intersection) the vehicles turn randomly to one of the new roads   */
         Random r = new Random();
         for (int i = 0; i < roads.size(); i++) {
             if (roads.get(i).vehiclesOffRoad.size() > 0) {
@@ -199,7 +231,7 @@ public class RoadMain {
 
     public boolean isEmpty(int i, int size) {
         /*Returns true if there is enough room at the beginning of a new road to add a new vehicle to it. Used when
-        * turning vehicles  */
+         * turning vehicles  */
         boolean status = false;
         if (roads.get(i).vehicles.size() == 0) {
             status = true;
@@ -252,12 +284,13 @@ public class RoadMain {
 
     public void printPos() {
         /*Prints the road number, vehicle types and vehicle positions on all roads  */
-        {System.out.println("\nMoving vehicles....");
+        {
+            System.out.println("\nMoving vehicles....");
             for (int v = 0; v < roads.size(); v++) {
                 for (int x = 0; x < roads.get(v).vehicles.size(); x++) {
 
-                    System.out.println("Road number:  " + v + "  Type:  " + roads.get(v).vehicles.get(x).getType() + "  Direction:  " + roads.get(v).vehicles.get(x).getDirection()
-                            + "  Position:  " + roads.get(v).vehicles.get(x).getPos());
+                    System.out.println("Road number:  " + v + ".....Type:  " + roads.get(v).vehicles.get(x).getType() + ".....Direction:  " + roads.get(v).vehicles.get(x).getDirection()
+                            + ".....X Position:  " + roads.get(v).vehicles.get(x).getXpos() + ".....Y Position:  " + roads.get(v).vehicles.get(x).getYpos());
 
                 }
 

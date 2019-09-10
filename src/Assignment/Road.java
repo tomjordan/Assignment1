@@ -81,8 +81,8 @@ public class Road {
         } else if (direction == "West") {
             vehicles.add(new Car("West", speed, xeast, ysouth + width / 2));
         }
-        vehicles.get(vehicleRef).intiDir();
-        vehicleRef = vehicles.size();
+        vehicles.get(vehicles.size()-1).intiDir();
+        //vehicleRef = vehicles.size();
         vehiclesOnRoad++;
     }
 
@@ -97,8 +97,9 @@ public class Road {
         } else if (direction == "West") {
             vehicles.add(new Motorbike("West", speed, xeast, ysouth + width / 2));
         }
-        vehicles.get(vehicleRef).intiDir();
-        vehicleRef = vehicles.size();
+        vehicles.get(vehicles.size()-1).intiDir();
+       // vehicles.get(vehicleRef).intiDir();
+       // vehicleRef = vehicles.size();
         vehiclesOnRoad++;
     }
 
@@ -113,8 +114,9 @@ public class Road {
         } else if (direction == "West") {
             vehicles.add(new Bus("West", speed, xeast, ysouth + width / 2));
         }
-        vehicles.get(vehicleRef).intiDir();
-        vehicleRef = vehicles.size();
+        vehicles.get(vehicles.size()-1).intiDir();
+       // vehicles.get(vehicleRef).intiDir();
+      // vehicleRef = vehicles.size();
         vehiclesOnRoad++;
     }
 

@@ -51,7 +51,7 @@ class RoadTest {
         road.moveVehicles();
         road.moveVehicles();
         road.moveVehicles();
-        assertEquals(1, road.vehicles_off_road.size());
+        assertEquals(1, road.vehiclesOffRoad.size());
 
     }
 
@@ -174,8 +174,8 @@ class RoadTest {
     void testrandomthings() {
         Road road = new Road(15, 10, "North", 0, 0);
         road.addCar(15);
-        road.vehicles_off_road.add(road.vehicles.get(0));
-        assertEquals(15, road.vehicles_off_road.get(0).getSpeed());
+        road.vehiclesOffRoad.add(road.vehicles.get(0));
+        assertEquals(15, road.vehiclesOffRoad.get(0).getSpeed());
     }
 
 }
