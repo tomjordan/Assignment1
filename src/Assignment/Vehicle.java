@@ -26,19 +26,23 @@ public class Vehicle {
     }
 
     public void setLength(int length) {
+        /*Set the length of a vehicle */
         this.length = length;
     }
 
     public int getCarlength() {
+        /*Returns the length of a car */
         return carlength;
     }
 
     public int getLength() {
+        /*Returns the length of vehicle */
         return length;
     }
 
 
     public void intiDir() {
+        /*Initiates the front and rear positions of vehicle based on its length and direction */
         if (getDirection() == "North") {
             ypos = yinit + this.getLength();
             yrear = yinit;
@@ -59,7 +63,7 @@ public class Vehicle {
     }
 
     public void moveVehicle() {
-
+        /*Moves the vehicle based on its direction and speed */
         if (direction == "North") {
             yprev = ypos;
             ypos = ypos + speed;
@@ -81,38 +85,47 @@ public class Vehicle {
     }
 
     public void setType(String type) {
+        /*Sets the type of a vehicle */
         this.type = type;
     }
 
     public String getType() {
+        /*Returns the type of a vehicle */
         return type;
     }
 
     public String getDirection() {
+        /*Returns the direction of a vehicle */
         return direction;
     }
 
     public int getXpos() {
+        /*Returns front x coordinate of a vehicle */
         return xpos;
     }
 
     public int getYpos() {
+        /*Returns front y coordinate of a vehicle */
         return ypos;
     }
 
     public int getXrear() {
+        /*Returns rear x coordinate of a vehicle */
         return xrear;
     }
 
     public int getYrear() {
+        /*Returns rear y coordinate of a vehicle */
         return yrear;
     }
 
     public void setSpeed(int newspeed) {
+        /*Sets the speed of a vehicle */
         this.speed = newspeed;
     }
 
     public void setPos(int newposition){
+        /*Sets the front and rear positions of a vehicle based on its direction and length */
         if (getDirection() == "North") {
             ypos = newposition;
             yrear = newposition - this.getLength();
@@ -129,6 +142,7 @@ public class Vehicle {
 
     }
     public int getPos() {
+        /*Returns front coordinate of a vehicle based on its direction */
         int position = 0;
         if (direction == "North" || direction == "South") {
             position = ypos;
@@ -138,6 +152,7 @@ public class Vehicle {
     }
 
     public int getRear(){
+        /*Returns rear coordinate of a vehicle based on its direction */
         int position = 0;
         if (direction == "North" || direction == "South") {
             position = yrear;
@@ -149,14 +164,17 @@ public class Vehicle {
 
 
     int getSpeed() {
+        /*Returns the speed of a vehicle*/
         return speed;
     }
 
     public int getRoadRef(){
+        /*Returns the reference road the vehicle is currently on*/
         return roadRef;
 
     }
     public void setRoadRef(int num){
+        /*Sets the reference for road that a vehicle is currently on*/
         this.roadRef = num;
 
     }

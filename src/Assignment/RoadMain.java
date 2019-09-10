@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class RoadMain {
+    /*Roadmain is used as the traffic simulator */
     int numRoads = 0;
     ArrayList<Road> roads = new ArrayList<Road>();
     private Random random = new Random();
@@ -27,13 +28,14 @@ public class RoadMain {
     }
 
     public void addnewRoad(int length, int width, String direction, int xinit, int yinit) {
+        /*Adds a road which is no connected to any existing road */
         roads.add(new Road(length, width, direction, xinit, yinit));
         roads.get(numRoads).makeRoad();
         numRoads++;
     }
 
     public void addConectingRoad(int roadRef, int length, String direction) {
-
+        /*Adds a new road onto the end of an existing road. To add an intersection, add multiple roads to the end of the same road  */
         String dir = roads.get(roadRef).getDirection();
         int north_end = roads.get(roadRef).getYnorth();
         int south_end = roads.get(roadRef).getYsouth();
@@ -116,7 +118,9 @@ public class RoadMain {
 
         numRoads++;
     }
-    public void addTrafficLight(int roadRef, String whichEnd){
+
+    public void addTrafficLight(int roadRef, String whichEnd) {
+        /*Adds a traffic light to specified road */
         roads.get(roadRef).addTrafficLight(whichEnd);
     }
 
@@ -131,7 +135,7 @@ public class RoadMain {
 
 
     public void moveVehicles() {
-
+        /*Moves vehicles on all roads  */
         for (int i = roads.size() - 1; i >= 0; i--) {
 
             roads.get(i).moveVehicles();
@@ -141,17 +145,19 @@ public class RoadMain {
 
 
     public void checkTurns() {
+        /*Checks if a vehicle has moved off its current road. If it has and there are connected roads, the vehicle will turn (be added to next road
+        * if there are multiple connected roads (intersection) the vehicles turn randomly to one of the new roads   */
         Random r = new Random();
         for (int i = 0; i < roads.size(); i++) {
-            if (roads.get(i).vehicles_off_road.size() > 0) {
+            if (roads.get(i).vehiclesOffRoad.size() > 0) {
                 int ref;
-                int speed = roads.get(i).vehicles_off_road.get(0).getSpeed();
-                String type = roads.get(i).vehicles_off_road.get(0).getType();
+                int speed = roads.get(i).vehiclesOffRoad.get(0).getSpeed();
+                String type = roads.get(i).vehiclesOffRoad.get(0).getType();
 
                 if (roads.get(i).connectedRoads.size() == 3) {
                     int j = r.nextInt(3);
                     if (isEmpty(roads.get(i).connectedRoads.get(j),
-                            roads.get(i).vehicles_off_road.get(0).getLength())) {
+                            roads.get(i).vehiclesOffRoad.get(0).getLength())) {
                         ref = roads.get(i).connectedRoads.get(j);
                         addVehicle(type, speed, ref);
                         roads.get(i).vehicles.remove(0);
@@ -162,7 +168,7 @@ public class RoadMain {
                 } else if (roads.get(i).connectedRoads.size() == 2) {
                     int j = r.nextInt(2);
                     if (isEmpty(roads.get(i).connectedRoads.get(j),
-                            roads.get(i).vehicles_off_road.get(0).getLength())) {
+                            roads.get(i).vehiclesOffRoad.get(0).getLength())) {
                         ref = roads.get(i).connectedRoads.get(j);
                         addVehicle(type, speed, ref);
                         //roads.get((roads.get(i).connectedRoads.get(j))).addVehicle(type, speed);
@@ -172,7 +178,7 @@ public class RoadMain {
 
                 } else if (roads.get(i).connectedRoads.size() == 1) {
                     if (isEmpty(roads.get(i).connectedRoads.get(0),
-                            roads.get(i).vehicles_off_road.get(0).getLength())) {
+                            roads.get(i).vehiclesOffRoad.get(0).getLength())) {
 
                         ref = roads.get(i).connectedRoads.get(0);
                         addVehicle(type, speed, ref);
@@ -192,6 +198,8 @@ public class RoadMain {
 
 
     public boolean isEmpty(int i, int size) {
+        /*Returns true if there is enough room at the beginning of a new road to add a new vehicle to it. Used when
+        * turning vehicles  */
         boolean status = false;
         if (roads.get(i).vehicles.size() == 0) {
             status = true;
@@ -227,6 +235,7 @@ public class RoadMain {
 
 
     public void addVehicle(String type, int speed, int roadRef) {
+        /*Adds a new vehicle to the road specified. Used to allow vehicles to turn  */
         if (type == "Car") {
             roads.get(roadRef).addCar(speed);
             roads.get(roadRef).vehicles.get(roads.get(roadRef).vehicles.size() - 1).setRoadRef(roadRef);
@@ -236,27 +245,29 @@ public class RoadMain {
 
         } else if (type == "Motorbike") {
             roads.get(roadRef).addMotorbike(speed);
-            roads.get(roadRef).vehicles.get(roads.get(roadRef).vehicles.size()-1).setRoadRef(roadRef);
+            roads.get(roadRef).vehicles.get(roads.get(roadRef).vehicles.size() - 1).setRoadRef(roadRef);
 
         }
     }
 
     public void printPos() {
-
-        {
+        /*Prints the road number, vehicle types and vehicle positions on all roads  */
+        {System.out.println("\nMoving vehicles....");
             for (int v = 0; v < roads.size(); v++) {
                 for (int x = 0; x < roads.get(v).vehicles.size(); x++) {
-                    System.out.println(roads.get(v).vehicles.get(x).getType());
-                    System.out.println(roads.get(v).vehicles.get(x).getDirection());
-                    System.out.println(roads.get(v).vehicles.get(x).getPos());
-                    System.out.println(roads.get(v).vehicles.get(x).getRoadRef());
+
+                    System.out.println("Road number:  " + v + "  Type:  " + roads.get(v).vehicles.get(x).getType() + "  Direction:  " + roads.get(v).vehicles.get(x).getDirection()
+                            + "  Position:  " + roads.get(v).vehicles.get(x).getPos());
+
                 }
+
             }
         }
     }
 }
 
-
+/*Old code i thought i might need. Was messing around with an add intersection method. Decided that the same thing could be achieved
+ * by simply adding 2 or 3 connecting roads to a road*/
 /*
 
  public void checkTurns() {
@@ -293,6 +304,10 @@ public class RoadMain {
         } else roads.get(i).vehicles.get(0).setPos(roads.get(i).getRoadEnd());
         roads.get(i).reset_offRoad();*/
 
+
+
+    /* . Was messing around with an add intersection method. Decided that the same thing could be achieved
+             * by simply adding 2 or 3 connecting roads to a road*
 
     /*public void addIntersection(int roadRef, String intersectionType, int length) {
         String dir = roads.get(roadRef).getDirection();

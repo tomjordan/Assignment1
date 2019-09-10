@@ -3,39 +3,42 @@ package Assignment;
 import java.util.Random;
 
 public class TrafficLight {
-
+    /*Traffic light is used to stop traffic at the beginning or end of roads  */
     private int xpos;
     private int ypos;
     private boolean status = true;
-    String which_end;
+    String whichEnd;
 
 
     public TrafficLight(String where) {
-        this.which_end = where;
+        this.whichEnd = where;
     }
 
     public boolean isGreen() {
-        return status; //True = green  False = red
+        /*Returns true if light is green, false if red  */
+        return status; // True = green  False = red
 
     }
 
-    public void setStatus ( boolean status){
+    public void setStatus(boolean status) {
+        /*Sets the status of the traffic light. True = green, False = red  */
+
         this.status = status;
     }
 
-    public int getXpos () {
+    public int getXpos() {
         return xpos;
     }
 
-    public int getYpos () {
+    public int getYpos() {
         return ypos;
     }
 
-    public void setXpos ( int xpos){
+    public void setXpos(int xpos) {
         this.xpos = xpos;
     }
 
-    public void setYpos ( int ypos){
+    public void setYpos(int ypos) {
         this.ypos = ypos;
     }
 }

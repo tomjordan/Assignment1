@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.*;
 
 public class Road {
+    /* The road class is used to create the map
+      and gives vehicles a direction and end points where they can turn/leave the map   */
+
     private int length;
     private int width;
     private int xinit;
@@ -24,7 +27,7 @@ public class Road {
 
     ArrayList<Integer> connectedRoads = new ArrayList<Integer>();
     ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
-    ArrayList<Vehicle> vehicles_off_road = new ArrayList<Vehicle>();
+    ArrayList<Vehicle> vehiclesOffRoad = new ArrayList<Vehicle>();
 
 
     Road(int length, int width, String direction, int xinit, int yinit) {
@@ -36,7 +39,7 @@ public class Road {
     }
 
     public void makeRoad() {
-        /*Builds the road based on initial positions */
+        /*Builds the road based on initial positions and direction of road */
         if (this.getDirection() == "North") {
             ynorth = yinit + length;
             ysouth = yinit;
@@ -60,10 +63,6 @@ public class Road {
         }
     }
 
-    public ArrayList<Integer> getConnectedRoads() {
-        return this.connectedRoads;
-    }
-
     public void setConnectedRoads(int connectedRoads) {
         /*Adds reference number to keep track of what roads are connected to the end
         * of current road */
@@ -72,6 +71,7 @@ public class Road {
     }
 
     public void addCar(int speed) {
+        /*Adds a car to the beginning of the road in the direction of the road at a specified speed*/
         if (direction == "North") {
             vehicles.add(new Car("North", speed, xwest + width / 2, ysouth));
         } else if (direction == "South") {
@@ -87,6 +87,7 @@ public class Road {
     }
 
     public void addMotorbike(int speed) {
+        /*Adds a motorbike to the beginning of the road in the direction of the road at a specified speed*/
         if (direction == "North") {
             vehicles.add(new Motorbike("North", speed, xwest + width / 2, ysouth));
         } else if (direction == "South") {
@@ -102,6 +103,7 @@ public class Road {
     }
 
     public void addBus(int speed) {
+        /*Adds a bus to the beginning of the road in the direction of the road at a specified speed*/
         if (direction == "North") {
             vehicles.add(new Bus("North", speed, xwest + width / 2, ysouth));
         } else if (direction == "South") {
@@ -117,6 +119,7 @@ public class Road {
     }
 
     public void addTrafficLight(String which_end) {
+        /*Adds a traffic light to the end or beginning of the road */
         if (which_end == "Start") {
             this.trafficLightStart = true;
             this.startLight = new TrafficLight("Start");
@@ -129,14 +132,21 @@ public class Road {
     }
 
     public void setEndLight(boolean status){
-        endLight.setStatus(status);
+        /*Change the status of the traffic light at the end of the road*/
+        if (trafficLightend){
+        endLight.setStatus(status);}
     }
 
     public void setStartLight(boolean status){
-        startLight.setStatus(status);
+        /*Change the status of the traffic light at the beginning of the road*/
+        if(trafficLightStart){
+        startLight.setStatus(status);}
     }
 
     public void moveVehicles() {
+        /*Moves all the vehicles currently on the road. Ensures that there are no collisions
+        * and that the vehicles are not moving through red lights*/
+
         for (int i = 0; i < vehicles.size(); i++) {
             if (checkCollision(i)) {
                 vehicles.get(i).setSpeed(vehicles.get(i - 1).getSpeed());
@@ -155,7 +165,7 @@ public class Road {
 
     public boolean checkMovement(int i) {
 
-        /* Checks to see if the vehicle will be moving off the current road*/
+        /* Returns true if the vehicle will be moving off the current road*/
 
         boolean status = false;
 
@@ -183,6 +193,7 @@ public class Road {
 
 
     public int getRoadEnd() {
+        /*Returns the position of the end of the road based on its direction*/
         int max = 0;
         if (direction == "North") {
             max = ynorth;
@@ -202,13 +213,15 @@ public class Road {
     }
 
     public Vehicle getVehicleOnRoad(int ref_num) {
+        /*Returns a specified vehicle currently on the road*/
         return vehicles.get(ref_num);
 
     }
 
 
     public void isOffRoad(int i) {
-        vehicles_off_road.add(vehicles.get(i));
+        /*Adds a vehicle to the liost of vehicles that would be moving off the road*/
+        vehiclesOffRoad.add(vehicles.get(i));
     }
 
 
@@ -216,7 +229,7 @@ public class Road {
     public boolean checkCollision(int vRef) {
         /*Returns true if a vehicle will move past the vehicle
         * in front of it. If it does, position is set to the end of front vehicle
-        * and speed is set to the first vehicles speed in move vehicles function */
+        * and speed is set to the first vehicles speed. Used in move vehicles function */
         boolean status = false;
         if (vehicles.size() == 1) {
             status = false;
@@ -254,50 +267,42 @@ public class Road {
     }
 
     public ArrayList<Vehicle> getVehicles_off_road() {
-        return vehicles_off_road;
+        /*Returns list of vehicles moving off the current road. Used to determine if vehicles will be turning etc.*/
+        return vehiclesOffRoad;
     }
 
-    public void setVehicles_off_road() {
-        this.vehicles_off_road = new ArrayList<Vehicle>();
-    }
 
     public void reset_offRoad() {
-        vehicles_off_road.clear();
+        /*Resets the vehicles off road list*/
+        vehiclesOffRoad.clear();
     }
 
-    public TrafficLight getEndLight() {
-        return endLight;
-    }
 
-    public TrafficLight getStartLight() {
-        return startLight;
-    }
     public int getLength() {
+        /*Returns length of the road*/
         return length;
     }
 
     public String getDirection() {
+        /*Returns the direction of the road*/
         return direction;
     }
 
     public int getNum_vehicles() {
+        /*Returns the number of vehicles currently on the road*/
         return vehiclesOnRoad;
     }
 
-    public void setVehicles_on_road(int vehicles_on_road) {
-        this.vehiclesOnRoad = vehicles_on_road;
-    }
 
-    public void setVehicle_ref(int vehicle_ref) {
-        this.vehicleRef = vehicle_ref;
-    }
 
 
     public int getXeast() {
+        /*Returns the coordinate of east edge of road*/
         return xeast;
     }
 
     public int getXwest() {
+        /*Returns the coordinate of west edge of road*/
         return xwest;
     }
 
@@ -306,10 +311,12 @@ public class Road {
     }
 
     public int getYnorth() {
+        /*Returns the coordinate of north edge of road*/
         return ynorth;
     }
 
     public int getYsouth() {
+        /*Returns the coordinate of south edge of road*/
         return ysouth;
     }
 
