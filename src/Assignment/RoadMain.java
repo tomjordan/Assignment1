@@ -16,7 +16,11 @@ public class RoadMain {
 
     public static void main(String[] args) throws InterruptedException {
         /*Basic simulator with 5 roads and one traffic light at the end of road 0.
-        New vehicles are added at random with random attributes. The traffic light changes status at random.*/
+        New vehicles are added at random with random attributes. The traffic light changes status at random.
+        More raods and traffic lights can be added by using addTrafficLight and
+        addConnectingRoad methods*/
+
+        // Add roads and traffic lights here///////////////////////////////////////////
         RoadMain roadMain = new RoadMain();
         roadMain.addnewRoad(25, 10, "North", 0, 0);
         roadMain.addConectingRoad(0, 25, "East");
@@ -26,6 +30,8 @@ public class RoadMain {
 
         roadMain.roads.get(0).addTrafficLight("End");
         roadMain.roads.get(0).setEndLight(false);
+        ////////////////////////////////////////////////////////////////////////////////////////
+
         for (; ; ) {
             TimeUnit.SECONDS.sleep(1);
             Random r = new Random();
