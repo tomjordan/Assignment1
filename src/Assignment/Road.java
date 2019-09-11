@@ -65,9 +65,9 @@ public class Road {
 
     public void setConnectedRoads(int connectedRoads) {
         /*Adds reference number to keep track of what roads are connected to the end
-        * of current road */
+         * of current road */
         this.connectedRoads.add(connectedRoads);
-               this.index++;
+        this.index++;
     }
 
     public void addCar(int speed) {
@@ -81,7 +81,7 @@ public class Road {
         } else if (direction == "West") {
             vehicles.add(new Car("West", speed, xeast, ysouth + width / 2));
         }
-        vehicles.get(vehicles.size()-1).intiDir();
+        vehicles.get(vehicles.size() - 1).intiDir();
         //vehicleRef = vehicles.size();
         vehiclesOnRoad++;
     }
@@ -97,9 +97,9 @@ public class Road {
         } else if (direction == "West") {
             vehicles.add(new Motorbike("West", speed, xeast, ysouth + width / 2));
         }
-        vehicles.get(vehicles.size()-1).intiDir();
-       // vehicles.get(vehicleRef).intiDir();
-       // vehicleRef = vehicles.size();
+        vehicles.get(vehicles.size() - 1).intiDir();
+        // vehicles.get(vehicleRef).intiDir();
+        // vehicleRef = vehicles.size();
         vehiclesOnRoad++;
     }
 
@@ -114,9 +114,9 @@ public class Road {
         } else if (direction == "West") {
             vehicles.add(new Bus("West", speed, xeast, ysouth + width / 2));
         }
-        vehicles.get(vehicles.size()-1).intiDir();
-       // vehicles.get(vehicleRef).intiDir();
-      // vehicleRef = vehicles.size();
+        vehicles.get(vehicles.size() - 1).intiDir();
+        // vehicles.get(vehicleRef).intiDir();
+        // vehicleRef = vehicles.size();
         vehiclesOnRoad++;
     }
 
@@ -133,21 +133,23 @@ public class Road {
         }
     }
 
-    public void setEndLight(boolean status){
+    public void setEndLight(boolean status) {
         /*Change the status of the traffic light at the end of the road*/
-        if (trafficLightend){
-        endLight.setStatus(status);}
+        if (trafficLightend) {
+            endLight.setStatus(status);
+        }
     }
 
-    public void setStartLight(boolean status){
+    public void setStartLight(boolean status) {
         /*Change the status of the traffic light at the beginning of the road*/
-        if(trafficLightStart){
-        startLight.setStatus(status);}
+        if (trafficLightStart) {
+            startLight.setStatus(status);
+        }
     }
 
     public void moveVehicles() {
         /*Moves all the vehicles currently on the road. Ensures that there are no collisions
-        * and that the vehicles are not moving through red lights*/
+         * and that the vehicles are not moving through red lights*/
 
         for (int i = 0; i < vehicles.size(); i++) {
             if (checkCollision(i)) {
@@ -157,7 +159,8 @@ public class Road {
                 if (trafficLightend) {
                     if (endLight.isGreen()) {
                         isOffRoad(i);
-                    }vehicles.get(i).setPos(getRoadEnd());
+                    }
+                    vehicles.get(i).setPos(getRoadEnd());
                 } else isOffRoad(i);
             } else vehicles.get(i).moveVehicle();
 
@@ -227,11 +230,10 @@ public class Road {
     }
 
 
-
     public boolean checkCollision(int vRef) {
         /*Returns true if a vehicle will move past the vehicle
-        * in front of it. If it does, position is set to the end of front vehicle
-        * and speed is set to the first vehicles speed. Used in move vehicles function */
+         * in front of it. If it does, position is set to the end of front vehicle
+         * and speed is set to the first vehicles speed. Used in move vehicles function */
         boolean status = false;
         if (vehicles.size() == 1) {
             status = false;
@@ -294,8 +296,6 @@ public class Road {
         /*Returns the number of vehicles currently on the road*/
         return vehiclesOnRoad;
     }
-
-
 
 
     public int getXeast() {

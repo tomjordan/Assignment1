@@ -16,7 +16,7 @@ public class RoadMain {
 
     public static void main(String[] args) throws InterruptedException {
         /*Basic simulator with a specified road and one traffic light. New vehicles are added at random.
-        * The traffic light changes status at random.*/
+         * The traffic light changes status at random.*/
         RoadMain roadMain = new RoadMain();
         roadMain.addnewRoad(25, 10, "North", 0, 0);
         roadMain.addConectingRoad(0, 25, "East");

@@ -124,7 +124,7 @@ public class Vehicle {
         this.speed = newspeed;
     }
 
-    public void setPos(int newposition){
+    public void setPos(int newposition) {
         /*Sets the front and rear positions of a vehicle based on its direction and length */
         if (getDirection() == "North") {
             ypos = newposition;
@@ -141,24 +141,27 @@ public class Vehicle {
         }
 
     }
+
     public int getPos() {
         /*Returns front coordinate of a vehicle based on its direction */
         int position = 0;
         if (direction == "North" || direction == "South") {
             position = ypos;
-        }else {
+        } else {
             position = xpos;
-        }return position;
+        }
+        return position;
     }
 
-    public int getRear(){
+    public int getRear() {
         /*Returns rear coordinate of a vehicle based on its direction */
         int position = 0;
         if (direction == "North" || direction == "South") {
             position = yrear;
-        }else {
+        } else {
             position = xrear;
-        }return position;
+        }
+        return position;
 
     }
 
@@ -168,17 +171,17 @@ public class Vehicle {
         return speed;
     }
 
-    public int getRoadRef(){
+    public int getRoadRef() {
         /*Returns the reference road the vehicle is currently on*/
         return roadRef;
 
     }
-    public void setRoadRef(int num){
+
+    public void setRoadRef(int num) {
         /*Sets the reference for road that a vehicle is currently on*/
         this.roadRef = num;
 
     }
-
 
 
 }

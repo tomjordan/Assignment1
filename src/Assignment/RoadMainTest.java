@@ -12,29 +12,23 @@ class RoadMainTest {
         RoadMain roadMain = new RoadMain();
 
         roadMain.addnewRoad(20, 10, "North", 0, 0);
-        roadMain.addConectingRoad(0,20, "North");
-        roadMain.addConectingRoad(0,20, "East");
-        roadMain.addConectingRoad(0,20, "West");
+        roadMain.addConectingRoad(0, 20, "North");
+        roadMain.addConectingRoad(0, 20, "East");
+        roadMain.addConectingRoad(0, 20, "West");
 
 
         assertEquals(1, roadMain.roads.get(0).connectedRoads.get(0));
         assertEquals(2, roadMain.roads.get(0).connectedRoads.get(1));
         assertEquals(3, roadMain.roads.get(0).connectedRoads.get(2));
-        roadMain.addConectingRoad(2,20, "North");
-        roadMain.addConectingRoad(2,20, "South");
+        roadMain.addConectingRoad(2, 20, "North");
+        roadMain.addConectingRoad(2, 20, "South");
 
         assertEquals(4, roadMain.roads.get(2).connectedRoads.get(0));
         assertEquals(5, roadMain.roads.get(2).connectedRoads.get(1));
 
 
-
-
-
-
-
-
-
     }
+
     @Test
     void testTurns() {
         RoadMain roadMain = new RoadMain();
@@ -122,7 +116,6 @@ class RoadMainTest {
     }
 
 
-
     @Test
     void testTrafficLights() {
         RoadMain roadMain = new RoadMain();
@@ -180,7 +173,7 @@ class RoadMainTest {
         roadMain.moveVehicles();
         roadMain.printPos();
         roadMain.moveVehicles();
-        
+
 
     }
 }
