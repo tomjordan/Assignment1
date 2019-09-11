@@ -15,8 +15,8 @@ public class RoadMain {
 
 
     public static void main(String[] args) throws InterruptedException {
-        /*Basic simulator with a specified road and one traffic light. New vehicles are added at random.
-         * The traffic light changes status at random.*/
+        /*Basic simulator with 5 roads and one traffic light at the end of road 0.
+        New vehicles are added at random with random attributes. The traffic light changes status at random.*/
         RoadMain roadMain = new RoadMain();
         roadMain.addnewRoad(25, 10, "North", 0, 0);
         roadMain.addConectingRoad(0, 25, "East");
@@ -27,28 +27,34 @@ public class RoadMain {
         roadMain.roads.get(0).addTrafficLight("End");
         roadMain.roads.get(0).setEndLight(false);
         for (; ; ) {
-            roadMain.printPos();
             TimeUnit.SECONDS.sleep(1);
             Random r = new Random();
-            int j = r.nextInt(8);
+            int j = r.nextInt(7);
+            int speed = r.nextInt(6) + 3;
             if (j == 0) {
-                roadMain.addVehicle("Car", 5, 0);
-
+                if (roadMain.isEmpty(0, 2)) {
+                    roadMain.addVehicle("Car", speed, 0);
+                }
             } else if (j == 1) {
-                roadMain.addVehicle("Motorbike", 5, 0);
-
+                if (roadMain.isEmpty(0, 1)) {
+                    roadMain.addVehicle("Motorbike", speed, 0);
+                }
             } else if (j == 2) {
-                roadMain.addVehicle("Bus", 5, 0);
+                if (roadMain.isEmpty(0, 6)) {
 
+                    roadMain.addVehicle("Bus", speed, 0);
+                }
             }
             int i = r.nextInt(5);
             if (i == 0 || i == 2 || i == 3) {
-                roadMain.roads.get(0).setEndLight(false);
+                roadMain.roads.get(0).setEndLight(true);
 
             } else if (i == 1) {
-                roadMain.roads.get(0).setEndLight(true);
+                roadMain.roads.get(0).setEndLight(false);
             }
+            roadMain.printPos();
             roadMain.moveVehicles();
+
 
         }
 
@@ -182,48 +188,52 @@ public class RoadMain {
         Random r = new Random();
         for (int i = 0; i < roads.size(); i++) {
             if (roads.get(i).vehiclesOffRoad.size() > 0) {
-                int ref;
-                int speed = roads.get(i).vehiclesOffRoad.get(0).getSpeed();
-                String type = roads.get(i).vehiclesOffRoad.get(0).getType();
+                for (int n = 0; n < roads.get(i).vehiclesOffRoad.size(); n++) {
+                    int ref;
+                    int speed = roads.get(i).vehiclesOffRoad.get(n).getSpeed();
+                    String type = roads.get(i).vehiclesOffRoad.get(n).getType();
 
-                if (roads.get(i).connectedRoads.size() == 3) {
-                    int j = r.nextInt(3);
-                    if (isEmpty(roads.get(i).connectedRoads.get(j),
-                            roads.get(i).vehiclesOffRoad.get(0).getLength())) {
-                        ref = roads.get(i).connectedRoads.get(j);
-                        addVehicle(type, speed, ref);
-                        roads.get(i).vehicles.remove(0);
+                    if (roads.get(i).connectedRoads.size() == 3) {
+                        int j = r.nextInt(3);
+                        if (isEmpty(roads.get(i).connectedRoads.get(j),
+                                roads.get(i).vehiclesOffRoad.get(n).getLength())) {
+                            ref = roads.get(i).connectedRoads.get(j);
+                            addVehicle(type, speed, ref);
+                            roads.get(i).vehicles.remove(n);
+                            //  roads.get(i).reset_offRoad();
+
+                        } else roads.get(i).vehicles.get(n).setPos(roads.get(i).getRoadEnd());
+
+                    } else if (roads.get(i).connectedRoads.size() == 2) {
+                        int j = r.nextInt(2);
+                        if (isEmpty(roads.get(i).connectedRoads.get(j),
+                                roads.get(i).vehiclesOffRoad.get(n).getLength())) {
+                            ref = roads.get(i).connectedRoads.get(j);
+                            addVehicle(type, speed, ref);
+                            //roads.get((roads.get(i).connectedRoads.get(j))).addVehicle(type, speed);
+                            roads.get(i).vehicles.remove(n);
+                            //  roads.get(i).reset_offRoad();
+                        } else roads.get(i).vehicles.get(0).setPos(roads.get(i).getRoadEnd());
+
+                    } else if (roads.get(i).connectedRoads.size() == 1) {
+                        if (isEmpty(roads.get(i).connectedRoads.get(n),
+                                roads.get(i).vehiclesOffRoad.get(n).getLength())) {
+
+                            ref = roads.get(i).connectedRoads.get(n);
+                            addVehicle(type, speed, ref);
+                            //roads.get((roads.get(i).connectedRoads.get(j))).addVehicle(type, speed);
+                            roads.get(i).vehicles.remove(n);
+                            // roads.get(i).reset_offRoad();
+                        } else roads.get(i).vehicles.get(0).setPos(roads.get(i).getRoadEnd());
+                    } else if (roads.get(i).connectedRoads.size() == 0) {
+                        roads.get(i).vehicles.remove(n);
                         roads.get(i).reset_offRoad();
+                    }
 
-                    } else roads.get(i).vehicles.get(0).setPos(roads.get(i).getRoadEnd());
 
-                } else if (roads.get(i).connectedRoads.size() == 2) {
-                    int j = r.nextInt(2);
-                    if (isEmpty(roads.get(i).connectedRoads.get(j),
-                            roads.get(i).vehiclesOffRoad.get(0).getLength())) {
-                        ref = roads.get(i).connectedRoads.get(j);
-                        addVehicle(type, speed, ref);
-                        //roads.get((roads.get(i).connectedRoads.get(j))).addVehicle(type, speed);
-                        roads.get(i).vehicles.remove(0);
-                        roads.get(i).reset_offRoad();
-                    } else roads.get(i).vehicles.get(0).setPos(roads.get(i).getRoadEnd());
-
-                } else if (roads.get(i).connectedRoads.size() == 1) {
-                    if (isEmpty(roads.get(i).connectedRoads.get(0),
-                            roads.get(i).vehiclesOffRoad.get(0).getLength())) {
-
-                        ref = roads.get(i).connectedRoads.get(0);
-                        addVehicle(type, speed, ref);
-                        //roads.get((roads.get(i).connectedRoads.get(j))).addVehicle(type, speed);
-                        roads.get(i).vehicles.remove(0);
-                        roads.get(i).reset_offRoad();
-                    } else roads.get(i).vehicles.get(0).setPos(roads.get(i).getRoadEnd());
-                } else if (roads.get(i).connectedRoads.size() == 0) {
-                    roads.get(i).vehicles.remove(0);
-                    roads.get(i).reset_offRoad();
                 }
             }
-
+            roads.get(i).reset_offRoad();
 
         }
     }
@@ -289,8 +299,8 @@ public class RoadMain {
             for (int v = 0; v < roads.size(); v++) {
                 for (int x = 0; x < roads.get(v).vehicles.size(); x++) {
 
-                    System.out.println("Road number:  " + v + ".....Type:  " + roads.get(v).vehicles.get(x).getType() + ".....Direction:  " + roads.get(v).vehicles.get(x).getDirection()
-                            + ".....X Position:  " + roads.get(v).vehicles.get(x).getXpos() + ".....Y Position:  " + roads.get(v).vehicles.get(x).getYpos());
+                    System.out.println("Road number:  " + v + "... Type:  " + roads.get(v).vehicles.get(x).getType() + "... Direction:  " + roads.get(v).vehicles.get(x).getDirection()
+                            + "... X Position:  " + roads.get(v).vehicles.get(x).getXpos() + "... Y Position:  " + roads.get(v).vehicles.get(x).getYpos() + "... Speed: " + roads.get(v).vehicles.get(x).getSpeed());
 
                 }
 
