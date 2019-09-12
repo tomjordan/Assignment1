@@ -25,58 +25,58 @@ public class Vehicle {
         this.speed = speed;
     }
 
-    public void setLength(int length) {
+    void setLength(int length) {
         /*Set the length of a vehicle */
         this.length = length;
     }
 
-    public int getCarlength() {
+    int getCarlength() {
         /*Returns the length of a car */
         return carlength;
     }
 
-    public int getLength() {
+    int getLength() {
         /*Returns the length of vehicle */
         return length;
     }
 
 
-    public void intiDir() {
+    void intiDir() {
         /*Initiates the front and rear positions of vehicle based on its length and direction */
-        if (getDirection() == "North") {
+        if (getDirection().equals("North")) {
             ypos = yinit + this.getLength();
             yrear = yinit;
             xpos = xinit;
-        } else if (getDirection() == "South") {
+        } else if (getDirection().equals("South")) {
             ypos = yinit - this.getLength();
             yrear = yinit;
             xpos = xinit;
-        } else if (getDirection() == "East") {
+        } else if (getDirection().equals("East")) {
             xpos = xinit + this.getLength();
             xrear = xinit;
             ypos = yinit;
-        } else if (getDirection() == "West") {
+        } else if (getDirection().equals("West")) {
             xpos = xinit - this.getLength();
             xrear = xinit;
             ypos = yinit;
         }
     }
 
-    public void moveVehicle() {
+    void moveVehicle() {
         /*Moves the vehicle based on its direction and speed */
-        if (direction == "North") {
+        if (direction.equals("North")) {
             yprev = ypos;
             ypos = ypos + speed;
             yrear = yrear + speed;
-        } else if (this.direction == "South") {
+        } else if (this.direction.equals("South")) {
             yprev = ypos;
             ypos = ypos - speed;
             yrear = yrear - speed;
-        } else if (this.direction == "East") {
+        } else if (this.direction.equals("East")) {
             xprev = xpos;
             xpos = xpos + speed;
             xrear = xrear + speed;
-        } else if (this.direction == "West") {
+        } else if (this.direction.equals("West")) {
             xprev = xpos;
             xpos = xpos - speed;
             xrear = xrear - speed;
@@ -84,7 +84,7 @@ public class Vehicle {
 
     }
 
-    public void setType(String type) {
+    void setType(String type) {
         /*Sets the type of a vehicle */
         this.type = type;
     }
@@ -94,58 +94,58 @@ public class Vehicle {
         return type;
     }
 
-    public String getDirection() {
+    String getDirection() {
         /*Returns the direction of a vehicle */
         return direction;
     }
 
-    public int getXpos() {
+    int getXpos() {
         /*Returns front x coordinate of a vehicle */
         return xpos;
     }
 
-    public int getYpos() {
+    int getYpos() {
         /*Returns front y coordinate of a vehicle */
         return ypos;
     }
 
-    public int getXrear() {
+    int getXrear() {
         /*Returns rear x coordinate of a vehicle */
         return xrear;
     }
 
-    public int getYrear() {
+    int getYrear() {
         /*Returns rear y coordinate of a vehicle */
         return yrear;
     }
 
-    public void setSpeed(int newspeed) {
+    void setSpeed(int newspeed) {
         /*Sets the speed of a vehicle */
         this.speed = newspeed;
     }
 
-    public void setPos(int newposition) {
+    void setPos(int newposition) {
         /*Sets the front and rear positions of a vehicle based on its direction and length */
-        if (getDirection() == "North") {
+        if (getDirection().equals("North")) {
             ypos = newposition;
             yrear = newposition - this.getLength();
-        } else if (getDirection() == "South") {
+        } else if (getDirection().equals("South")) {
             ypos = newposition;
             yrear = newposition + this.getLength();
-        } else if (getDirection() == "East") {
+        } else if (getDirection().equals("East")) {
             xpos = newposition;
             xrear = newposition - this.getLength();
-        } else if (getDirection() == "West") {
+        } else if (getDirection().equals("West")) {
             xpos = newposition;
             xrear = newposition + this.getLength();
         }
 
     }
 
-    public int getPos() {
+    int getPos() {
         /*Returns front coordinate of a vehicle based on its direction */
         int position = 0;
-        if (direction == "North" || direction == "South") {
+        if (direction.equals("North") || direction.equals("South")) {
             position = ypos;
         } else {
             position = xpos;
@@ -153,10 +153,10 @@ public class Vehicle {
         return position;
     }
 
-    public int getRear() {
+    int getRear() {
         /*Returns rear coordinate of a vehicle based on its direction */
         int position = 0;
-        if (direction == "North" || direction == "South") {
+        if (direction.equals("North") || direction.equals("South")) {
             position = yrear;
         } else {
             position = xrear;
@@ -177,7 +177,7 @@ public class Vehicle {
 
     }
 
-    public void setRoadRef(int num) {
+    void setRoadRef(int num) {
         /*Sets the reference for road that a vehicle is currently on*/
         this.roadRef = num;
 

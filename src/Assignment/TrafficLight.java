@@ -14,13 +14,13 @@ public class TrafficLight {
         this.whichEnd = where;
     }
 
-    public boolean isGreen() {
+    boolean isGreen() {
         /*Returns true if light is green, false if red  */
         return status; // True = green  False = red
 
     }
 
-    public void setStatus(boolean status) {
+    void setStatus(boolean status) {
         /*Sets the status of the traffic light. True = green, False = red  */
 
         this.status = status;
