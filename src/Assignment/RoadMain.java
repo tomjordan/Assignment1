@@ -73,94 +73,98 @@ public class RoadMain {
 
     public void addnewRoad(int length, int width, String direction, int xinit, int yinit) {
         /*Adds a road which is no connected to any existing road */
-        roads.add(new Road(length, width, direction, xinit, yinit));
-        roads.get(numRoads).makeRoad();
-        numRoads++;
+        if (length > 12 && length < 30) {
+            roads.add(new Road(length, width, direction, xinit, yinit));
+            roads.get(numRoads).makeRoad();
+            numRoads++;
+        }
     }
 
     public void addConectingRoad(int roadRef, int length, String direction) {
         /*Adds a new road onto the end of an existing road. To add an intersection, add multiple roads to the end of the same road  */
-        String dir = roads.get(roadRef).getDirection();
-        int north_end = roads.get(roadRef).getYnorth();
-        int south_end = roads.get(roadRef).getYsouth();
-        int east_end = roads.get(roadRef).getXeast();
-        int west_end = roads.get(roadRef).getXwest();
-        int width_new = roads.get(roadRef).getWidth();
-        if (numRoads > 0) {
-            if (dir == "North") {
-                if (direction != "South") {
+        if (length > 12 && length < 30) {
+            String dir = roads.get(roadRef).getDirection();
+            int north_end = roads.get(roadRef).getYnorth();
+            int south_end = roads.get(roadRef).getYsouth();
+            int east_end = roads.get(roadRef).getXeast();
+            int west_end = roads.get(roadRef).getXwest();
+            int width_new = roads.get(roadRef).getWidth();
+            if (numRoads > 0) {
+                if (dir == "North") {
+                    if (direction != "South") {
 
-                    if (direction == "East") {
-                        roads.add(new Road(length, width_new,
-                                direction, west_end, north_end));
+                        if (direction == "East") {
+                            roads.add(new Road(length, width_new,
+                                    direction, west_end, north_end));
 
-                    } else if (direction == "West") {
-                        roads.add(new Road(length, width_new,
-                                direction, east_end, north_end));
-                    } else if (direction == "North") {
-                        roads.add(new Road(length, width_new,
-                                direction, east_end, north_end));
+                        } else if (direction == "West") {
+                            roads.add(new Road(length, width_new,
+                                    direction, east_end, north_end));
+                        } else if (direction == "North") {
+                            roads.add(new Road(length, width_new,
+                                    direction, east_end, north_end));
 
-                    }
-
-                }
-            }
-            if (dir == "South") {
-                if (direction != "North") {
-
-                    if (direction == "East") {
-                        roads.add(new Road(length, width_new,
-                                direction, west_end, south_end - width_new));
-                    } else if (direction == "West") {
-                        roads.add(new Road(length, width_new,
-                                direction, west_end, south_end - width_new));
-                    } else if (direction == "South") {
-                        roads.add(new Road(length, width_new,
-                                direction, east_end, south_end));
+                        }
 
                     }
-
                 }
-            }
-            if (dir == "East") {
-                if (direction != "West") {
+                if (dir == "South") {
+                    if (direction != "North") {
 
-                    if (direction == "North") {
-                        roads.add(new Road(length, width_new,
-                                direction, east_end, south_end));
-                    } else if (direction == "South") {
-                        roads.add(new Road(length, width_new,
-                                direction, east_end, north_end));
-                    } else if (direction == "East") {
-                        roads.add(new Road(length, width_new,
-                                direction, east_end, south_end));
+                        if (direction == "East") {
+                            roads.add(new Road(length, width_new,
+                                    direction, west_end, south_end - width_new));
+                        } else if (direction == "West") {
+                            roads.add(new Road(length, width_new,
+                                    direction, west_end, south_end - width_new));
+                        } else if (direction == "South") {
+                            roads.add(new Road(length, width_new,
+                                    direction, east_end, south_end));
+
+                        }
 
                     }
-
                 }
-            }
-            if (dir == "West") {
-                if (direction != "East") {
+                if (dir == "East") {
+                    if (direction != "West") {
 
-                    if (direction == "North") {
-                        roads.add(new Road(length, width_new,
-                                direction, west_end - width_new, south_end));
-                    } else if (direction == "South") {
-                        roads.add(new Road(length, width_new,
-                                direction, west_end - width_new, north_end));
-                    } else if (direction == "West") {
-                        roads.add(new Road(length, width_new,
-                                direction, east_end, south_end));
+                        if (direction == "North") {
+                            roads.add(new Road(length, width_new,
+                                    direction, east_end, south_end));
+                        } else if (direction == "South") {
+                            roads.add(new Road(length, width_new,
+                                    direction, east_end, north_end));
+                        } else if (direction == "East") {
+                            roads.add(new Road(length, width_new,
+                                    direction, east_end, south_end));
+
+                        }
 
                     }
+                }
+                if (dir == "West") {
+                    if (direction != "East") {
 
+                        if (direction == "North") {
+                            roads.add(new Road(length, width_new,
+                                    direction, west_end - width_new, south_end));
+                        } else if (direction == "South") {
+                            roads.add(new Road(length, width_new,
+                                    direction, west_end - width_new, north_end));
+                        } else if (direction == "West") {
+                            roads.add(new Road(length, width_new,
+                                    direction, east_end, south_end));
+
+                        }
+
+                    }
                 }
             }
+            roads.get(numRoads).makeRoad();
+            roads.get(roadRef).setConnectedRoads(numRoads);
+
+            numRoads++;
         }
-        roads.get(numRoads).makeRoad();
-        roads.get(roadRef).setConnectedRoads(numRoads);
-
-        numRoads++;
     }
 
     public void addTrafficLight(int roadRef, String whichEnd) {
@@ -301,13 +305,27 @@ public class RoadMain {
     public void printPos() {
         /*Prints the road number, vehicle types and vehicle positions on all roads  */
         {
-            System.out.println("\nMoving vehicles....");
+            System.out.println("\nMoving vehicles....\n");
             for (int v = 0; v < roads.size(); v++) {
+                System.out.println("\nVehicles on Road  " + v + ":\n");
+                if (roads.get(v).vehicles.size() == 0) {
+                    System.out.println("No vehicles are currently on this road...");
+                }
                 for (int x = 0; x < roads.get(v).vehicles.size(); x++) {
+                    if (roads.get(v).vehicles.get(x).getType() == "Motorbike") {
+                        System.out.println("Type:  " + roads.get(v).vehicles.get(x).getType() + "    |Direction:  " +
+                                roads.get(v).vehicles.get(x).getDirection()
+                                + "    |X Position:  " + roads.get(v).vehicles.get(x).getXpos() + "    |Y Position:  "
+                                + roads.get(v).vehicles.get(x).getYpos() + "    |Speed: " + roads.get(v).vehicles.get(x).getSpeed());
 
-                    System.out.println("Road number:  " + v + "... Type:  " + roads.get(v).vehicles.get(x).getType() + "... Direction:  " + roads.get(v).vehicles.get(x).getDirection()
-                            + "... X Position:  " + roads.get(v).vehicles.get(x).getXpos() + "... Y Position:  " + roads.get(v).vehicles.get(x).getYpos() + "... Speed: " + roads.get(v).vehicles.get(x).getSpeed());
 
+                    } else {
+
+                        System.out.println("Type:  " + roads.get(v).vehicles.get(x).getType() + "          |Direction:  " +
+                                roads.get(v).vehicles.get(x).getDirection()
+                                + "    |X Position:  " + roads.get(v).vehicles.get(x).getXpos() + "    |Y Position:  "
+                                + roads.get(v).vehicles.get(x).getYpos() + "    |Speed: " + roads.get(v).vehicles.get(x).getSpeed());
+                    }
                 }
 
             }

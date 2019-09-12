@@ -56,7 +56,20 @@ class RoadTest {
     }
 
 
-    /*
+
+    @Test
+    void testrandomthings() {
+        Road road = new Road(15, 10, "North", 0, 0);
+        road.addCar(15);
+        road.vehiclesOffRoad.add(road.vehicles.get(0));
+        assertEquals(15, road.vehiclesOffRoad.get(0).getSpeed());
+    }
+
+}
+
+
+/*Tests for previos versions of road  */
+ /*
 
 
           @Test
@@ -166,12 +179,3 @@ class RoadTest {
            }
        }
        */
-    @Test
-    void testrandomthings() {
-        Road road = new Road(15, 10, "North", 0, 0);
-        road.addCar(15);
-        road.vehiclesOffRoad.add(road.vehicles.get(0));
-        assertEquals(15, road.vehiclesOffRoad.get(0).getSpeed());
-    }
-
-}

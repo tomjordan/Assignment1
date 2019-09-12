@@ -1,4 +1,7 @@
 /*
+
+
+///// tests from previous version of traffic light
 package Assignment;
 
 import org.junit.jupiter.api.Test;
@@ -17,4 +20,5 @@ class TrafficLightTest {
 
 
     }
-}*/
+}
+*/
