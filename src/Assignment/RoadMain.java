@@ -56,6 +56,11 @@ public class RoadMain {
                 }
             }
 
+            
+            roadMain.printPos();
+            roadMain.moveVehicles();
+
+
 
             for (Road road : roadMain.roads) {
                 if (road.lightAtEnd()) {
@@ -78,8 +83,6 @@ public class RoadMain {
 
 
             }
-            roadMain.printPos();
-            roadMain.moveVehicles();
         }
 
     }
