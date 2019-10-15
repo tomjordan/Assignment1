@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import Assignment.*;
+
 
 public class Gui extends JFrame implements ActionListener {
 
@@ -86,7 +88,7 @@ public class Gui extends JFrame implements ActionListener {
 
 
     private int getConnectedRoad(){
-       int roadNum;
+        int roadNum;
         if (roadCount == 0){
             roadNum = 0;
         }else {
@@ -96,13 +98,18 @@ public class Gui extends JFrame implements ActionListener {
     }
 
 
+    public void runSim(){
+
+    }
+
+
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         String name = actionEvent.getActionCommand();
 
         if (name.equals("Simulator Mode")) {
             System.out.println("Simulator Mode pressed");
-
+            //roadMain = new RoadMain();
         } else if (name.equals("Build Mode")) {
             System.out.println("Build Mode pressed");
 
@@ -110,8 +117,8 @@ public class Gui extends JFrame implements ActionListener {
             if (!isLengthInt()) { System.out.println("Enter a valid integer length");
 
             } else { System.out.println(getDirection() + "    " + getNewRoadLength()+ "     " + getConnectedRoad() );
-           existingRoads.addItem(roadCount);
-            roadCount ++;
+                existingRoads.addItem(roadCount);
+                roadCount ++;
             }
 
         }
