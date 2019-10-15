@@ -118,14 +118,14 @@ public class RoadMain {
 
                         if (direction.equals("East")) {
                             roads.add(new Road(length, width_new,
-                                    direction, west_end, north_end));
+                                    direction,east_end, north_end));
 
                         } else if (direction.equals("West")) {
                             roads.add(new Road(length, width_new,
-                                    direction, east_end, north_end));
+                                    direction, west_end, north_end));
                         } else if (direction.equals("North")) {
                             roads.add(new Road(length, width_new,
-                                    direction, east_end, north_end));
+                                    direction, west_end, north_end + width_new));
 
                         }
 
@@ -136,13 +136,13 @@ public class RoadMain {
 
                         if (direction.equals("East")) {
                             roads.add(new Road(length, width_new,
-                                    direction, west_end, south_end - width_new));
+                                    direction, east_end, south_end - width_new));
                         } else if (direction.equals("West")) {
                             roads.add(new Road(length, width_new,
                                     direction, west_end, south_end - width_new));
                         } else if (direction.equals("South")) {
                             roads.add(new Road(length, width_new,
-                                    direction, east_end, south_end));
+                                    direction, west_end, south_end-width_new));
 
                         }
 
@@ -153,13 +153,13 @@ public class RoadMain {
 
                         if (direction.equals("North")) {
                             roads.add(new Road(length, width_new,
-                                    direction, east_end, south_end));
+                                    direction, east_end, north_end));
                         } else if (direction.equals("South")) {
                             roads.add(new Road(length, width_new,
-                                    direction, east_end, north_end));
+                                    direction, east_end, south_end));
                         } else if (direction.equals("East")) {
                             roads.add(new Road(length, width_new,
-                                    direction, east_end, south_end));
+                                    direction, east_end + width_new, south_end));
 
                         }
 
@@ -171,15 +171,15 @@ public class RoadMain {
                         switch (direction) {
                             case "North":
                                 roads.add(new Road(length, width_new,
-                                        direction, west_end - width_new, south_end));
+                                        direction, west_end - width_new, north_end));
                                 break;
                             case "South":
                                 roads.add(new Road(length, width_new,
-                                        direction, west_end - width_new, north_end));
+                                        direction, west_end - width_new, south_end));
                                 break;
                             case "West":
                                 roads.add(new Road(length, width_new,
-                                        direction, east_end, south_end));
+                                        direction, west_end - width_new, south_end));
 
                                 break;
                         }

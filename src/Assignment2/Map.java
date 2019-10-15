@@ -10,15 +10,17 @@ public class Map extends JPanel {
 
     public Map(int length, int width) {
         setBackground(Color.GREEN);
-        setPreferredSize(new Dimension(length, width));
+       // setPreferredSize(new Dimension(length, width));
     }
 
     public void paintRoads() {
-        repaint();
+       // repaint();
+        System.out.println("LALALALALA");
     }
 
-    public void addRoad(int length, int width, String direction, int xinit, int yinit) {
-        this.roads.add(new RoadShape(length, width, direction, xinit, yinit));
+    public void addRoad(int length, int width, String direction, int xinit, int yinit, int roadnum) {
+        this.roads.add(new RoadShape(length, width, direction, xinit, yinit, roadnum));
+        repaint();
     }
 
     @Override
