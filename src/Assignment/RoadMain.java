@@ -365,7 +365,7 @@ public class RoadMain {
     }
 
     public void runSim() throws InterruptedException {
-        for (; ; ) {
+       // for (; ; ) {
             TimeUnit.SECONDS.sleep(1);
             Random r = new Random();
             int j = r.nextInt(7);
@@ -412,10 +412,12 @@ public class RoadMain {
 
 
             }
-        }
+       // }
     }
 
-
+   public ArrayList<Road> getRoads(){
+        return roads;
+    }
 
 }
 

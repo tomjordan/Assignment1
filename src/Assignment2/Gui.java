@@ -4,8 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
 
 import Assignment.*;
 
@@ -17,7 +16,9 @@ public class Gui extends JFrame implements ActionListener {
     private JComboBox<Integer> existingRoads;
     private int roadCount = 0;
     private JComboBox<String> addTrafficLight;
+    private JPanel map;
     RoadMain roadMain = new RoadMain();
+    //ArrayList<drawRoad> drawnroads = new ArrayList<drawRoad>();
     //int[] roadList = new int[roadCount];
 
     public static void main(String[] args) {
@@ -47,6 +48,8 @@ public class Gui extends JFrame implements ActionListener {
         newRoadLength = new JTextField("Road Length");
         existingRoads = new JComboBox<>(new Integer[roadCount]);
         addTrafficLight = new JComboBox<>(new String[]{"Add Traffic Light?", "Yes", "No"});
+        //map = new JPanel();
+        //map.setSize(1000, 1000);
 
         JButton addToMap = new JButton("Add Road");
 
@@ -64,6 +67,11 @@ public class Gui extends JFrame implements ActionListener {
         newRoadInputs.setLayout(new GridLayout(5, 1));
 
         add(controlPanel, BorderLayout.EAST);
+        //add(map);
+        //add(a);
+
+
+
         modeSelection.add(simulatorMode);
         modeSelection.add(buildMode);
 
@@ -77,20 +85,20 @@ public class Gui extends JFrame implements ActionListener {
         controlPanel.add(newRoadInputs);
     }
 
-    private String getDirection() {
+     String getDirection() {
         return direction.getItemAt(direction.getSelectedIndex());
     }
 
-    private String getTrafficLight() {
+     String getTrafficLight() {
         return addTrafficLight.getItemAt(addTrafficLight.getSelectedIndex());
     }
 
-    private int getNewRoadLength() {
+     int getNewRoadLength() {
         int length = Integer.parseInt(newRoadLength.getText());
         return length;
     }
 
-    private boolean isLengthInt() {
+     boolean isLengthInt() {
         String input = newRoadLength.getText();
         try {
             Integer.parseInt(input);
@@ -101,7 +109,7 @@ public class Gui extends JFrame implements ActionListener {
     }
 
 
-    private int getConnectedRoad() {
+     int getConnectedRoad() {
         int roadNum;
         if (roadCount == 0) {
             roadNum = 0;
@@ -110,6 +118,40 @@ public class Gui extends JFrame implements ActionListener {
         }
         return roadNum;
     }
+
+    void addRoadImage(int length, int width, String direction, int xinit, int yinit){
+        PaintRoad a = new PaintRoad(length, width, direction, xinit, yinit);
+       //drawnroads.add(new drawRoad(length, width, direction, xinit, yinit));
+        //map.add(new drawRoad(length, width, direction, xinit, yinit));
+        add(a);
+    }
+
+
+
+
+
+    int getXinit(int roadRef){
+        int x;
+        if (roadMain.getRoad(roadRef).getDirection().equals("East")){
+            x = roadMain.getRoad(roadRef).getXeast();
+
+        }else {
+            x = roadMain.getRoad(roadRef).getXwest();
+        }
+        return x*10;
+    }
+
+    int getYinit(int roadRef){
+        int y;
+        if (roadMain.getRoad(roadRef).getDirection().equals("South")){
+            y = roadMain.getRoad(roadRef).getYsouth();
+
+        }else {
+            y = roadMain.getRoad(roadRef).getYnorth();
+        }
+        return y*10;
+    }
+
 
 
     @Override
@@ -137,14 +179,17 @@ public class Gui extends JFrame implements ActionListener {
                     if (getTrafficLight().equals("Add Traffic Light?")) {
                         System.out.println("Please select whether or not you want a traffic light...");
                     } else if (getTrafficLight().equals("Yes")) {
-                        roadMain.addnewRoad(getNewRoadLength(), 10, getDirection(), 0, 0);
+                        roadMain.addnewRoad(getNewRoadLength(), 8, getDirection(), 0, 0);
                         roadMain.addTrafficLight(0, "End");
                         System.out.println("New road added! Direction: " + getDirection() + "  Length: " + getNewRoadLength() + "  With a traffic light at its end");
+
+                        addRoadImage(getNewRoadLength()*10, 80, getDirection(), 0, 0);
                         existingRoads.addItem(roadCount);
                         roadCount++;
                     } else {
-                        roadMain.addnewRoad(getNewRoadLength(), 10, getDirection(), 0, 0);
+                        roadMain.addnewRoad(getNewRoadLength(), 8, getDirection(), 0, 0);
                         System.out.println("New road added! Direction: " + getDirection() + "  Length: " + getNewRoadLength()+ "  Without a traffic light");
+                        addRoadImage(getNewRoadLength()*10, 80, getDirection(), 0, 0);
                         existingRoads.addItem(roadCount);
                         roadCount++;
                     }
@@ -156,11 +201,13 @@ public class Gui extends JFrame implements ActionListener {
                         roadMain.addConectingRoad(getConnectedRoad(), getNewRoadLength(), getDirection());
                         roadMain.addTrafficLight(getConnectedRoad(), "End");
                         System.out.println("New road added! Direction: " + getDirection() + "  Length: " + getNewRoadLength() +" On the end of road: " + getConnectedRoad() + "  With a traffic light at its end");
+                        addRoadImage(getNewRoadLength()*10, 80, getDirection(), getXinit(getConnectedRoad()), getYinit(getConnectedRoad()));
                         existingRoads.addItem(roadCount);
                         roadCount++;
                     } else {
                         roadMain.addConectingRoad(getConnectedRoad(), getNewRoadLength(), getDirection());
                         System.out.println("New road added! Direction: " + getDirection() + "  Length: " + getNewRoadLength() + " On the end of road: " + getConnectedRoad());
+                        addRoadImage(getNewRoadLength()*10, 80, getDirection(), getXinit(getConnectedRoad()), getYinit(getConnectedRoad()));
                         existingRoads.addItem(roadCount);
                         roadCount++;
                     }

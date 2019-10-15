@@ -320,7 +320,7 @@ public class Road {
         return length;
     }
 
-    String getDirection() {
+    public String getDirection() {
         /*Returns the direction of the road*/
         return direction;
     }
@@ -331,12 +331,12 @@ public class Road {
     }
 
 
-    int getXeast() {
+    public int getXeast() {
         /*Returns the coordinate of east edge of road*/
         return xeast;
     }
 
-    int getXwest() {
+    public int getXwest() {
         /*Returns the coordinate of west edge of road*/
         return xwest;
     }
@@ -345,14 +345,18 @@ public class Road {
         return width;
     }
 
-    int getYnorth() {
+    public int getYnorth() {
         /*Returns the coordinate of north edge of road*/
         return ynorth;
     }
 
-    int getYsouth() {
+    public int getYsouth() {
         /*Returns the coordinate of south edge of road*/
         return ysouth;
+    }
+
+    public ArrayList<Vehicle> getVehicles(){
+        return vehicles;
     }
 
 }
