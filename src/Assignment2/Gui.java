@@ -16,9 +16,8 @@ public class Gui extends JFrame implements ActionListener {
     private JComboBox<Integer> existingRoads;
     private int roadCount = 0;
     private JComboBox<String> addTrafficLight;
-    private JPanel map;
+    Map map;
     RoadMain roadMain = new RoadMain();
-    //ArrayList<drawRoad> drawnroads = new ArrayList<drawRoad>();
     //int[] roadList = new int[roadCount];
 
     public static void main(String[] args) {
@@ -52,8 +51,7 @@ public class Gui extends JFrame implements ActionListener {
         //map.setSize(1000, 1000);
 
         JButton addToMap = new JButton("Add Road");
-
-
+        map = new Map(100, 100);
         ///Give actions///
 
         simulatorMode.addActionListener(this);
@@ -71,7 +69,7 @@ public class Gui extends JFrame implements ActionListener {
         //add(a);
 
 
-
+        add(map, BorderLayout.CENTER);
         modeSelection.add(simulatorMode);
         modeSelection.add(buildMode);
 
@@ -85,20 +83,20 @@ public class Gui extends JFrame implements ActionListener {
         controlPanel.add(newRoadInputs);
     }
 
-     String getDirection() {
+    String getDirection() {
         return direction.getItemAt(direction.getSelectedIndex());
     }
 
-     String getTrafficLight() {
+    String getTrafficLight() {
         return addTrafficLight.getItemAt(addTrafficLight.getSelectedIndex());
     }
 
-     int getNewRoadLength() {
+    int getNewRoadLength() {
         int length = Integer.parseInt(newRoadLength.getText());
         return length;
     }
 
-     boolean isLengthInt() {
+    boolean isLengthInt() {
         String input = newRoadLength.getText();
         try {
             Integer.parseInt(input);
@@ -109,7 +107,7 @@ public class Gui extends JFrame implements ActionListener {
     }
 
 
-     int getConnectedRoad() {
+    int getConnectedRoad() {
         int roadNum;
         if (roadCount == 0) {
             roadNum = 0;
@@ -119,19 +117,177 @@ public class Gui extends JFrame implements ActionListener {
         return roadNum;
     }
 
-    void addRoadImage(int length, int width, String direction, int xinit, int yinit){
-        PaintRoad a = new PaintRoad(length, width, direction, xinit, yinit);
-       //drawnroads.add(new drawRoad(length, width, direction, xinit, yinit));
-        //map.add(new drawRoad(length, width, direction, xinit, yinit));
-        add(a);
+    /*void map.addRoad(int length, int width, String direction, int xinit, int yinit) {
+        //PaintRoad a = new PaintRoad(length, width, direction, xinit, yinit);
+        map.addRoad(length, width, direction, xinit, yinit);
+        map.paintRoads();
+    }*/
+
+    void addNewRoad(int ref, int length, String direction) {
+
+        if (roadCount == 0) {
+            roadMain.addnewRoad(length, 8, direction, 0, 0);
+            length *=10;
+            switch (direction) {
+                case "North":
+                    map.addRoad(80, length,
+                            direction, 0, -length);
+                    map.paintRoads();
+                    addCount();
+                    break;
+                case "South":
+                    map.addRoad(80, length,
+                            direction, 0, 0);
+                    map.paintRoads();
+                    addCount();
+                    break;
+                case "East":
+                    map.addRoad(length, 80,
+                            direction, 0, 0);
+                    map.paintRoads();
+                    addCount();
+                    break;
+                case "West":
+
+                    map.addRoad(length, 80,
+                            direction, -length, 0);
+                    map.paintRoads();
+                    addCount();
+                    break;
+
+            }
+
+
+        } else {
+
+            roadMain.addConectingRoad(getConnectedRoad(), length, direction);
+            String dir = roadMain.getRoad(ref).getDirection();
+            int north_end = roadMain.getRoad(ref).getYnorth()*10;
+            int south_end = roadMain.getRoad(ref).getYsouth()*10;
+            int east_end = roadMain.getRoad(ref).getXeast()*10;
+            int west_end = roadMain.getRoad(ref).getXwest()*10;
+            length*=10;
+
+            if (dir.equals("North")) {
+                if (!direction.equals("South")) {
+                    switch (direction) {
+                        case "East":
+                            map.addRoad(length, 80,
+                                    direction, east_end, -north_end - 80);
+                            map.paintRoads();
+                            addCount();
+                            break;
+                        case "West":
+                            map.addRoad(length, 80,
+                                    direction, west_end - length, -north_end - 80);
+                            map.paintRoads();
+                            addCount();
+                            break;
+                        case "North":
+                            map.addRoad(length, 80,
+                                    direction, west_end, -north_end - 80);
+                            map.paintRoads();
+
+                            addCount();
+                            break;
+                    }
+
+                }
+            }
+            if (dir.equals("South")) {
+                if (!direction.equals("North")) {
+
+                    switch (direction) {
+                        case "East":
+                            map.addRoad(length, 80,
+                                    direction, east_end, -south_end);
+                            map.paintRoads();
+                            addCount();
+                            break;
+                        case "West":
+                            map.addRoad(length, 80,
+                                    direction, west_end - length, -south_end);
+                            map.paintRoads();
+                            addCount();
+                            break;
+                        case "South":
+                            map.addRoad(length, 80,
+                                    direction, west_end, -south_end + 80);
+                            map.paintRoads();
+                            addCount();
+                            break;
+                    }
+
+                }
+            }
+            if (dir.equals("East")) {
+                if (!direction.equals("West")) {
+
+                    switch (direction) {
+                        case "North":
+                            map.addRoad(length, 80,
+                                    direction, east_end, -north_end - length);
+                            map.paintRoads();
+                            addCount();
+
+                            break;
+                        case "South":
+                            map.addRoad(length, 80,
+                                    direction, east_end, -south_end);
+                            map.paintRoads();
+                            addCount();
+                            break;
+                        case "East":
+                            map.addRoad(length, 80,
+                                    direction, east_end + 80, -north_end);
+                            map.paintRoads();
+                            addCount();
+
+                            break;
+                    }
+
+                }
+            }
+            if (dir.equals("West")) {
+                if (!direction.equals("East")) {
+
+                    switch (direction) {
+                        case "North":
+                            map.addRoad(length, 80,
+                                    direction, west_end, -north_end - length);
+                            map.paintRoads();
+                            addCount();
+                            break;
+                        case "South":
+                            map.addRoad(length, 80,
+                                    direction, west_end - 80, -south_end);
+                            map.paintRoads();
+                            addCount();
+                            break;
+                        case "West":
+                            map.addRoad(length, 80,
+                                    direction, west_end - length, -north_end);
+                            map.paintRoads();
+                            addCount();
+
+                            break;
+                    }
+
+                }
+            }
+        }
+
     }
 
 
-
-
-
+/*
     int getXinit(int roadRef){
+        String dir = roads.get(roadRef).getDirection();
         int x;
+
+
+
+
         if (roadMain.getRoad(roadRef).getDirection().equals("East")){
             x = roadMain.getRoad(roadRef).getXeast();
 
@@ -150,9 +306,12 @@ public class Gui extends JFrame implements ActionListener {
             y = roadMain.getRoad(roadRef).getYnorth();
         }
         return y*10;
+    }*/
+
+    public void addCount() {
+        existingRoads.addItem(roadCount);
+        roadCount++;
     }
-
-
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
@@ -175,46 +334,27 @@ public class Gui extends JFrame implements ActionListener {
                 System.out.println("Enter a valid integer length");
 
             } else {
-                if (roadCount == 0) {
-                    if (getTrafficLight().equals("Add Traffic Light?")) {
-                        System.out.println("Please select whether or not you want a traffic light...");
-                    } else if (getTrafficLight().equals("Yes")) {
-                        roadMain.addnewRoad(getNewRoadLength(), 8, getDirection(), 0, 0);
-                        roadMain.addTrafficLight(0, "End");
-                        System.out.println("New road added! Direction: " + getDirection() + "  Length: " + getNewRoadLength() + "  With a traffic light at its end");
 
-                        addRoadImage(getNewRoadLength()*10, 80, getDirection(), 0, 0);
-                        existingRoads.addItem(roadCount);
-                        roadCount++;
-                    } else {
-                        roadMain.addnewRoad(getNewRoadLength(), 8, getDirection(), 0, 0);
-                        System.out.println("New road added! Direction: " + getDirection() + "  Length: " + getNewRoadLength()+ "  Without a traffic light");
-                        addRoadImage(getNewRoadLength()*10, 80, getDirection(), 0, 0);
-                        existingRoads.addItem(roadCount);
-                        roadCount++;
-                    }
+                if (getTrafficLight().equals("Add Traffic Light?")) {
+                    System.out.println("Please select whether or not you want a traffic light...");
+
+
+                } else if (getTrafficLight().equals("Yes")) {
+                    addNewRoad(getConnectedRoad(), getNewRoadLength(), getDirection());
+                    roadMain.addTrafficLight(roadCount - 1, "End");
+                    System.out.println("New road added! Direction: " + getDirection() + "  Length: " + getNewRoadLength() + " On the end of road: " + getConnectedRoad() + "  With a traffic light at its end");
+
 
                 } else {
-                    if (getTrafficLight().equals("Add Traffic Light?")) {
-                        System.out.println("Please select whether or not you want a traffic light...");
-                    } else if (getTrafficLight().equals("Yes")) {
-                        roadMain.addConectingRoad(getConnectedRoad(), getNewRoadLength(), getDirection());
-                        roadMain.addTrafficLight(getConnectedRoad(), "End");
-                        System.out.println("New road added! Direction: " + getDirection() + "  Length: " + getNewRoadLength() +" On the end of road: " + getConnectedRoad() + "  With a traffic light at its end");
-                        addRoadImage(getNewRoadLength()*10, 80, getDirection(), getXinit(getConnectedRoad()), getYinit(getConnectedRoad()));
-                        existingRoads.addItem(roadCount);
-                        roadCount++;
-                    } else {
-                        roadMain.addConectingRoad(getConnectedRoad(), getNewRoadLength(), getDirection());
-                        System.out.println("New road added! Direction: " + getDirection() + "  Length: " + getNewRoadLength() + " On the end of road: " + getConnectedRoad());
-                        addRoadImage(getNewRoadLength()*10, 80, getDirection(), getXinit(getConnectedRoad()), getYinit(getConnectedRoad()));
-                        existingRoads.addItem(roadCount);
-                        roadCount++;
-                    }
+                    addNewRoad(getConnectedRoad(), getNewRoadLength(), getDirection());
+                    System.out.println("New road added! Direction: " + getDirection() + "  Length: " + getNewRoadLength() + " On the end of road: " + getConnectedRoad());
+                    //addRoadImage(getNewRoadLength()*10, 80, getDirection(), getXinit(getConnectedRoad()), getYinit(getConnectedRoad()));
+
                 }
-
-
             }
+
+
         }
     }
 }
+
