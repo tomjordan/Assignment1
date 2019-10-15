@@ -16,6 +16,7 @@ public class Gui extends JFrame implements ActionListener {
     private JTextField newRoadLength;
     private JComboBox<Integer> existingRoads;
     private int roadCount = 0;
+    private JComboBox<String> addTrafficLight;
     RoadMain roadMain = new RoadMain();
     //int[] roadList = new int[roadCount];
 
@@ -36,7 +37,7 @@ public class Gui extends JFrame implements ActionListener {
         ////////Create gui layout here////////
 
 
-        ///Create Elements here///
+        ///Create Elements///
         JPanel controlPanel = new JPanel();
         JPanel newRoadInputs = new JPanel();
         JPanel modeSelection = new JPanel();
@@ -45,24 +46,29 @@ public class Gui extends JFrame implements ActionListener {
         direction = new JComboBox<>(new String[]{"North", "South", "East", "West"});
         newRoadLength = new JTextField("Road Length");
         existingRoads = new JComboBox<>(new Integer[roadCount]);
+        addTrafficLight = new JComboBox<>(new String[]{"Add Traffic Light?", "Yes", "No"});
+
         JButton addToMap = new JButton("Add Road");
 
 
         ///Give actions///
-        controlPanel.setLayout(new GridLayout(2, 1));
-        modeSelection.setLayout(new GridLayout(2, 1));
-        newRoadInputs.setLayout(new GridLayout(4, 1));
+
         simulatorMode.addActionListener(this);
         buildMode.addActionListener(this);
         addToMap.addActionListener(this);
 
 
-        ///Add to GUI///
+        ///Layout///
+        controlPanel.setLayout(new GridLayout(2, 1));
+        modeSelection.setLayout(new GridLayout(2, 1));
+        newRoadInputs.setLayout(new GridLayout(5, 1));
+
         add(controlPanel, BorderLayout.EAST);
         modeSelection.add(simulatorMode);
         modeSelection.add(buildMode);
 
         newRoadInputs.add(direction);
+        newRoadInputs.add(addTrafficLight);
         newRoadInputs.add(newRoadLength);
         newRoadInputs.add(existingRoads);
         newRoadInputs.add(addToMap);
@@ -73,6 +79,10 @@ public class Gui extends JFrame implements ActionListener {
 
     private String getDirection() {
         return direction.getItemAt(direction.getSelectedIndex());
+    }
+
+    private String getTrafficLight() {
+        return addTrafficLight.getItemAt(addTrafficLight.getSelectedIndex());
     }
 
     private int getNewRoadLength() {
@@ -114,7 +124,7 @@ public class Gui extends JFrame implements ActionListener {
                 e.printStackTrace();
             }
         } else if (name.equals("Build Mode")) {
-            // roadMain = new RoadMain();
+            roadMain = new RoadMain();
             System.out.println("Build Mode pressed");
 
 
@@ -124,15 +134,38 @@ public class Gui extends JFrame implements ActionListener {
 
             } else {
                 if (roadCount == 0) {
-                    roadMain.addnewRoad(getNewRoadLength(), 10, getDirection(), 0, 0);
-                    System.out.println("New road added! Direction: " + getDirection() + "  Length: " + getNewRoadLength());
+                    if (getTrafficLight().equals("Add Traffic Light?")) {
+                        System.out.println("Please select whether or not you want a traffic light...");
+                    } else if (getTrafficLight().equals("Yes")) {
+                        roadMain.addnewRoad(getNewRoadLength(), 10, getDirection(), 0, 0);
+                        roadMain.addTrafficLight(0, "End");
+                        System.out.println("New road added! Direction: " + getDirection() + "  Length: " + getNewRoadLength() + "  With a traffic light at its end");
+                        existingRoads.addItem(roadCount);
+                        roadCount++;
+                    } else {
+                        roadMain.addnewRoad(getNewRoadLength(), 10, getDirection(), 0, 0);
+                        System.out.println("New road added! Direction: " + getDirection() + "  Length: " + getNewRoadLength()+ "  Without a traffic light");
+                        existingRoads.addItem(roadCount);
+                        roadCount++;
+                    }
 
                 } else {
-                    roadMain.addConectingRoad(getConnectedRoad(), getNewRoadLength(), getDirection());
-                    System.out.println("New road added! Direction: " + getDirection() + "  Length: " + getNewRoadLength() + " On the end of road: " + getConnectedRoad());
+                    if (getTrafficLight().equals("Add Traffic Light?")) {
+                        System.out.println("Please select whether or not you want a traffic light...");
+                    } else if (getTrafficLight().equals("Yes")) {
+                        roadMain.addConectingRoad(getConnectedRoad(), getNewRoadLength(), getDirection());
+                        roadMain.addTrafficLight(getConnectedRoad(), "End");
+                        System.out.println("New road added! Direction: " + getDirection() + "  Length: " + getNewRoadLength() +" On the end of road: " + getConnectedRoad() + "  With a traffic light at its end");
+                        existingRoads.addItem(roadCount);
+                        roadCount++;
+                    } else {
+                        roadMain.addConectingRoad(getConnectedRoad(), getNewRoadLength(), getDirection());
+                        System.out.println("New road added! Direction: " + getDirection() + "  Length: " + getNewRoadLength() + " On the end of road: " + getConnectedRoad());
+                        existingRoads.addItem(roadCount);
+                        roadCount++;
+                    }
                 }
-                existingRoads.addItem(roadCount);
-                roadCount++;
+
 
             }
         }
