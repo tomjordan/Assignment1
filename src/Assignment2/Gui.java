@@ -9,7 +9,9 @@ public class Gui extends JFrame implements ActionListener {
 
     private JComboBox<String> direction;
     private JTextField newRoadLength;
-
+    private JComboBox<Integer> existingRoads;
+    private int roadCount = 0;
+    //int[] roadList = new int[roadCount];
 
     public static void main(String[] args) {
         new Gui().setVisible(true);
@@ -30,15 +32,20 @@ public class Gui extends JFrame implements ActionListener {
 
         ///Create Elements here///
         JPanel controlPanel = new JPanel();
+        JPanel newRoadInputs = new JPanel();
+        JPanel modeSelection = new JPanel();
         JButton simulatorMode = new JButton("Simulator Mode");
         JButton buildMode = new JButton("Build Mode");
         direction = new JComboBox<>(new String[]{"North", "South", "East", "West"});
         newRoadLength = new JTextField("Road Length");
+        existingRoads = new JComboBox<>(new Integer[roadCount]);
         JButton addToMap = new JButton("Add Road");
 
 
         ///Give actions///
-        controlPanel.setLayout(new GridLayout(5, 1));
+        controlPanel.setLayout(new GridLayout(2, 1));
+        modeSelection.setLayout(new GridLayout(2, 1));
+        newRoadInputs.setLayout(new GridLayout(4, 1));
         simulatorMode.addActionListener(this);
         buildMode.addActionListener(this);
         addToMap.addActionListener(this);
@@ -46,11 +53,16 @@ public class Gui extends JFrame implements ActionListener {
 
         ///Add to GUI///
         add(controlPanel, BorderLayout.EAST);
-        controlPanel.add(simulatorMode);
-        controlPanel.add(buildMode);
-        controlPanel.add(direction);
-        controlPanel.add(newRoadLength);
-        controlPanel.add(addToMap);
+        modeSelection.add(simulatorMode);
+        modeSelection.add(buildMode);
+
+        newRoadInputs.add(direction);
+        newRoadInputs.add(newRoadLength);
+        newRoadInputs.add(existingRoads);
+        newRoadInputs.add(addToMap);
+
+        controlPanel.add(modeSelection);
+        controlPanel.add(newRoadInputs);
     }
 
     private String getDirection() {
@@ -62,7 +74,7 @@ public class Gui extends JFrame implements ActionListener {
         return length;
     }
 
-    public boolean isLengthInt() {
+    private boolean isLengthInt() {
         String input = newRoadLength.getText();
         try {
             Integer.parseInt(input);
@@ -73,19 +85,33 @@ public class Gui extends JFrame implements ActionListener {
     }
 
 
+    private int getConnectedRoad(){
+       int roadNum;
+        if (roadCount == 0){
+            roadNum = 0;
+        }else {
+            roadNum = existingRoads.getItemAt(existingRoads.getSelectedIndex());
+        }
+        return roadNum;
+    }
+
+
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         String name = actionEvent.getActionCommand();
 
         if (name.equals("Simulator Mode")) {
             System.out.println("Simulator Mode pressed");
+
         } else if (name.equals("Build Mode")) {
             System.out.println("Build Mode pressed");
+
         } else if (name.equals("Add Road")) {
             if (!isLengthInt()) { System.out.println("Enter a valid integer length");
 
-            } else { System.out.println(getDirection() + "    " + getNewRoadLength());
-
+            } else { System.out.println(getDirection() + "    " + getNewRoadLength()+ "     " + getConnectedRoad() );
+           existingRoads.addItem(roadCount);
+            roadCount ++;
             }
 
         }
