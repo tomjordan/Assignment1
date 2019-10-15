@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
 import Assignment.*;
 
 
@@ -13,6 +16,7 @@ public class Gui extends JFrame implements ActionListener {
     private JTextField newRoadLength;
     private JComboBox<Integer> existingRoads;
     private int roadCount = 0;
+    RoadMain roadMain = new RoadMain();
     //int[] roadList = new int[roadCount];
 
     public static void main(String[] args) {
@@ -87,19 +91,14 @@ public class Gui extends JFrame implements ActionListener {
     }
 
 
-    private int getConnectedRoad(){
+    private int getConnectedRoad() {
         int roadNum;
-        if (roadCount == 0){
+        if (roadCount == 0) {
             roadNum = 0;
-        }else {
+        } else {
             roadNum = existingRoads.getItemAt(existingRoads.getSelectedIndex());
         }
         return roadNum;
-    }
-
-
-    public void runSim(){
-
     }
 
 
@@ -109,18 +108,33 @@ public class Gui extends JFrame implements ActionListener {
 
         if (name.equals("Simulator Mode")) {
             System.out.println("Simulator Mode pressed");
-            //roadMain = new RoadMain();
+            try {
+                roadMain.runSim();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         } else if (name.equals("Build Mode")) {
+            // roadMain = new RoadMain();
             System.out.println("Build Mode pressed");
 
+
         } else if (name.equals("Add Road")) {
-            if (!isLengthInt()) { System.out.println("Enter a valid integer length");
+            if (!isLengthInt()) {
+                System.out.println("Enter a valid integer length");
 
-            } else { System.out.println(getDirection() + "    " + getNewRoadLength()+ "     " + getConnectedRoad() );
+            } else {
+                if (roadCount == 0) {
+                    roadMain.addnewRoad(getNewRoadLength(), 10, getDirection(), 0, 0);
+                    System.out.println("New road added! Direction: " + getDirection() + "  Length: " + getNewRoadLength());
+
+                } else {
+                    roadMain.addConectingRoad(getConnectedRoad(), getNewRoadLength(), getDirection());
+                    System.out.println("New road added! Direction: " + getDirection() + "  Length: " + getNewRoadLength() + " On the end of road: " + getConnectedRoad());
+                }
                 existingRoads.addItem(roadCount);
-                roadCount ++;
-            }
+                roadCount++;
 
+            }
         }
     }
 }

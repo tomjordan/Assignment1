@@ -15,8 +15,8 @@ public class RoadMain {
     ArrayList<TrafficLight> trafficLights = new ArrayList<TrafficLight>();
 
 
-    /*public static void main(String[] args) throws InterruptedException {
-        *//*Basic simulator with 5 roads and one traffic light at the end of road 0.
+    /* public static void main(String[] args) throws InterruptedException {
+     *//*     Basic simulator with 5 roads and one traffic light at the end of road 0.
         New vehicles are added at random with random attributes. The traffic light changes status at random.
         More raods and traffic lights can be added by using addTrafficLight and
         addConnectingRoad methods*//*
@@ -34,9 +34,11 @@ public class RoadMain {
         roadMain.roads.get(0).addTrafficLight("End");
         roadMain.roads.get(1).addTrafficLight("End");
 
+        roadMain.runSim();
+
         ////////////////////////////////////////////////////////////////////////////////////////
 
-        for (; ; ) {
+       for (; ; ) {
             TimeUnit.SECONDS.sleep(1);
             Random r = new Random();
             int j = r.nextInt(7);
@@ -85,14 +87,14 @@ public class RoadMain {
             }
         }
 
-    }*/
-
+    }
+*/
 
     public void change_roads(int road_ref) {
 
     }
 
-    void addnewRoad(int length, int width, String direction, int xinit, int yinit) {
+    public void addnewRoad(int length, int width, String direction, int xinit, int yinit) {
         /*Adds a road which is no connected to any existing road */
         if (length > 12 && length < 30) {
             roads.add(new Road(length, width, direction, xinit, yinit));
@@ -101,7 +103,7 @@ public class RoadMain {
         }
     }
 
-    void addConectingRoad(int roadRef, int length, String direction) {
+    public void addConectingRoad(int roadRef, int length, String direction) {
         /*Adds a new road onto the end of an existing road. To add an intersection, add multiple roads to the end of the same road  */
         if (length > 12 && length < 30) {
             String dir = roads.get(roadRef).getDirection();
@@ -361,6 +363,60 @@ public class RoadMain {
 
         }
     }
+
+    public void runSim() throws InterruptedException {
+        for (; ; ) {
+            TimeUnit.SECONDS.sleep(1);
+            Random r = new Random();
+            int j = r.nextInt(7);
+            int speed = r.nextInt(6) + 3;
+            if (j == 0) {
+                if (isEmpty(0, 2)) {
+                    addVehicle("Car", speed, 0);
+                }
+            } else if (j == 1) {
+                if (isEmpty(0, 1)) {
+                    addVehicle("Motorbike", speed, 0);
+                }
+            } else if (j == 2) {
+                if (isEmpty(0, 6)) {
+
+                    addVehicle("Bus", speed, 0);
+                }
+            }
+
+
+            printPos();
+            moveVehicles();
+
+
+
+            for (Road road : roads) {
+                if (road.lightAtEnd()) {
+                    int i = r.nextInt(5);
+                    if (i == 0 || i == 2 || i == 3) {
+                        road.setEndLight(true);
+                    } else if (i == 1 || i == 4) {
+                        road.setEndLight(false);
+                    }
+                } else if (road.lightAtStart()) {
+                    int i = r.nextInt(5);
+                    if (i == 0 || i == 2 || i == 3) {
+                        road.setStartLight(true);
+                    } else if (i == 1 || i == 4) {
+                        road.setStartLight(false);
+                    }
+
+
+                }
+
+
+            }
+        }
+    }
+
+
+
 }
 
 
