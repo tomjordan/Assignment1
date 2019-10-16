@@ -15,6 +15,7 @@ public class RoadMain {
     ArrayList<TrafficLight> trafficLights = new ArrayList<TrafficLight>();
 
 
+
     /* public static void main(String[] args) throws InterruptedException {
      *//*     Basic simulator with 5 roads and one traffic light at the end of road 0.
         New vehicles are added at random with random attributes. The traffic light changes status at random.

@@ -44,21 +44,43 @@ public class RoadShape {
 
     }
 
-   /* public void drawVehicle(Graphics g){
-
-
-    }
-
-    public void drawTraffic(Graphics g, Vehicle vehicle){
-
-                if (vehicle.getType()="Car"){
-
-
+   int getXStart(){
+        int x = 0;
+        switch (direction){
+            case "North":
+          x = xinit+40;
+                break;
+            case "South":
+                x = xinit+40;
+                break;
+            case "East":
+                x = xinit;
+                break;
+            case "West":
+                x = xinit+length;
+                break;
         }
+        return x;
+   }
 
-
-
-    }*/
+    int getYStart(){
+        int y = 0;
+        switch (direction){
+            case "North":
+                y = yinit+length;
+                break;
+            case "South":
+                y = yinit;
+                break;
+            case "East":
+                y = yinit-40;
+                break;
+            case "West":
+                y = yinit-40;
+                break;
+        }
+        return y;
+    }
 
 
     public void draw(Graphics g) {
