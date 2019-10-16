@@ -5,85 +5,76 @@ import java.awt.*;
 public class VehicleImage {
 
 
+    String type;
     String direction;
+    int distanceTraveled;
+    int roadNum;
     int xinit;
     int yinit;
-    int length;
-    int width;
-    int count;
 
 
-    public VehicleImage(int distanceTraveled, String type, int xinit, int yinit, int roadnum) {
-        this.direction = direction;
-        this.length = length;
-        this.width = width;
+    public VehicleImage(int distanceTraveled, String type, int xinit, int yinit, String direction) {
+        this.type = type;
+        this.distanceTraveled = distanceTraveled*10;
         this.xinit = xinit;
         this.yinit = yinit;
-        this.count = roadnum;
+        this.direction = direction;
     }
 
-    int getXinit(){
-        return xinit;
+    public void update(int xinit, int yinit, int distanceTraveled){
+        this.xinit = xinit;
+        this.yinit = yinit;
+        this.distanceTraveled = distanceTraveled*10;
     }
 
-    int getYinit(){
-        return yinit;
-    }
-    int getLength(){
-        return length;
-    }
-
-    //@Override
 
     public void drawTraffic(Graphics g){
-
-
-
-    }
-
-
-    public void draw(Graphics g) {
-        //  g.fillRect(xinit, yinit, length, width);
-        //super.draw(g);
         switch (direction) {
             case "North":
-                g.setColor(Color.WHITE);
-                g.fillRect(xinit, yinit, width, length);
-                g.setColor(Color.BLACK);
-                g.fillRect(xinit+5, yinit, width-10, length);
-                g.fillRect(xinit, yinit - width, width, width);
-                g.setColor(Color.BLUE);
-                g.drawString("Road: "+this.count, xinit, yinit+40);
-
-                break;
+                if (type.equals("Car")) {
+                    g.setColor(Color.RED);
+                    g.fillRect(xinit+25, yinit-distanceTraveled, 30, 20);}
+                else if (type.equals("Bus")){
+                    g.setColor(Color.YELLOW);
+                    g.fillRect(xinit+25, yinit-distanceTraveled, 30, 60);}
+            else if (type.equals("Motorbike")){
+                    g.setColor(Color.GREEN);
+                    g.fillRect(xinit+25, yinit-distanceTraveled, 30, 10);}
+                    break;
             case "South":
-                g.setColor(Color.WHITE);
-                g.fillRect(xinit, yinit, width, length);
-                g.setColor(Color.BLACK);
-                g.fillRect(xinit+5, yinit, width-10, length);
-                g.fillRect(xinit, yinit + length, width, width);
-                g.setColor(Color.BLUE);
-                g.drawString("Road: "+this.count, xinit, yinit+40);
+                if (type.equals("Car")) {
+                    g.setColor(Color.RED);
+                    g.fillRect(xinit+25, yinit+distanceTraveled, 30, 20);}
+                else if (type.equals("Bus")){
+                    g.setColor(Color.YELLOW);
+                    g.fillRect(xinit+25, yinit+distanceTraveled, 30, 60);}
+                else if (type.equals("Motorbike")){
+                    g.setColor(Color.GREEN);
+                    g.fillRect(xinit+25, yinit+distanceTraveled, 30, 10);}
 
                 break;
             case "East":
-                g.setColor(Color.WHITE);
-                g.fillRect(xinit, yinit, length, width);
-                g.setColor(Color.BLACK);
-                g.fillRect(xinit, yinit+5, length, width-10);
-                g.fillRect(xinit+length, yinit , width, width);
-                g.setColor(Color.BLUE);
-                g.drawString("Road: "+this.count, xinit, yinit+40);
+                if (type.equals("Car")) {
+                    g.setColor(Color.RED);
+                    g.fillRect(xinit+distanceTraveled, yinit-25, 30, 20);}
+                else if (type.equals("Bus")){
+                    g.setColor(Color.YELLOW);
+                    g.fillRect(xinit+distanceTraveled, yinit-25, 30, 60);}
+                else if (type.equals("Motorbike")){
+                    g.setColor(Color.GREEN);
+                    g.fillRect(xinit+distanceTraveled, yinit-25, 30, 10);}
 
                 break;
             case "West":
-                g.setColor(Color.WHITE);
-                g.fillRect(xinit, yinit, length, width);
-                g.setColor(Color.BLACK);
-                g.fillRect(xinit, yinit+5, length, width-10);
-                g.fillRect(xinit-width, yinit , width, width);
-                g.setColor(Color.BLUE);
-                g.drawString("Road: "+this.count, xinit, yinit+40);
+                if (type.equals("Car")) {
+                    g.setColor(Color.RED);
+                    g.fillRect(xinit-distanceTraveled, yinit-25, 30, 20);}
+                else if (type.equals("Bus")){
+                    g.setColor(Color.YELLOW);
+                    g.fillRect(xinit-distanceTraveled, yinit-25, 30, 60);}
+                else if (type.equals("Motorbike")){
+                    g.setColor(Color.GREEN);
+                    g.fillRect(xinit-distanceTraveled, yinit-25, 30, 10);}
 
                 break;
         }
@@ -91,5 +82,6 @@ public class VehicleImage {
 
 
 
+    }
 
-}
+

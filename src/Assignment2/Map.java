@@ -1,5 +1,6 @@
 package Assignment2;
 
+import Assignment.Road;
 import Assignment.Vehicle;
 
 import javax.swing.*;
@@ -9,7 +10,8 @@ import java.util.ArrayList;
 public class Map extends JPanel {
 
     ArrayList<RoadShape> roads = new ArrayList<>();
-    ArrayList<Vehicle> vehicles = new ArrayList<>();
+    ArrayList<Road> mainRoads = new ArrayList<>();
+    ArrayList<VehicleImage> vehicleImages = new ArrayList<>();
 
     public Map(int length, int width) {
         setBackground(Color.GREEN);
@@ -26,10 +28,29 @@ public class Map extends JPanel {
         repaint();
     }
 
-    public void addVehicles(ArrayList vehicles){
-        this.vehicles = vehicles;
+
+
+    void moveVehicles(int ref){
+
+
+    }
+
+
+    /*public void setRoads(ArrayList<Road> roads) {
+        this.mainRoads = roads;
+        mainRoads.clear();
+
+
+        for (Road road : mainRoads) {
+            for (Vehicle vehicle : road.getVehicles()) {
+
+                vehicleImages.add(vehicle.getDistanceTraveled(), vehicle.getType(), this.roads.get(vehicle.getRoadRef()).getXinit(),
+                        this.roads.get(vehicle.getRoadRef()).getYinit(), road.getDirection());
 
             }
+
+        }
+    }*/
 
 
 

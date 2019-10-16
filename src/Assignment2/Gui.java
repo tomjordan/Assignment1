@@ -316,6 +316,13 @@ public class Gui extends JFrame implements ActionListener {
         return roadCount;
     }
 
+    public void updateVehicles(){
+        for(Road road: roadMain.getRoads()){
+
+            road.getVehicles();
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         String name = actionEvent.getActionCommand();
