@@ -1,12 +1,12 @@
-package Assignment2;
+package Assignment.Gui;
+
+import Assignment.Road;
+import Assignment.RoadMain;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
-import Assignment.*;
 
 
 public class Gui extends  JFrame   implements ActionListener {
@@ -326,6 +326,7 @@ public class Gui extends  JFrame   implements ActionListener {
             road.getVehicles();
         }
     }
+
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {

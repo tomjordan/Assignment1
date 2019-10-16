@@ -3,21 +3,24 @@ package Assignment;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+import Assignment.Gui.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class RoadMain {
+public class RoadMain extends Gui {
     /*Roadmain is used as the traffic simulator */
     private int numRoads = 0;
     ArrayList<Road> roads = new ArrayList<Road>();
     private Random random = new Random();
     ArrayList<TrafficLight> trafficLights = new ArrayList<TrafficLight>();
+    Gui a = new Gui();
 
 
+    public static void main(String[] args) {
 
-    /* public static void main(String[] args) throws InterruptedException {
-     *//*     Basic simulator with 5 roads and one traffic light at the end of road 0.
+    }
+     /*     Basic simulator with 5 roads and one traffic light at the end of road 0.
         New vehicles are added at random with random attributes. The traffic light changes status at random.
         More raods and traffic lights can be added by using addTrafficLight and
         addConnectingRoad methods*//*
@@ -101,7 +104,7 @@ public class RoadMain {
             roads.add(new Road(length, width, direction, xinit, yinit));
             roads.get(numRoads).makeRoad();
             numRoads++;
-        }
+              }
     }
 
     public void addConectingRoad(int roadRef, int length, String direction) {
@@ -206,11 +209,15 @@ public class RoadMain {
 
 
     void moveVehicles() {
+
         /*Moves vehicles on all roads  */
         for (int i = roads.size() - 1; i >= 0; i--) {
 
             roads.get(i).moveVehicles();
             checkTurns();
+            ///////mapdraw vehicles here/////
+
+
         }
     }
 
@@ -300,6 +307,7 @@ public class RoadMain {
                 if (roads.get(i).getVehicleOnRoad(roads.get(i).vehicles.size() - 1).getYrear()
                         > roads.get(i).getXeast() - size) {
                     status = true;
+
                 }
             }
         } else status = false;
@@ -314,6 +322,8 @@ public class RoadMain {
         if (type.equals("Car")) {
             roads.get(roadRef).addCar(speed);
             roads.get(roadRef).vehicles.get(roads.get(roadRef).vehicles.size() - 1).setRoadRef(roadRef);
+           /////////// a.addVehicle();
+
         } else if (type.equals("Bus")) {
             roads.get(roadRef).addBus(speed);
             roads.get(roadRef).vehicles.get(roads.get(roadRef).vehicles.size() - 1).setRoadRef(roadRef);
@@ -374,6 +384,7 @@ public class RoadMain {
             if (j == 0) {
                 if (isEmpty(0, 2)) {
                     addVehicle("Car", speed, 0);
+
                 }
             } else if (j == 1) {
                 if (isEmpty(0, 1)) {

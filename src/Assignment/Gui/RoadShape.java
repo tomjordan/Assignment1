@@ -1,6 +1,4 @@
-package Assignment2;
-
-import Assignment.Vehicle;
+package Assignment.Gui;
 
 import java.awt.*;
 
