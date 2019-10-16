@@ -27,7 +27,7 @@ public class Map extends JPanel {
     public void paint(Graphics g) {
         super.paint(g);
         for (RoadShape road : roads) {
-            g.setColor(Color.WHITE);
+            //g.setColor(Color.WHITE);
             road.draw(g);
         }
     }

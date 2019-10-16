@@ -164,24 +164,9 @@ public class Gui extends JFrame implements ActionListener {
             int yNorth = map.roads.get(ref).getYinit();
             int xWest = map.roads.get(ref).getXinit();
             String dir = roadMain.getRoad(ref).getDirection();
-            /*int north_end = roadMain.getRoad(ref).getYnorth()*10;
-            int south_end = roadMain.getRoad(ref).getYsouth()*10;
-            int east_end = roadMain.getRoad(ref).getXeast()*10;
-            int west_end = roadMain.getRoad(ref).getXwest()*10;*/
+            int conectedLength = map.roads.get(ref).getLength();
             length*=10;
 
-            /*if(getConnectedRoad() == 0){
-                if (dir.equals("South")){
-                    east_end-=90;
-                    west_end-=90;
-                    south_end+= 90;
-                }else if (dir.equals("East")){
-                    north_end+=10;
-                    east_end-=90;
-                    south_end+=10;
-
-                }
-            }*/
             if (dir.equals("North")) {
                 if (!direction.equals("South")) {
                     switch (direction) {
@@ -214,19 +199,19 @@ public class Gui extends JFrame implements ActionListener {
                     switch (direction) {
                         case "East":
                             map.addRoad(length, 80,
-                                    direction, xWest+80, yNorth+length, roadCount);
+                                    direction, xWest+80, yNorth+conectedLength, roadCount);
                             map.paintRoads();
                             addCount();
                             break;
                         case "West":
                             map.addRoad(length, 80,
-                                    direction, xWest-length, yNorth+length, roadCount);
+                                    direction, xWest-length, yNorth+conectedLength, roadCount);
                             map.paintRoads();
                             addCount();
                             break;
                         case "South":
                             map.addRoad(length, 80,
-                                    direction, xWest, yNorth+ length + 80, roadCount);
+                                    direction, xWest, yNorth+ conectedLength + 80, roadCount);
                             map.paintRoads();
                             addCount();
                             break;
@@ -240,20 +225,20 @@ public class Gui extends JFrame implements ActionListener {
                     switch (direction) {
                         case "North":
                             map.addRoad(length, 80,
-                                    direction, xWest+length, yNorth - length, roadCount);
+                                    direction, xWest+conectedLength, yNorth - length, roadCount);
                             map.paintRoads();
                             addCount();
 
                             break;
                         case "South":
                             map.addRoad(length, 80,
-                                    direction, xWest+length, yNorth+80, roadCount);
+                                    direction, xWest+conectedLength, yNorth+80, roadCount);
                             map.paintRoads();
                             addCount();
                             break;
                         case "East":
                             map.addRoad(length, 80,
-                                    direction, xWest+length + 80, yNorth, roadCount);
+                                    direction, xWest+conectedLength + 80, yNorth, roadCount);
                             map.paintRoads();
                             addCount();
 
@@ -359,7 +344,7 @@ public class Gui extends JFrame implements ActionListener {
 
                 } else if (getTrafficLight().equals("Yes")) {
                     addNewRoad(getConnectedRoad(), getNewRoadLength(), getDirection());
-                    roadMain.addTrafficLight(roadCount - 1, "End");
+                    roadMain.addTrafficLight(roadCount, "End");
                     System.out.println("New road added! Direction: " + getDirection() + "  Length: " + getNewRoadLength() + " On the end of road: " + getConnectedRoad() + "  With a traffic light at its end");
 
 
