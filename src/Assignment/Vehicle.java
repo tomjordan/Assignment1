@@ -18,6 +18,7 @@ public class Vehicle {
     private int roadRef = 0;
 
 
+
     public Vehicle(String direction, int speed, int x, int y) {
         this.xinit = x;
         this.yinit = y;
@@ -40,6 +41,23 @@ public class Vehicle {
         return length;
     }
 
+
+    public int getDistanceTraveled(){
+        int distanceTraveled = 0;
+        switch (direction) {
+            case "North":
+            case "South":
+                distanceTraveled = Math.abs(yrear-yinit);
+                break;
+            case "East":
+            case "West":
+                distanceTraveled = Math.abs(xrear-xinit);
+                break;
+        }
+        return distanceTraveled;
+
+
+    }
 
     void intiDir() {
         /*Initiates the front and rear positions of vehicle based on its length and direction */

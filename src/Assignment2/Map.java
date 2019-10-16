@@ -1,5 +1,7 @@
 package Assignment2;
 
+import Assignment.Vehicle;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -7,6 +9,7 @@ import java.util.ArrayList;
 public class Map extends JPanel {
 
     ArrayList<RoadShape> roads = new ArrayList<>();
+    ArrayList<Vehicle> vehicles = new ArrayList<>();
 
     public Map(int length, int width) {
         setBackground(Color.GREEN);
@@ -22,6 +25,13 @@ public class Map extends JPanel {
         this.roads.add(new RoadShape(length, width, direction, xinit, yinit, roadnum));
         repaint();
     }
+
+    public void addVehicles(ArrayList vehicles){
+        this.vehicles = vehicles;
+
+            }
+
+
 
     @Override
     public void paint(Graphics g) {

@@ -1,10 +1,9 @@
 package Assignment2;
 
-import Assignment.Vehicle;
-
 import java.awt.*;
 
-public class RoadShape {
+public class VehicleImage {
+
 
     String direction;
     int xinit;
@@ -14,7 +13,7 @@ public class RoadShape {
     int count;
 
 
-    public RoadShape(int length, int width, String direction, int xinit, int yinit, int roadnum) {
+    public VehicleImage(int distanceTraveled, String type, int xinit, int yinit, int roadnum) {
         this.direction = direction;
         this.length = length;
         this.width = width;
@@ -30,39 +29,21 @@ public class RoadShape {
     int getYinit(){
         return yinit;
     }
-
-
-
     int getLength(){
         return length;
     }
 
     //@Override
 
-    public void addVehicle(){
+    public void drawTraffic(Graphics g){
+
 
 
     }
-
-   /* public void drawVehicle(Graphics g){
-
-
-    }
-
-    public void drawTraffic(Graphics g, Vehicle vehicle){
-
-                if (vehicle.getType()="Car"){
-
-
-        }
-
-
-
-    }*/
 
 
     public void draw(Graphics g) {
-      //  g.fillRect(xinit, yinit, length, width);
+        //  g.fillRect(xinit, yinit, length, width);
         //super.draw(g);
         switch (direction) {
             case "North":
@@ -107,7 +88,8 @@ public class RoadShape {
                 break;
         }
     }
+
+
+
+
 }
-
-
-
