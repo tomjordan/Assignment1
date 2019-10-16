@@ -19,9 +19,15 @@ public class RoadShape {
         this.xinit = xinit;
         this.yinit = yinit;
         this.count = roadnum;
-
     }
 
+    int getXinit(){
+        return xinit;
+    }
+
+    int getYinit(){
+        return yinit;
+    }
 
     //@Override
     public void draw(Graphics g) {
