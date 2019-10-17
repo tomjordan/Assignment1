@@ -16,18 +16,37 @@ public class Map extends JPanel {
        // setPreferredSize(new Dimension(length, width));
     }
 
-    public void paintRoads() {
+    /*public void paintRoads() {
        // repaint();
         System.out.println("LALALALALA");
-    }
+    }*/
 
     public void addRoad(int length, int width, String direction, int xinit, int yinit, int roadnum) {
         this.roads.add(new RoadShape(length, width, direction, xinit, yinit, roadnum));
         repaint();
     }
 
+    void addVehicle(String type, int yNorth, int xWest, int length, String direction) {
+        int width = 10;
+        switch (direction){
+            case "North":
+            case "South":
+                vehicleImages.add(new VehicleImage(xWest, yNorth, width, length, type));
+                break;
+            case "East":
+            case "West":
+                vehicleImages.add(new VehicleImage(xWest, yNorth, length, width, type));
+                break;
+        }
 
-    void addVehicle(int roadRef, String type, int front, int rear){
+
+
+
+        vehicleImages.add(new VehicleImage(xWest, -yNorth, length, 10, type));
+    }
+
+
+   /* void addVehicle(int roadRef, String type, int front, int rear){
         int xRoad = roads.get(roadRef).getXStart();
         int yRoad = roads.get(roadRef).getYStart();
         int yVehicle;
@@ -70,7 +89,7 @@ public class Map extends JPanel {
                 vehicleImages.add(new VehicleImage(xVehicle, yVehicle, length, width, type));
                 break;
         }
-    }
+    }*/
 
 
 

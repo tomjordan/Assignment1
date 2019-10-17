@@ -1,3 +1,4 @@
+/*
 
 package Assignment;
 
@@ -179,7 +180,10 @@ class RoadMainTest {
 }
 
 
-/*Tests for previos versions of roadMain  */
+*/
+/*Tests for previos versions of roadMain  *//*
+
+*/
 /*@Test
     void testturning() {
         RoadMain roadMain = new RoadMain();
@@ -252,6 +256,8 @@ class RoadMainTest {
         //assertEquals(18, roadMain.roads.get(2).vehicles.get(0).getXpos());
 
     }*//*
+*/
+/*
 
 
 
@@ -315,3 +321,4 @@ class RoadMainTest {
 
     }
 }*/
+

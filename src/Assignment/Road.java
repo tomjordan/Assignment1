@@ -195,33 +195,33 @@ public class Road {
 
             if (direction == "North") {
                 if (vehicles.get(vRef).getYpos() + vehicles.get(vRef).getSpeed() >=
-                        vehicles.get(vRef - 1).getYrear()) {
+                        vehicles.get(vRef - 1).getYrear()- 20) {
                     vehicles.get(vRef).setSpeed(vehicles.get(vRef - 1).getSpeed());
-                    vehicles.get(vRef).setPos(vehicles.get(vRef - 1).getRear() - 20);
+                    vehicles.get(vRef).setPos(vehicles.get(vRef - 1).getYrear() - 21);
                     status = true;
                 }
 
             } else if (direction == "East") {
                 if (vehicles.get(vRef).getXpos() + vehicles.get(vRef).getSpeed() >=
-                        vehicles.get(vRef - 1).getXrear()) {
+                        vehicles.get(vRef - 1).getXrear()-20) {
                     vehicles.get(vRef).setSpeed(vehicles.get(vRef - 1).getSpeed());
-                    vehicles.get(vRef).setPos(vehicles.get(vRef - 1).getRear() - 20);
+                    vehicles.get(vRef).setPos(vehicles.get(vRef - 1).getXrear() - 21);
                     status = true;
                 }
 
             } else if (direction == "West") {
                 if (vehicles.get(vRef).getXpos() - vehicles.get(vRef).getSpeed() <=
-                        vehicles.get(vRef - 1).getXrear()) {
+                        vehicles.get(vRef - 1).getXrear()+ 20) {
                     vehicles.get(vRef).setSpeed(vehicles.get(vRef - 1).getSpeed());
-                    vehicles.get(vRef).setPos(vehicles.get(vRef - 1).getRear() + 20);
+                    vehicles.get(vRef).setPos(vehicles.get(vRef - 1).getXrear() + 21);
                     status = true;
                 }
 
             } else if (direction == "South") {
                 if (vehicles.get(vRef).getYpos() - vehicles.get(vRef).getSpeed() <=
-                        vehicles.get(vRef - 1).getYrear()) {
+                        vehicles.get(vRef - 1).getYrear()+ 20) {
                     vehicles.get(vRef).setSpeed(vehicles.get(vRef - 1).getSpeed());
-                    vehicles.get(vRef).setPos(vehicles.get(vRef - 1).getRear() + 20);
+                    vehicles.get(vRef).setPos(vehicles.get(vRef - 1).getYrear() + 21);
                     status = true;
                 }
 

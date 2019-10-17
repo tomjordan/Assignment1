@@ -450,10 +450,10 @@ public class RoadMain {
 
             for (Road road : roads) {
                 if (road.lightAtEnd()) {
-                    int i = r.nextInt(5);
-                    if (i == 0 || i == 2 || i == 3) {
+                    int i = r.nextInt(150);
+                    if (i >130) {
                         road.setEndLight(true);
-                    } else if (i == 1 || i == 4) {
+                    } else if (i <130) {
                         road.setEndLight(false);
                     }
                 } else if (road.lightAtStart()) {

@@ -87,7 +87,7 @@ public class Gui extends JFrame implements ActionListener {
 
         controlPanel.add(modeSelection);
         controlPanel.add(newRoadInputs);
-        addNewRoad(0, 200, "South");
+        addInitialRoad();
     }
 
     String getDirection() {
@@ -147,6 +147,126 @@ public class Gui extends JFrame implements ActionListener {
 
     }
 
+    void addInitialRoad(){
+        roadMain.addnewRoad(200, 60, "South", 500, -60);
+        map.addRoad(roadMain.getRoad(0).getLength(), 60,
+                "South", roadMain.getRoad(0).getXwest(), -roadMain.getRoad(0).getYnorth() , roadCount);
+       // map.paintRoads();
+        addCount();
+    }
+
+    void addNewRoad(int ref, int length, String direction) {
+        roadMain.addConectingRoad(ref, length, direction);
+        addCount();
+        map.addRoad(length, 60,
+                direction, roadMain.getRoad(roadCount-1).getXwest(), -roadMain.getRoad(roadCount-1).getYnorth() , roadCount);
+        //map.paintRoads();
+
+    }
+
+    public void addCount() {
+        existingRoads.addItem(roadCount);
+        roadCount++;
+    }
+
+    int getRoadCount() {
+        return roadCount;
+    }
+
+
+    /*public void redrawVehicles() {
+        map.moveVehicles();
+    }*/
+
+    public void upateVehicles() {
+        map.vehicleImages.clear();
+        //redrawVehicles();
+        for (Road road : roadMain.getRoads()) {
+            for (Vehicle vehicle : road.getVehicles()) {
+               // map.addVehicle(vehicle.getRoadRef(), vehicle.getType(), vehicle.getDistanceTraveled());
+                //String type, int yNorth, int xWest, int length
+                map.addVehicle(vehicle.getType(), -vehicle.getYnorth(), vehicle.getXwest(), vehicle.getLength(), road.getDirection() );
+
+            }
+
+        }
+        map.repaint();
+    }
+
+
+    void runGui() {
+
+        if (timer != null) {
+            timer.stop();
+        }
+        timer = new Timer(1000/60, e -> {
+
+            roadMain.runSim();
+            upateVehicles();
+
+        });
+        timer.start();
+    }
+
+
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        String name = actionEvent.getActionCommand();
+
+        if (name.equals("Simulator Mode")) {
+            System.out.println("Simulator Mode pressed");
+                runGui();
+            //roadMain.runSim();
+            //upateVehicles();
+
+        } else if (name.equals("Build Mode")) {
+            confirmReset();
+
+        } else if (name.equals("Make Default")) {
+
+            addNewRoad(0, 250, "East"); //1
+            addNewRoad(0, 250, "West");//2
+            addNewRoad(0, 250, "South");//3
+            addNewRoad(1, 250, "East");//4
+            addNewRoad(2, 250, "South");//5
+            addNewRoad(5, 250, "East");//6
+            addNewRoad(5, 250, "West");//7
+
+            System.out.println("Make Default");
+
+        } else if (name.equals("Add Road")) {
+            if (!isLengthInt()) {
+                System.out.println("Enter a valid integer length");
+
+            } else {
+
+                if (getTrafficLight().equals("Add Traffic Light?")) {
+                    System.out.println("Please select whether or not you want a traffic light...");
+
+
+                } else if (getTrafficLight().equals("Yes")) {
+                    addNewRoad(getConnectedRoad(), getNewRoadLength(), getDirection());
+                    roadMain.addTrafficLight(getConnectedRoad(), "End");
+                    System.out.println("New road added! Direction: " + getDirection() + "  Length: " + getNewRoadLength() + " On the end of road: " + getConnectedRoad() + "  With a traffic light at its end");
+
+
+                } else {
+                    addNewRoad(getConnectedRoad(), getNewRoadLength(), getDirection());
+                    System.out.println("New road added! Direction: " + getDirection() + "  Length: " + getNewRoadLength() + " On the end of road: " + getConnectedRoad());
+                    //addRoadImage(getNewRoadLength()*10, 80, getDirection(), getXinit(getConnectedRoad()), getYinit(getConnectedRoad()));
+
+                }
+            }
+
+
+        }
+    }
+}
+
+
+
+
+/*
     void addNewRoad(int ref, int length, String direction) {
 
         if (roadCount == 0) {
@@ -298,105 +418,7 @@ public class Gui extends JFrame implements ActionListener {
             }
         }
 
-    }
-
-
-    public void addCount() {
-        existingRoads.addItem(roadCount);
-        roadCount++;
-    }
-
-    int getRoadCount() {
-        return roadCount;
-    }
-
-
-    public void redrawVehicles() {
-        map.moveVehicles();
-    }
-
-    public void upateGui() {
-        map.vehicleImages.clear();
-        //redrawVehicles();
-        for (Road road : roadMain.getRoads()) {
-            for (Vehicle vehicle : road.getVehicles()) {
-               // map.addVehicle(vehicle.getRoadRef(), vehicle.getType(), vehicle.getDistanceTraveled());
-                map.addVehicle(vehicle.getRoadRef(), vehicle.getType(), vehicle.getPos(), vehicle.getRear());
-
-            }
-
-        }
-        map.repaint();
-    }
-
-
-    void runGui() {
-
-        if (timer != null) {
-            timer.stop();
-        }
-        timer = new Timer(1000/60, e -> {
-
-            roadMain.runSim();
-            upateGui();
-
-        });
-        timer.start();
-    }
-
-
-    @Override
-    public void actionPerformed(ActionEvent actionEvent) {
-        String name = actionEvent.getActionCommand();
-
-        if (name.equals("Simulator Mode")) {
-            System.out.println("Simulator Mode pressed");
-                runGui();
-
-
-        } else if (name.equals("Build Mode")) {
-            confirmReset();
-
-        } else if (name.equals("Make Default")) {
-
-            addNewRoad(0, 250, "East"); //1
-            addNewRoad(0, 250, "West");//2
-            addNewRoad(0, 250, "South");//3
-            addNewRoad(1, 250, "East");//4
-            addNewRoad(2, 250, "South");//5
-            addNewRoad(5, 250, "East");//6
-            addNewRoad(5, 250, "West");//7
-
-            System.out.println("Make Default");
-
-        } else if (name.equals("Add Road")) {
-            if (!isLengthInt()) {
-                System.out.println("Enter a valid integer length");
-
-            } else {
-
-                if (getTrafficLight().equals("Add Traffic Light?")) {
-                    System.out.println("Please select whether or not you want a traffic light...");
-
-
-                } else if (getTrafficLight().equals("Yes")) {
-                    addNewRoad(getConnectedRoad(), getNewRoadLength(), getDirection());
-                    roadMain.addTrafficLight(getConnectedRoad(), "End");
-                    System.out.println("New road added! Direction: " + getDirection() + "  Length: " + getNewRoadLength() + " On the end of road: " + getConnectedRoad() + "  With a traffic light at its end");
-
-
-                } else {
-                    addNewRoad(getConnectedRoad(), getNewRoadLength(), getDirection());
-                    System.out.println("New road added! Direction: " + getDirection() + "  Length: " + getNewRoadLength() + " On the end of road: " + getConnectedRoad());
-                    //addRoadImage(getNewRoadLength()*10, 80, getDirection(), getXinit(getConnectedRoad()), getYinit(getConnectedRoad()));
-
-                }
-            }
-
-
-        }
-    }
-}
+    }*/
 
 
 
