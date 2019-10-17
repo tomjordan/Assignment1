@@ -61,43 +61,53 @@ public class Vehicle {
 
     void intiDir() {
         /*Initiates the front and rear positions of vehicle based on its length and direction */
-        if (getDirection().equals("North")) {
-            ypos = yinit ;
-            yrear = yinit - length;
-            xpos = xinit;
-        } else if (getDirection().equals("South")) {
-            ypos = yinit;
-            yrear = yinit + length;
-            xpos = xinit;
-        } else if (getDirection().equals("East")) {
-            xpos = xinit;
-            xrear = xinit - length;
-            ypos = yinit;
-        } else if (getDirection().equals("West")) {
-            xpos = xinit;
-            xrear = xinit + length;
-            ypos = yinit;
+        switch (getDirection()) {
+            case "North":
+                ypos = yinit;
+                yrear = yinit - length;
+                xpos = xinit;
+                break;
+            case "South":
+                ypos = yinit;
+                yrear = yinit + length;
+                xpos = xinit;
+                break;
+            case "East":
+                xpos = xinit;
+                xrear = xinit - length;
+                ypos = yinit;
+                break;
+            case "West":
+                xpos = xinit;
+                xrear = xinit + length;
+                ypos = yinit;
+                break;
         }
     }
 
     void moveVehicle() {
         /*Moves the vehicle based on its direction and speed */
-        if (direction.equals("North")) {
-            yprev = ypos;
-            ypos = ypos + speed;
-            yrear = yrear + speed;
-        } else if (this.direction.equals("South")) {
-            yprev = ypos;
-            ypos = ypos - speed;
-            yrear = yrear - speed;
-        } else if (this.direction.equals("East")) {
-            xprev = xpos;
-            xpos = xpos + speed;
-            xrear = xrear + speed;
-        } else if (this.direction.equals("West")) {
-            xprev = xpos;
-            xpos = xpos - speed;
-            xrear = xrear - speed;
+        switch (direction) {
+            case "North":
+                //yprev = ypos;
+                ypos = ypos + speed;
+                yrear = yrear + speed;
+                break;
+            case "South":
+               // yprev = ypos;
+                ypos = ypos - speed;
+                yrear = yrear - speed;
+                break;
+            case "East":
+               // xprev = xpos;
+                xpos = xpos + speed;
+                xrear = xrear + speed;
+                break;
+            case "West":
+              //  xprev = xpos;
+                xpos = xpos - speed;
+                xrear = xrear - speed;
+                break;
         }
 
     }
@@ -146,21 +156,21 @@ public class Vehicle {
         /*Sets the front and rear positions of a vehicle based on its direction and length */
         if (getDirection().equals("North")) {
             ypos = newposition;
-            yrear = newposition - this.getLength();
+            yrear = newposition - length;
         } else if (getDirection().equals("South")) {
             ypos = newposition;
-            yrear = newposition + this.getLength();
+            yrear = newposition + length;
         } else if (getDirection().equals("East")) {
             xpos = newposition;
-            xrear = newposition - this.getLength();
+            xrear = newposition - length;
         } else if (getDirection().equals("West")) {
             xpos = newposition;
-            xrear = newposition + this.getLength();
+            xrear = newposition + length;
         }
 
     }
 
-    int getPos() {
+    public int getPos() {
         /*Returns front coordinate of a vehicle based on its direction */
         int position = 0;
         if (direction.equals("North") || direction.equals("South")) {
@@ -171,7 +181,7 @@ public class Vehicle {
         return position;
     }
 
-    int getRear() {
+   public int getRear() {
         /*Returns rear coordinate of a vehicle based on its direction */
         int position = 0;
         if (direction.equals("North") || direction.equals("South")) {

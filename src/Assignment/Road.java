@@ -171,8 +171,9 @@ public class Road {
 
         for (int i = 0; i < vehicles.size(); i++) {
             if (checkCollision(i)) {
-                vehicles.get(i).setSpeed(vehicles.get(i - 1).getSpeed());
-                vehicles.get(i).setPos(vehicles.get(i - 1).getRear());
+                System.out.println("\n\n\n\n...........................................................................Collision with " + vehicles.get(i).getType() + "  " + vehicles.get(i-1).getType());
+                //vehicles.get(i).setSpeed(vehicles.get(i - 1).getSpeed());
+                //vehicles.get(i).setPos(vehicles.get(i - 1).getRear());
             } else if (checkMovement(i)) {
                 if (trafficLightend) {
                     if (endLight.isGreen()) {
@@ -184,6 +185,52 @@ public class Road {
 
         }
     }
+
+    private boolean checkCollision(int vRef) {
+        /*Returns true if a vehicle will move past the vehicle
+         * in front of it. If it does, position is set to the end of front vehicle
+         * and speed is set to the first vehicles speed. Used in move vehicles function */
+        boolean status = false;
+        if (vRef != 0){
+
+            if (direction == "North") {
+                if (vehicles.get(vRef).getYpos() + vehicles.get(vRef).getSpeed() >=
+                        vehicles.get(vRef - 1).getYrear()) {
+                    vehicles.get(vRef).setSpeed(vehicles.get(vRef - 1).getSpeed());
+                    vehicles.get(vRef).setPos(vehicles.get(vRef - 1).getRear() - 20);
+                    status = true;
+                }
+
+            } else if (direction == "East") {
+                if (vehicles.get(vRef).getXpos() + vehicles.get(vRef).getSpeed() >=
+                        vehicles.get(vRef - 1).getXrear()) {
+                    vehicles.get(vRef).setSpeed(vehicles.get(vRef - 1).getSpeed());
+                    vehicles.get(vRef).setPos(vehicles.get(vRef - 1).getRear() - 20);
+                    status = true;
+                }
+
+            } else if (direction == "West") {
+                if (vehicles.get(vRef).getXpos() - vehicles.get(vRef).getSpeed() <=
+                        vehicles.get(vRef - 1).getXrear()) {
+                    vehicles.get(vRef).setSpeed(vehicles.get(vRef - 1).getSpeed());
+                    vehicles.get(vRef).setPos(vehicles.get(vRef - 1).getRear() + 20);
+                    status = true;
+                }
+
+            } else if (direction == "South") {
+                if (vehicles.get(vRef).getYpos() - vehicles.get(vRef).getSpeed() <=
+                        vehicles.get(vRef - 1).getYrear()) {
+                    vehicles.get(vRef).setSpeed(vehicles.get(vRef - 1).getSpeed());
+                    vehicles.get(vRef).setPos(vehicles.get(vRef - 1).getRear() + 20);
+                    status = true;
+                }
+
+            }
+
+        }
+        return status;
+    }
+
 
     boolean lightAtStart() {
         return trafficLightStart;
@@ -263,45 +310,6 @@ public class Road {
     }
 
 
-    private boolean checkCollision(int vRef) {
-        /*Returns true if a vehicle will move past the vehicle
-         * in front of it. If it does, position is set to the end of front vehicle
-         * and speed is set to the first vehicles speed. Used in move vehicles function */
-        boolean status = false;
-        if (vehicles.size() == 1) {
-            status = false;
-        } else if (vRef == 0) {
-            status = false;
-        } else {
-            if (direction == "North") {
-                if (vehicles.get(vRef).getYpos() + vehicles.get(vRef).getSpeed() >=
-                        vehicles.get(vRef - 1).getYrear()) {
-                    status = true;
-                } else status = false;
-
-            } else if (direction == "East") {
-                if (vehicles.get(vRef).getXpos() + vehicles.get(vRef).getSpeed() >=
-                        vehicles.get(vRef - 1).getXrear()) {
-                    status = true;
-                } else status = false;
-
-            } else if (direction == "West") {
-                if (vehicles.get(vRef).getXpos() - vehicles.get(vRef).getSpeed() <=
-                        vehicles.get(vRef - 1).getXrear()) {
-                    status = true;
-                } else status = false;
-
-            } else if (direction == "South") {
-                if (vehicles.get(vRef).getYpos() - vehicles.get(vRef).getSpeed() <=
-                        vehicles.get(vRef - 1).getYrear()) {
-                    status = true;
-                } else status = false;
-
-            }
-
-        }
-        return status;
-    }
 
     public ArrayList<Vehicle> getVehicles_off_road() {
         /*Returns list of vehicles moving off the current road. Used to determine if vehicles will be turning etc.*/
@@ -391,6 +399,46 @@ public class Road {
         }
         tot_TrafficLights++;
 
+    }*/
+
+/*    private boolean checkCollision(int vRef) {
+        *//*Returns true if a vehicle will move past the vehicle
+         * in front of it. If it does, position is set to the end of front vehicle
+         * and speed is set to the first vehicles speed. Used in move vehicles function *//*
+        boolean status = false;
+        if (vehicles.size() == 1) {
+            status = false;
+        } else if (vRef == 0) {
+            status = false;
+        } else {
+            if (direction == "North") {
+                if (vehicles.get(vRef).getYpos() + vehicles.get(vRef).getSpeed() >=
+                        vehicles.get(vRef - 1).getYrear()) {
+                    status = true;
+                } else status = false;
+
+            } else if (direction == "East") {
+                if (vehicles.get(vRef).getXpos() + vehicles.get(vRef).getSpeed() >=
+                        vehicles.get(vRef - 1).getXrear()) {
+                    status = true;
+                } else status = false;
+
+            } else if (direction == "West") {
+                if (vehicles.get(vRef).getXpos() - vehicles.get(vRef).getSpeed() <=
+                        vehicles.get(vRef - 1).getXrear()) {
+                    status = true;
+                } else status = false;
+
+            } else if (direction == "South") {
+                if (vehicles.get(vRef).getYpos() - vehicles.get(vRef).getSpeed() <=
+                        vehicles.get(vRef - 1).getYrear()) {
+                    status = true;
+                } else status = false;
+
+            }
+
+        }
+        return status;
     }*/
 
 

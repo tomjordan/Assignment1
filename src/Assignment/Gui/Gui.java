@@ -131,16 +131,7 @@ public class Gui extends JFrame implements ActionListener {
         map.paintRoads();
     }*/
 
-    public void upateGui() {
-        redrawVehicles();
-        for (Road road : roadMain.getRoads()) {
-            for (Vehicle vehicle : road.getVehicles()) {
-                updateVehicles(vehicle.getRoadRef(), vehicle.getType(), vehicle.getDistanceTraveled());
-            }
 
-        }
-
-    }
 
     void confirmReset() {
         int input = JOptionPane.showConfirmDialog(null,
@@ -310,34 +301,6 @@ public class Gui extends JFrame implements ActionListener {
     }
 
 
-/*
-    int getXinit(int roadRef){
-        String dir = roads.get(roadRef).getDirection();
-        int x;
-
-
-
-
-        if (roadMain.getRoad(roadRef).getDirection().equals("East")){
-            x = roadMain.getRoad(roadRef).getXeast();
-
-        }else {
-            x = roadMain.getRoad(roadRef).getXwest();
-        }
-        return x*10;
-    }
-
-    int getYinit(int roadRef){
-        int y;
-        if (roadMain.getRoad(roadRef).getDirection().equals("South")){
-            y = roadMain.getRoad(roadRef).getYsouth();
-
-        }else {
-            y = roadMain.getRoad(roadRef).getYnorth();
-        }
-        return y*10;
-    }*/
-
     public void addCount() {
         existingRoads.addItem(roadCount);
         roadCount++;
@@ -347,13 +310,25 @@ public class Gui extends JFrame implements ActionListener {
         return roadCount;
     }
 
-    public void updateVehicles(int roadRef, String type, int distanceTraveled) {
-        map.addVehicle(roadRef, type, distanceTraveled);
-    }
 
     public void redrawVehicles() {
         map.moveVehicles();
     }
+
+    public void upateGui() {
+        map.vehicleImages.clear();
+        //redrawVehicles();
+        for (Road road : roadMain.getRoads()) {
+            for (Vehicle vehicle : road.getVehicles()) {
+               // map.addVehicle(vehicle.getRoadRef(), vehicle.getType(), vehicle.getDistanceTraveled());
+                map.addVehicle(vehicle.getRoadRef(), vehicle.getType(), vehicle.getPos(), vehicle.getRear());
+
+            }
+
+        }
+        map.repaint();
+    }
+
 
     void runGui() {
 
@@ -361,6 +336,7 @@ public class Gui extends JFrame implements ActionListener {
             timer.stop();
         }
         timer = new Timer(1000/60, e -> {
+
             roadMain.runSim();
             upateGui();
 
@@ -424,6 +400,36 @@ public class Gui extends JFrame implements ActionListener {
 
 
 
+
+
+
+/*
+    int getXinit(int roadRef){
+        String dir = roads.get(roadRef).getDirection();
+        int x;
+
+
+
+
+        if (roadMain.getRoad(roadRef).getDirection().equals("East")){
+            x = roadMain.getRoad(roadRef).getXeast();
+
+        }else {
+            x = roadMain.getRoad(roadRef).getXwest();
+        }
+        return x*10;
+    }
+
+    int getYinit(int roadRef){
+        int y;
+        if (roadMain.getRoad(roadRef).getDirection().equals("South")){
+            y = roadMain.getRoad(roadRef).getYsouth();
+
+        }else {
+            y = roadMain.getRoad(roadRef).getYnorth();
+        }
+        return y*10;
+    }*/
 
 
 /*int north_end = roadMain.getRoad(ref).getYnorth()*10;

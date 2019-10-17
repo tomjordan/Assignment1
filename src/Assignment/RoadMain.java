@@ -348,17 +348,16 @@ public class RoadMain {
         if (type.equals("Car")) {
             roads.get(roadRef).addCar(speed);
             roads.get(roadRef).vehicles.get(roads.get(roadRef).vehicles.size() - 1).setRoadRef(roadRef);
-          //  gui.addVehicle(roadRef, type, speed);
+
 
         } else if (type.equals("Bus")) {
             roads.get(roadRef).addBus(speed);
             roads.get(roadRef).vehicles.get(roads.get(roadRef).vehicles.size() - 1).setRoadRef(roadRef);
-           // gui.addVehicle(roadRef, type, speed);
 
         } else if (type.equals("Motorbike")) {
             roads.get(roadRef).addMotorbike(speed);
             roads.get(roadRef).vehicles.get(roads.get(roadRef).vehicles.size() - 1).setRoadRef(roadRef);
-           // gui.addVehicle(roadRef, type, speed);
+
 
         }
     }

@@ -26,10 +26,10 @@ public class Map extends JPanel {
         repaint();
     }
 
-    void addVehicle(int roadRef, String type, int distanceTraveled){
+
+    void addVehicle(int roadRef, String type, int front, int rear){
         int xRoad = roads.get(roadRef).getXStart();
         int yRoad = roads.get(roadRef).getYStart();
-      //  distanceTraveled*=10;
         int yVehicle;
         int xVehicle;
         int length = 0;
@@ -51,25 +51,28 @@ public class Map extends JPanel {
         switch (direction){
             case "North":
                 xVehicle = xRoad - 5;
-                yVehicle = yRoad - distanceTraveled - length;
+                yVehicle = -front;
                 vehicleImages.add(new VehicleImage(xVehicle, yVehicle, width, length, type));
                 break;
             case "South":
                 xVehicle = xRoad - 5;
-                yVehicle = yRoad + distanceTraveled;
+                yVehicle = -rear;
                 vehicleImages.add(new VehicleImage(xVehicle, yVehicle, width, length, type));
                 break;
             case "East":
-                xVehicle = xRoad + distanceTraveled;
+                xVehicle = rear;
                 yVehicle = yRoad - 5;
                 vehicleImages.add(new VehicleImage(xVehicle, yVehicle, length, width, type));
                 break;
             case "West":
-                xVehicle = xRoad - distanceTraveled - length;
+                xVehicle = front;
                 yVehicle = yRoad - 5;
                 vehicleImages.add(new VehicleImage(xVehicle, yVehicle, length, width, type));
+                break;
         }
     }
+
+
 
 
 
@@ -111,6 +114,53 @@ public class Map extends JPanel {
     }
 }
 
+
+
+    /*void addVehicle(int roadRef, String type, int distanceTraveled){
+        int xRoad = roads.get(roadRef).getXStart();
+        int yRoad = roads.get(roadRef).getYStart();
+      //  distanceTraveled*=10;
+        int yVehicle;
+        int xVehicle;
+        int length = 0;
+        int width = 10;
+        String direction = roads.get(roadRef).getDirection();
+        switch (type){
+            case "Car":
+                length = 20;
+                break;
+            case "Bus":
+                length = 60;
+                break;
+            case "Motorbike":
+                length = 10;
+                break;
+
+        }
+
+        switch (direction){
+            case "North":
+                xVehicle = xRoad - 5;
+                yVehicle = yRoad - distanceTraveled - length;
+                vehicleImages.add(new VehicleImage(xVehicle, yVehicle, width, length, type));
+                break;
+            case "South":
+                xVehicle = xRoad - 5;
+                yVehicle = yRoad + distanceTraveled;
+                vehicleImages.add(new VehicleImage(xVehicle, yVehicle, width, length, type));
+                break;
+            case "East":
+                xVehicle = xRoad + distanceTraveled;
+                yVehicle = yRoad - 5;
+                vehicleImages.add(new VehicleImage(xVehicle, yVehicle, length, width, type));
+                break;
+            case "West":
+                xVehicle = xRoad - distanceTraveled - length;
+                yVehicle = yRoad - 5;
+                vehicleImages.add(new VehicleImage(xVehicle, yVehicle, length, width, type));
+                break;
+        }
+    }*/
 
 /*
 package Assignment2;
