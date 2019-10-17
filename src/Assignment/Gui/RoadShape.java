@@ -1,6 +1,7 @@
 package Assignment.Gui;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class RoadShape {
 
@@ -9,7 +10,8 @@ public class RoadShape {
     private int yinit;
     private int length;
     private int width;
-    private int count;
+    private int roadNum;
+
 
 
     public RoadShape(int length, int width, String direction, int xinit, int yinit, int roadnum) {
@@ -18,7 +20,7 @@ public class RoadShape {
         this.width = width;
         this.xinit = xinit;
         this.yinit = yinit;
-        this.count = roadnum;
+        this.roadNum = roadnum;
     }
 
     int getXinit(){
@@ -30,26 +32,23 @@ public class RoadShape {
     }
 
 
-
+    String getDirection(){
+        return direction;
+    }
     int getLength(){
         return length;
     }
 
     //@Override
 
-    public void addVehicle(){
-
-
-    }
-
    int getXStart(){
         int x = 0;
         switch (direction){
             case "North":
-          x = xinit+40;
+          x = xinit+30;
                 break;
             case "South":
-                x = xinit+40;
+                x = xinit+30;
                 break;
             case "East":
                 x = xinit;
@@ -71,10 +70,10 @@ public class RoadShape {
                 y = yinit;
                 break;
             case "East":
-                y = yinit-40;
+                y = yinit+30;
                 break;
             case "West":
-                y = yinit-40;
+                y = yinit+30;
                 break;
         }
         return y;
@@ -92,7 +91,7 @@ public class RoadShape {
                 g.fillRect(xinit+5, yinit, width-10, length);
                 g.fillRect(xinit, yinit - width, width, width);
                 g.setColor(Color.BLUE);
-                g.drawString("Road: "+this.count, xinit, yinit+40);
+                g.drawString("Road: "+this.roadNum, xinit, yinit+40);
 
                 break;
             case "South":
@@ -102,7 +101,7 @@ public class RoadShape {
                 g.fillRect(xinit+5, yinit, width-10, length);
                 g.fillRect(xinit, yinit + length, width, width);
                 g.setColor(Color.BLUE);
-                g.drawString("Road: "+this.count, xinit, yinit+40);
+                g.drawString("Road: "+this.roadNum, xinit, yinit+40);
 
                 break;
             case "East":
@@ -112,7 +111,7 @@ public class RoadShape {
                 g.fillRect(xinit, yinit+5, length, width-10);
                 g.fillRect(xinit+length, yinit , width, width);
                 g.setColor(Color.BLUE);
-                g.drawString("Road: "+this.count, xinit, yinit+40);
+                g.drawString("Road: "+this.roadNum, xinit, yinit+40);
 
                 break;
             case "West":
@@ -122,7 +121,7 @@ public class RoadShape {
                 g.fillRect(xinit, yinit+5, length, width-10);
                 g.fillRect(xinit-width, yinit , width, width);
                 g.setColor(Color.BLUE);
-                g.drawString("Road: "+this.count, xinit, yinit+40);
+                g.drawString("Road: "+this.roadNum, xinit, yinit+40);
 
                 break;
         }

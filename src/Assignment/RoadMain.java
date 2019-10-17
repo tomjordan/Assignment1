@@ -8,16 +8,17 @@ import Assignment.Gui.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class RoadMain extends Gui {
+public class RoadMain {
     /*Roadmain is used as the traffic simulator */
     private int numRoads = 0;
     ArrayList<Road> roads = new ArrayList<Road>();
     private Random random = new Random();
     ArrayList<TrafficLight> trafficLights = new ArrayList<TrafficLight>();
-    Gui a = new Gui();
+  //  Gui gui = new Gui();
 
 
     public static void main(String[] args) {
+
 
     }
      /*     Basic simulator with 5 roads and one traffic light at the end of road 0.
@@ -97,6 +98,12 @@ public class RoadMain extends Gui {
     public void change_roads(int road_ref) {
 
     }
+
+    public void setGui() {
+        //gui.setVisible(true);
+    }
+
+
 
     public void addnewRoad(int length, int width, String direction, int xinit, int yinit) {
         /*Adds a road which is no connected to any existing road */
@@ -219,6 +226,7 @@ public class RoadMain extends Gui {
 
 
         }
+
     }
 
 
@@ -310,6 +318,7 @@ public class RoadMain extends Gui {
 
                 }
             }
+
         } else status = false;
 
 
@@ -322,15 +331,17 @@ public class RoadMain extends Gui {
         if (type.equals("Car")) {
             roads.get(roadRef).addCar(speed);
             roads.get(roadRef).vehicles.get(roads.get(roadRef).vehicles.size() - 1).setRoadRef(roadRef);
-           /////////// a.addVehicle();
+          //  gui.addVehicle(roadRef, type, speed);
 
         } else if (type.equals("Bus")) {
             roads.get(roadRef).addBus(speed);
             roads.get(roadRef).vehicles.get(roads.get(roadRef).vehicles.size() - 1).setRoadRef(roadRef);
+           // gui.addVehicle(roadRef, type, speed);
 
         } else if (type.equals("Motorbike")) {
             roads.get(roadRef).addMotorbike(speed);
             roads.get(roadRef).vehicles.get(roads.get(roadRef).vehicles.size() - 1).setRoadRef(roadRef);
+           // gui.addVehicle(roadRef, type, speed);
 
         }
     }
@@ -375,9 +386,25 @@ public class RoadMain extends Gui {
         }
     }
 
+    /*public void upateGui(){
+        gui.redrawVehicles();
+        for (Road road: roads){
+            for (Vehicle vehicle :road.vehicles){
+                gui.updateVehicles(vehicle.getRoadRef(), vehicle.getType(), vehicle.getDistanceTraveled());
+            }
+
+        }
+
+    }*/
+
+    void openGui(){
+       // gui.setVisible(true);
+    }
+
     public void runSim() throws InterruptedException {
+
        // for (; ; ) {
-            TimeUnit.SECONDS.sleep(1);
+            //TimeUnit.SECONDS.sleep(1);
             Random r = new Random();
             int j = r.nextInt(7);
             int speed = r.nextInt(6) + 3;
@@ -400,6 +427,7 @@ public class RoadMain extends Gui {
 
             printPos();
             moveVehicles();
+          //  upateGui();
 
 
 

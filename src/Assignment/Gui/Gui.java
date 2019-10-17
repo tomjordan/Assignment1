@@ -2,6 +2,7 @@ package Assignment.Gui;
 
 import Assignment.Road;
 import Assignment.RoadMain;
+import Assignment.Vehicle;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,13 +22,14 @@ public class Gui extends  JFrame   implements ActionListener {
     //int[] roadList = new int[roadCount];
 
     public static void main(String[] args) {
-        //new Gui().setVisible(true);
+        new Gui().setVisible(true);
 
 
     }
 
     public Gui() {
         super("Traffic Simulator");
+        //setVisible(true);
         setSize(1400, 1000);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -115,6 +117,7 @@ public class Gui extends  JFrame   implements ActionListener {
             roadNum = existingRoads.getItemAt(existingRoads.getSelectedIndex());
         }
         return roadNum;
+
     }
 
     /*void map.addRoad(int length, int width, String direction, int xinit, int yinit) {
@@ -123,35 +126,46 @@ public class Gui extends  JFrame   implements ActionListener {
         map.paintRoads();
     }*/
 
+    public void upateGui(){
+       redrawVehicles();
+        for (Road road: roadMain.getRoads()){
+            for (Vehicle vehicle : road.getVehicles()){
+                updateVehicles(vehicle.getRoadRef(), vehicle.getType(), vehicle.getDistanceTraveled());
+            }
+
+        }
+
+    }
+
     void addNewRoad(int ref, int length, String direction) {
 
         if (roadCount == 0) {
-            roadMain.addnewRoad(length, 8, direction, 10, -10);
+            roadMain.addnewRoad(length, 6, direction, 10, -10);
             length *=10;
             switch (direction) {
                 case "North":
-                    map.addRoad(length, 80,
+                    map.addRoad(length, 60,
                             direction, 10, -length, roadCount);
-                   // map.paintRoads();
+                   map.paintRoads();
                     addCount();
                     break;
                 case "South":
-                    map.addRoad(length, 80,
+                    map.addRoad(length, 60,
                             direction, 10, 10, roadCount);
-                   // map.paintRoads();
+                   map.paintRoads();
                     addCount();
                     break;
                 case "East":
-                    map.addRoad(length, 80,
+                    map.addRoad(length, 60,
                             direction, 10, 10, roadCount);
-                   // map.paintRoads();
+                   map.paintRoads();
                     addCount();
                     break;
                 case "West":
 
-                    map.addRoad(length, 80,
+                    map.addRoad(length, 60,
                             direction, -length, 10, roadCount);
-                  //  map.paintRoads();
+                 map.paintRoads();
                     addCount();
                     break;
 
@@ -171,20 +185,20 @@ public class Gui extends  JFrame   implements ActionListener {
                 if (!direction.equals("South")) {
                     switch (direction) {
                         case "East":
-                            map.addRoad(length, 80,
-                                    direction, xWest+80, yNorth - 80, roadCount);
+                            map.addRoad(length, 60,
+                                    direction, xWest+60, yNorth - 60, roadCount);
                             map.paintRoads();
                             addCount();
                             break;
                         case "West":
-                            map.addRoad(length, 80,
-                                    direction, xWest - length, yNorth - 80, roadCount);
+                            map.addRoad(length, 60,
+                                    direction, xWest - length, yNorth - 60, roadCount);
                             map.paintRoads();
                             addCount();
                             break;
                         case "North":
-                            map.addRoad(length, 80,
-                                    direction, xWest, yNorth-length-80, roadCount);
+                            map.addRoad(length, 60,
+                                    direction, xWest, yNorth-length-60, roadCount);
                             map.paintRoads();
 
                             addCount();
@@ -198,20 +212,20 @@ public class Gui extends  JFrame   implements ActionListener {
 
                     switch (direction) {
                         case "East":
-                            map.addRoad(length, 80,
-                                    direction, xWest+80, yNorth+conectedLength, roadCount);
+                            map.addRoad(length, 60,
+                                    direction, xWest+60, yNorth+conectedLength, roadCount);
                             map.paintRoads();
                             addCount();
                             break;
                         case "West":
-                            map.addRoad(length, 80,
+                            map.addRoad(length, 60,
                                     direction, xWest-length, yNorth+conectedLength, roadCount);
                             map.paintRoads();
                             addCount();
                             break;
                         case "South":
-                            map.addRoad(length, 80,
-                                    direction, xWest, yNorth+ conectedLength + 80, roadCount);
+                            map.addRoad(length, 60,
+                                    direction, xWest, yNorth+ conectedLength + 60, roadCount);
                             map.paintRoads();
                             addCount();
                             break;
@@ -224,21 +238,21 @@ public class Gui extends  JFrame   implements ActionListener {
 
                     switch (direction) {
                         case "North":
-                            map.addRoad(length, 80,
+                            map.addRoad(length, 60,
                                     direction, xWest+conectedLength, yNorth - length, roadCount);
                             map.paintRoads();
                             addCount();
 
                             break;
                         case "South":
-                            map.addRoad(length, 80,
-                                    direction, xWest+conectedLength, yNorth+80, roadCount);
+                            map.addRoad(length, 60,
+                                    direction, xWest+conectedLength, yNorth+60, roadCount);
                             map.paintRoads();
                             addCount();
                             break;
                         case "East":
-                            map.addRoad(length, 80,
-                                    direction, xWest+conectedLength + 80, yNorth, roadCount);
+                            map.addRoad(length, 60,
+                                    direction, xWest+conectedLength + 60, yNorth, roadCount);
                             map.paintRoads();
                             addCount();
 
@@ -252,20 +266,20 @@ public class Gui extends  JFrame   implements ActionListener {
 
                     switch (direction) {
                         case "North":
-                            map.addRoad(length, 80,
-                                    direction, xWest-80, yNorth - length, roadCount);
+                            map.addRoad(length, 60,
+                                    direction, xWest-60, yNorth - length, roadCount);
                             map.paintRoads();
                             addCount();
                             break;
                         case "South":
-                            map.addRoad(length, 80,
-                                    direction, xWest - 80, yNorth+80, roadCount);
+                            map.addRoad(length, 60,
+                                    direction, xWest - 60, yNorth+60, roadCount);
                             map.paintRoads();
                             addCount();
                             break;
                         case "West":
-                            map.addRoad(length, 80,
-                                    direction, xWest - length-80, yNorth, roadCount);
+                            map.addRoad(length, 60,
+                                    direction, xWest - length-60, yNorth, roadCount);
                             map.paintRoads();
                             addCount();
 
@@ -316,16 +330,19 @@ public class Gui extends  JFrame   implements ActionListener {
         return roadCount;
     }
 
-    public void addVehicle(int roadRef, String type, int distanceTraveled){
-
+    public void updateVehicles(int roadRef, String type, int distanceTraveled){
+        map.addVehicle(roadRef, type, distanceTraveled);
     }
 
-    public void updateVehicles(){
-        for(Road road: roadMain.getRoads()){
+    public void redrawVehicles(){
+        map.moveVehicles();
+    }
 
-            road.getVehicles();
+void runGui() throws InterruptedException {
+            roadMain.runSim();
+            upateGui();
         }
-    }
+
 
 
     @Override
@@ -335,12 +352,16 @@ public class Gui extends  JFrame   implements ActionListener {
         if (name.equals("Simulator Mode")) {
             System.out.println("Simulator Mode pressed");
             try {
-                roadMain.runSim();
+                runGui();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
+
         } else if (name.equals("Build Mode")) {
-            roadMain = new RoadMain();
+            addNewRoad(0, 25, "East");
+            addNewRoad(0, 25, "East");
+            addNewRoad(0, 25, "South");
             System.out.println("Build Mode pressed");
 
 
