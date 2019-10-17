@@ -107,16 +107,16 @@ public class RoadMain {
 
     public void addnewRoad(int length, int width, String direction, int xinit, int yinit) {
         /*Adds a road which is no connected to any existing road */
-        if (length > 12 && length < 30) {
+        //if (length > 12 && length < 30) {
             roads.add(new Road(length, width, direction, xinit, yinit));
             roads.get(numRoads).makeRoad();
             numRoads++;
-              }
+            //  }
     }
 
     public void addConectingRoad(int roadRef, int length, String direction) {
         /*Adds a new road onto the end of an existing road. To add an intersection, add multiple roads to the end of the same road  */
-        if (length > 12 && length < 30) {
+      //  if (length > 12 && length < 30) {
             String dir = roads.get(roadRef).getDirection();
             int north_end = roads.get(roadRef).getYnorth();
             int south_end = roads.get(roadRef).getYsouth();
@@ -197,7 +197,7 @@ public class RoadMain {
 
                     }
                 }
-            }
+           // }
             roads.get(numRoads).makeRoad();
             roads.get(roadRef).setConnectedRoads(numRoads);
 
