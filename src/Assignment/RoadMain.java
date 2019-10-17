@@ -296,6 +296,23 @@ public class RoadMain {
         } else if (i == roads.size() - 1) {
             status = true;
         } else if (roads.get(i).vehicles.size() > 0) {
+                if (roads.get(i).getVehicleOnRoad(roads.get(i).vehicles.size() - 1).getDistanceTraveled()
+                        < roads.get(i).getVehicleOnRoad(roads.get(i).vehicles.size() - 1).getDistanceTraveled()+size+15)
+                    status = true;
+        }
+
+
+        return status;
+    }
+    /*public boolean isEmpty(int i, int size) {
+        *//*Returns true if there is enough room at the beginning of a new road to add a new vehicle to it. Used when
+         * turning vehicles  *//*
+        boolean status = false;
+        if (roads.get(i).vehicles.size() == 0) {
+            status = true;
+        } else if (i == roads.size() - 1) {
+            status = true;
+        } else if (roads.get(i).vehicles.size() > 0) {
             if (roads.get(i).getDirection().equals("North")) {
                 if (roads.get(i).getVehicleOnRoad(roads.get(i).vehicles.size() - 1).getYrear()
                         > roads.get(i).getYsouth() + size) {
@@ -323,7 +340,7 @@ public class RoadMain {
 
 
         return status;
-    }
+    }*/
 
 
     void addVehicle(String type, int speed, int roadRef) {
@@ -401,29 +418,30 @@ public class RoadMain {
        // gui.setVisible(true);
     }
 
-    public void runSim() throws InterruptedException {
-
+    public void runSim() {
+        Random r = new Random();
        // for (; ; ) {
             //TimeUnit.SECONDS.sleep(1);
-            Random r = new Random();
-            int j = r.nextInt(7);
+        if (roads.get(0).vehicles.size() < 3 ) {
+
+            int j = r.nextInt(50);
             int speed = r.nextInt(6) + 3;
             if (j == 0) {
-                if (isEmpty(0, 2)) {
+                if (isEmpty(0, 20)) {
                     addVehicle("Car", speed, 0);
 
                 }
             } else if (j == 1) {
-                if (isEmpty(0, 1)) {
+                if (isEmpty(0, 10)) {
                     addVehicle("Motorbike", speed, 0);
                 }
             } else if (j == 2) {
-                if (isEmpty(0, 6)) {
+                if (isEmpty(0, 60)) {
 
                     addVehicle("Bus", speed, 0);
                 }
             }
-
+        }
 
             printPos();
             moveVehicles();

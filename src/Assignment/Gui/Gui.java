@@ -19,10 +19,11 @@ public class Gui extends JFrame implements ActionListener {
     private JComboBox<String> addTrafficLight;
     Map map;
     RoadMain roadMain = new RoadMain();
-    //int[] roadList = new int[roadCount];
+    Timer timer;
 
     public static void main(String[] args) {
         new Gui().setVisible(true);
+
 
 
     }
@@ -86,6 +87,7 @@ public class Gui extends JFrame implements ActionListener {
 
         controlPanel.add(modeSelection);
         controlPanel.add(newRoadInputs);
+        addNewRoad(0, 200, "South");
     }
 
     String getDirection() {
@@ -157,8 +159,7 @@ public class Gui extends JFrame implements ActionListener {
     void addNewRoad(int ref, int length, String direction) {
 
         if (roadCount == 0) {
-            roadMain.addnewRoad(length, 6, direction, 10, -10);
-            length *= 10;
+            roadMain.addnewRoad(length, 60, direction, 500, -10);
             switch (direction) {
                 case "North":
                     map.addRoad(length, 60,
@@ -168,7 +169,7 @@ public class Gui extends JFrame implements ActionListener {
                     break;
                 case "South":
                     map.addRoad(length, 60,
-                            direction, 10, 10, roadCount);
+                            direction, 500, 10, roadCount);
                     map.paintRoads();
                     addCount();
                     break;
@@ -196,7 +197,6 @@ public class Gui extends JFrame implements ActionListener {
             int xWest = map.roads.get(ref).getXinit();
             String dir = roadMain.getRoad(ref).getDirection();
             int conectedLength = map.roads.get(ref).getLength();
-            length *= 10;
 
             if (dir.equals("North")) {
                 if (!direction.equals("South")) {
@@ -355,9 +355,17 @@ public class Gui extends JFrame implements ActionListener {
         map.moveVehicles();
     }
 
-    void runGui() throws InterruptedException {
-        roadMain.runSim();
-        upateGui();
+    void runGui() {
+
+        if (timer != null) {
+            timer.stop();
+        }
+        timer = new Timer(1000/60, e -> {
+            roadMain.runSim();
+            upateGui();
+
+        });
+        timer.start();
     }
 
 
@@ -367,11 +375,7 @@ public class Gui extends JFrame implements ActionListener {
 
         if (name.equals("Simulator Mode")) {
             System.out.println("Simulator Mode pressed");
-            try {
                 runGui();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
 
 
         } else if (name.equals("Build Mode")) {
@@ -379,10 +383,15 @@ public class Gui extends JFrame implements ActionListener {
 
         } else if (name.equals("Make Default")) {
 
-            addNewRoad(0, 25, "East");
-            addNewRoad(0, 25, "East");
-            addNewRoad(0, 25, "South");
-            System.out.println("Build Mode pressed");
+            addNewRoad(0, 250, "East"); //1
+            addNewRoad(0, 250, "West");//2
+            addNewRoad(0, 250, "South");//3
+            addNewRoad(1, 250, "East");//4
+            addNewRoad(2, 250, "South");//5
+            addNewRoad(5, 250, "East");//6
+            addNewRoad(5, 250, "West");//7
+
+            System.out.println("Make Default");
 
         } else if (name.equals("Add Road")) {
             if (!isLengthInt()) {
@@ -396,7 +405,7 @@ public class Gui extends JFrame implements ActionListener {
 
                 } else if (getTrafficLight().equals("Yes")) {
                     addNewRoad(getConnectedRoad(), getNewRoadLength(), getDirection());
-                    roadMain.addTrafficLight(roadCount, "End");
+                    roadMain.addTrafficLight(getConnectedRoad(), "End");
                     System.out.println("New road added! Direction: " + getDirection() + "  Length: " + getNewRoadLength() + " On the end of road: " + getConnectedRoad() + "  With a traffic light at its end");
 
 

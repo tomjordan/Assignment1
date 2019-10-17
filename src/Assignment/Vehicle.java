@@ -1,7 +1,7 @@
 package Assignment;
 
 public class Vehicle {
-    private int carlength = 2;
+    private int carlength = 20;
     private int length;
     private int breadth;
     private String direction;
@@ -47,11 +47,11 @@ public class Vehicle {
         switch (direction) {
             case "North":
             case "South":
-                distanceTraveled = Math.abs(yrear-yinit);
+                distanceTraveled = Math.abs(ypos-yinit);
                 break;
             case "East":
             case "West":
-                distanceTraveled = Math.abs(xrear-xinit);
+                distanceTraveled = Math.abs(xpos-xinit);
                 break;
         }
         return distanceTraveled;
@@ -62,20 +62,20 @@ public class Vehicle {
     void intiDir() {
         /*Initiates the front and rear positions of vehicle based on its length and direction */
         if (getDirection().equals("North")) {
-            ypos = yinit + this.getLength();
-            yrear = yinit;
+            ypos = yinit ;
+            yrear = yinit - length;
             xpos = xinit;
         } else if (getDirection().equals("South")) {
-            ypos = yinit - this.getLength();
-            yrear = yinit;
+            ypos = yinit;
+            yrear = yinit + length;
             xpos = xinit;
         } else if (getDirection().equals("East")) {
-            xpos = xinit + this.getLength();
-            xrear = xinit;
+            xpos = xinit;
+            xrear = xinit - length;
             ypos = yinit;
         } else if (getDirection().equals("West")) {
-            xpos = xinit - this.getLength();
-            xrear = xinit;
+            xpos = xinit;
+            xrear = xinit + length;
             ypos = yinit;
         }
     }
@@ -210,4 +210,27 @@ public class Vehicle {
 
 
 
+/*
 
+    void intiDir() {
+        */
+/*Initiates the front and rear positions of vehicle based on its length and direction *//*
+
+        if (getDirection().equals("North")) {
+            ypos = yinit + this.getLength();
+            yrear = yinit;
+            xpos = xinit;
+        } else if (getDirection().equals("South")) {
+            ypos = yinit - this.getLength();
+            yrear = yinit;
+            xpos = xinit;
+        } else if (getDirection().equals("East")) {
+            xpos = xinit + this.getLength();
+            xrear = xinit;
+            ypos = yinit;
+        } else if (getDirection().equals("West")) {
+            xpos = xinit - this.getLength();
+            xrear = xinit;
+            ypos = yinit;
+        }
+    }*/

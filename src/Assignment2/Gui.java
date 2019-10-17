@@ -333,11 +333,7 @@ public class Gui extends  JFrame   implements ActionListener {
 
         if (name.equals("Simulator Mode")) {
             System.out.println("Simulator Mode pressed");
-            try {
                 roadMain.runSim();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         } else if (name.equals("Build Mode")) {
             roadMain = new RoadMain();
             System.out.println("Build Mode pressed");

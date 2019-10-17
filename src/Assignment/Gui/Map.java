@@ -29,7 +29,7 @@ public class Map extends JPanel {
     void addVehicle(int roadRef, String type, int distanceTraveled){
         int xRoad = roads.get(roadRef).getXStart();
         int yRoad = roads.get(roadRef).getYStart();
-        distanceTraveled*=10;
+      //  distanceTraveled*=10;
         int yVehicle;
         int xVehicle;
         int length = 0;
