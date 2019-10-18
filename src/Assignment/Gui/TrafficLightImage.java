@@ -18,11 +18,11 @@ public class TrafficLightImage {
 
     public void drawLights(Graphics g) {
         if (status){
-         g.setColor(Color.YELLOW);
+         g.setColor(Color.GREEN);
          g.fillOval(xinit,yinit,30,30);
          g.setColor(Color.GRAY);
          g.fillOval(xinit,yinit+30,30,30);
-     }else if (!status) {
+     }else{
             g.setColor(Color.GRAY);
             g.fillOval(xinit, yinit, 30, 30);
             g.setColor(Color.RED);

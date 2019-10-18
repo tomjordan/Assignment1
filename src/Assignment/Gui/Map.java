@@ -5,15 +5,18 @@ import Assignment.Road;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.awt.Color;
+
 
 public class Map extends JPanel {
-
+    public static final Color DARK_GREEN = new Color(0, 51, 0);
     ArrayList<RoadShape> roads = new ArrayList<>();
     ArrayList<VehicleImage> vehicleImages = new ArrayList<>();
     ArrayList<TrafficLightImage> trafficLightImages = new ArrayList<>();
 
     public Map(int length, int width) {
-        setBackground(Color.GREEN);
+
+        setBackground(DARK_GREEN);
        // setPreferredSize(new Dimension(length, width));
     }
 

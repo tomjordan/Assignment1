@@ -57,7 +57,7 @@ public class Road {
                 xeast = xinit + width;
                 xwest = xinit;
                 trafficLightNorth = ysouth+60;
-                trafficLightWest = xeast+30;
+                trafficLightWest = xeast;
                 break;
             case "East":
                 xeast = xinit + length;
@@ -72,7 +72,7 @@ public class Road {
                 xeast = xinit;
                 ynorth = yinit + width;
                 ysouth = yinit;
-                trafficLightNorth = ysouth - 60;
+                trafficLightNorth = ysouth;
                 trafficLightWest = xwest;
                 break;
         }

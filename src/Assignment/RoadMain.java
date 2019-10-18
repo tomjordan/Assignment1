@@ -436,9 +436,9 @@ public class RoadMain {
             for (Road road : roads) {
                 if (road.lightAtEnd()) {
                     int i = r.nextInt(150);
-                    if (i >130) {
+                    if (i >147) {
                         road.setEndLight(true);
-                    } else if (i <130) {
+                    } else if (i <3) {
                         road.setEndLight(false);
                     }
                 } else if (road.lightAtStart()) {
