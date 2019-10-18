@@ -23,6 +23,8 @@ public class Road {
     private boolean trafficLightend = false;
     private TrafficLight startLight;
     private TrafficLight endLight;
+    private int trafficLightNorth;
+    private int trafficLightWest;
     private int index = 0;
 
     ArrayList<Integer> connectedRoads = new ArrayList<Integer>();
@@ -46,24 +48,32 @@ public class Road {
                 ysouth = yinit;
                 xeast = xinit + width;
                 xwest = xinit;
+                trafficLightNorth = ynorth;
+                trafficLightWest = xwest - 30;
                 break;
             case "South":
                 ysouth = yinit - length;
                 ynorth = yinit;
                 xeast = xinit + width;
                 xwest = xinit;
+                trafficLightNorth = ysouth+60;
+                trafficLightWest = xeast+30;
                 break;
             case "East":
                 xeast = xinit + length;
                 xwest = xinit;
                 ynorth = yinit + width;
                 ysouth = yinit;
+                trafficLightNorth = ynorth + 60;
+                trafficLightWest = xeast-30;
                 break;
             case "West":
                 xwest = xinit - length;
                 xeast = xinit;
                 ynorth = yinit + width;
                 ysouth = yinit;
+                trafficLightNorth = ysouth - 60;
+                trafficLightWest = xwest;
                 break;
         }
     }
@@ -74,6 +84,13 @@ public class Road {
         this.connectedRoads.add(connectedRoads);
         this.index++;
     }
+    public int getTrafficLightNorth(){
+        return trafficLightNorth;
+    }
+    public int getTrafficLightWest(){
+        return trafficLightWest;
+    }
+
 
     void addCar(int speed) {
         /*Adds a car to the beginning of the road in the direction of the road at a specified speed*/
@@ -236,11 +253,11 @@ public class Road {
         return trafficLightStart;
     }
 
-    boolean lightAtEnd() {
+    public boolean lightAtEnd() {
         return trafficLightend;
     }
 
-    TrafficLight getEndLight() {
+    public TrafficLight getEndLight() {
         return endLight;
     }
 

@@ -14,7 +14,7 @@ public class TrafficLight {
         this.whichEnd = where;
     }
 
-    boolean isGreen() {
+   public boolean isGreen() {
         /*Returns true if light is green, false if red  */
         return status; // True = green  False = red
 

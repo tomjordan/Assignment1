@@ -287,9 +287,9 @@ public class RoadMain {
     }
 
 
-    public boolean isEmpty(int i, int size) {
-        /*Returns true if there is enough room at the beginning of a new road to add a new vehicle to it. Used when
-         * turning vehicles  */
+    /*public boolean isEmpty(int i, int size) {
+        *//*Returns true if there is enough room at the beginning of a new road to add a new vehicle to it. Used when
+         * turning vehicles  *//*
         boolean status = false;
         if (roads.get(i).vehicles.size() == 0) {
             status = true;
@@ -303,10 +303,10 @@ public class RoadMain {
 
 
         return status;
-    }
-    /*public boolean isEmpty(int i, int size) {
-        *//*Returns true if there is enough room at the beginning of a new road to add a new vehicle to it. Used when
-         * turning vehicles  *//*
+    }*/
+    public boolean isEmpty(int i, int size) {
+        /*Returns true if there is enough room at the beginning of a new road to add a new vehicle to it. Used when
+         * turning vehicles  */
         boolean status = false;
         if (roads.get(i).vehicles.size() == 0) {
             status = true;
@@ -315,22 +315,22 @@ public class RoadMain {
         } else if (roads.get(i).vehicles.size() > 0) {
             if (roads.get(i).getDirection().equals("North")) {
                 if (roads.get(i).getVehicleOnRoad(roads.get(i).vehicles.size() - 1).getYrear()
-                        > roads.get(i).getYsouth() + size) {
+                        < roads.get(i).getYsouth() + 15) {
                     status = true;
                 }
             } else if (roads.get(i).getDirection().equals("South")) {
                 if (roads.get(i).getVehicleOnRoad(roads.get(i).vehicles.size() - 1).getYrear()
-                        > roads.get(i).getYnorth() - size) {
+                        > roads.get(i).getYnorth() - 15) {
                     status = true;
                 }
             } else if (roads.get(i).getDirection().equals("East")) {
-                if (roads.get(i).getVehicleOnRoad(roads.get(i).vehicles.size() - 1).getYrear()
-                        > roads.get(i).getXwest() + size) {
+                if (roads.get(i).getVehicleOnRoad(roads.get(i).vehicles.size() - 1).getXrear()
+                        < roads.get(i).getXwest() + 15) {
                     status = true;
                 }
-            } else if (roads.get(i).getDirection().equals("North")) {
-                if (roads.get(i).getVehicleOnRoad(roads.get(i).vehicles.size() - 1).getYrear()
-                        > roads.get(i).getXeast() - size) {
+            } else if (roads.get(i).getDirection().equals("West")) {
+                if (roads.get(i).getVehicleOnRoad(roads.get(i).vehicles.size() - 1).getXrear()
+                        > roads.get(i).getXeast() - 15) {
                     status = true;
 
                 }
@@ -340,7 +340,7 @@ public class RoadMain {
 
 
         return status;
-    }*/
+    }
 
 
     void addVehicle(String type, int speed, int roadRef) {
@@ -402,21 +402,6 @@ public class RoadMain {
         }
     }
 
-    /*public void upateGui(){
-        gui.redrawVehicles();
-        for (Road road: roads){
-            for (Vehicle vehicle :road.vehicles){
-                gui.updateVehicles(vehicle.getRoadRef(), vehicle.getType(), vehicle.getDistanceTraveled());
-            }
-
-        }
-
-    }*/
-
-    void openGui(){
-       // gui.setVisible(true);
-    }
-
     public void runSim() {
         Random r = new Random();
        // for (; ; ) {
@@ -444,7 +429,7 @@ public class RoadMain {
 
             printPos();
             moveVehicles();
-          //  upateGui();
+
 
 
 

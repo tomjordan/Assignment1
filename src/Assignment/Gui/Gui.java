@@ -148,11 +148,12 @@ public class Gui extends JFrame implements ActionListener {
     }
 
     void addInitialRoad(){
-        roadMain.addnewRoad(200, 60, "South", 500, -60);
-        map.addRoad(roadMain.getRoad(0).getLength(), 60,
-                "South", roadMain.getRoad(0).getXwest(), -roadMain.getRoad(0).getYnorth() , roadCount);
-       // map.paintRoads();
+        roadMain.addnewRoad(200, 60, "South", 500, 0);
         addCount();
+        map.addRoad(roadMain.getRoad(0).getLength(), 60,
+                "South", roadMain.getRoad(0).getXwest(), -roadMain.getRoad(0).getYnorth() , 0);
+       // map.paintRoads();
+        //addCount();
     }
 
     void addNewRoad(int ref, int length, String direction) {
@@ -178,10 +179,15 @@ public class Gui extends JFrame implements ActionListener {
         map.moveVehicles();
     }*/
 
-    public void upateVehicles() {
+    public void updateImages() {
         map.vehicleImages.clear();
+        map.trafficLightImages.clear();
         //redrawVehicles();
         for (Road road : roadMain.getRoads()) {
+            if (road.lightAtEnd()){
+                boolean status = road.getEndLight().isGreen();
+                    map.addTrafficLight(road.getTrafficLightWest(), road.getTrafficLightNorth(), status);
+            }
             for (Vehicle vehicle : road.getVehicles()) {
                // map.addVehicle(vehicle.getRoadRef(), vehicle.getType(), vehicle.getDistanceTraveled());
                 //String type, int yNorth, int xWest, int length
@@ -194,7 +200,7 @@ public class Gui extends JFrame implements ActionListener {
     }
 
 
-    void runGui() {
+    void animate() {
 
         if (timer != null) {
             timer.stop();
@@ -202,7 +208,7 @@ public class Gui extends JFrame implements ActionListener {
         timer = new Timer(1000/60, e -> {
 
             roadMain.runSim();
-            upateVehicles();
+            updateImages();
 
         });
         timer.start();
@@ -215,9 +221,9 @@ public class Gui extends JFrame implements ActionListener {
 
         if (name.equals("Simulator Mode")) {
             System.out.println("Simulator Mode pressed");
-                runGui();
+              animate();
             //roadMain.runSim();
-            //upateVehicles();
+            //updateImages();
 
         } else if (name.equals("Build Mode")) {
             confirmReset();
@@ -246,7 +252,7 @@ public class Gui extends JFrame implements ActionListener {
 
                 } else if (getTrafficLight().equals("Yes")) {
                     addNewRoad(getConnectedRoad(), getNewRoadLength(), getDirection());
-                    roadMain.addTrafficLight(getConnectedRoad(), "End");
+                    roadMain.addTrafficLight(roadCount-1, "End");
                     System.out.println("New road added! Direction: " + getDirection() + "  Length: " + getNewRoadLength() + " On the end of road: " + getConnectedRoad() + "  With a traffic light at its end");
 
 

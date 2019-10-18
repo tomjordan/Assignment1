@@ -10,6 +10,7 @@ public class Map extends JPanel {
 
     ArrayList<RoadShape> roads = new ArrayList<>();
     ArrayList<VehicleImage> vehicleImages = new ArrayList<>();
+    ArrayList<TrafficLightImage> trafficLightImages = new ArrayList<>();
 
     public Map(int length, int width) {
         setBackground(Color.GREEN);
@@ -44,6 +45,12 @@ public class Map extends JPanel {
 
         vehicleImages.add(new VehicleImage(xWest, -yNorth, length, 10, type));
     }
+
+    void addTrafficLight(int xWest, int yNorth, boolean status) {
+        trafficLightImages.add(new TrafficLightImage(xWest, yNorth, status));
+        }
+
+
 
 
    /* void addVehicle(int roadRef, String type, int front, int rear){
@@ -93,15 +100,6 @@ public class Map extends JPanel {
 
 
 
-
-
-    void moveVehicles(){
-        repaint();
-        this.vehicleImages.clear();
-
-    }
-
-
     /*public void setRoads(ArrayList<Road> roads) {
         this.mainRoads = roads;
         mainRoads.clear();
@@ -129,6 +127,9 @@ public class Map extends JPanel {
         }
         for (VehicleImage vehicle : vehicleImages){
             vehicle.drawTraffic(g);
+        }
+        for (TrafficLightImage trafficLightImage : trafficLightImages){
+            trafficLightImage.drawLights(g);
         }
     }
 }
