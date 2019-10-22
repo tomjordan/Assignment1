@@ -204,6 +204,11 @@ public class Road {
         }
     }
 
+    /*boolean freeSpace(){
+        boolean status = false;
+        if (vehicles.get(vehicles.size()-1).getDistanceTraveled()<)
+    }*/
+
     private boolean checkCollision(int vRef) {
         /*Returns true if a vehicle will move past the vehicle
          * in front of it. If it does, position is set to the end of front vehicle

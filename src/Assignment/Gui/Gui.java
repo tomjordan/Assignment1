@@ -237,6 +237,8 @@ public class Gui extends JFrame implements ActionListener {
             addNewRoad(2, 250, "South");//5
             addNewRoad(5, 250, "East");//6
             addNewRoad(5, 250, "West");//7
+            roadMain.addTrafficLight(0, "End");
+            roadMain.addTrafficLight(5, "End");
 
             System.out.println("Make Default");
 
