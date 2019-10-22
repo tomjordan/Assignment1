@@ -229,6 +229,15 @@ public class RoadMain {
 
     }
 
+    /*private boolean checkMovement(int i) {
+        boolean status = false;
+        if (vehicles.get(i).getDistanceTraveled() > vehicles.get(i).getLength() + 15) {
+            status = true;
+        }
+        return status;
+    }*/
+
+
 
     private void checkTurns() {
         /*Checks if a vehicle has moved off its current road. If it has and there are connected roads, the vehicle will turn (be added to next road
@@ -304,6 +313,17 @@ public class RoadMain {
 
         return status;
     }*/
+/*
+    private boolean checkMovement(int i) {
+        boolean status = false;
+        if (vehicles.get(i).getDistanceTraveled() > size + 15) {
+            status = true;
+        }
+        return status;
+    }*/
+
+
+
     public boolean isEmpty(int i, int size) {
         /*Returns true if there is enough room at the beginning of a new road to add a new vehicle to it. Used when
          * turning vehicles  */
@@ -313,6 +333,14 @@ public class RoadMain {
         } else if (i == roads.size() - 1) {
             status = true;
         } else if (roads.get(i).vehicles.size() > 0) {
+            if (roads.get(i).getVehicleOnRoad(roads.get(i).vehicles.size() - 1).getDistanceTraveled()
+                    > roads.get(i).getYsouth() + 15) {
+                status = true;
+            }
+
+
+
+            /*
             if (roads.get(i).getDirection().equals("North")) {
                 if (roads.get(i).getVehicleOnRoad(roads.get(i).vehicles.size() - 1).getYrear()
                         < roads.get(i).getYsouth() + 15) {
@@ -335,7 +363,7 @@ public class RoadMain {
 
                 }
             }
-
+*/
         } else status = false;
 
 
@@ -464,9 +492,55 @@ public class RoadMain {
 }
 
 
+
+  /*  public boolean isEmpty(int i, int size) {
+        *//*Returns true if there is enough room at the beginning of a new road to add a new vehicle to it. Used when
+         * turning vehicles  *//*
+        boolean status = false;
+        if (roads.get(i).vehicles.size() == 0) {
+            status = true;
+        } else if (i == roads.size() - 1) {
+            status = true;
+        } else if (roads.get(i).vehicles.size() > 0) {
+            if (roads.get(i).getDirection().equals("North")) {
+                if (roads.get(i).getVehicleOnRoad(roads.get(i).vehicles.size() - 1).getYrear()
+                        < roads.get(i).getYsouth() + 15) {
+                    status = true;
+                }
+            } else if (roads.get(i).getDirection().equals("South")) {
+                if (roads.get(i).getVehicleOnRoad(roads.get(i).vehicles.size() - 1).getYrear()
+                        > roads.get(i).getYnorth() - 15) {
+                    status = true;
+                }
+            } else if (roads.get(i).getDirection().equals("East")) {
+                if (roads.get(i).getVehicleOnRoad(roads.get(i).vehicles.size() - 1).getXrear()
+                        < roads.get(i).getXwest() + 15) {
+                    status = true;
+                }
+            } else if (roads.get(i).getDirection().equals("West")) {
+                if (roads.get(i).getVehicleOnRoad(roads.get(i).vehicles.size() - 1).getXrear()
+                        > roads.get(i).getXeast() - 15) {
+                    status = true;
+
+                }
+            }
+
+        } else status = false;
+
+
+        return status;
+    }*/
+
+
 /*Old code i thought i might need. Was messing around with an add intersection method. Decided that the same thing could be achieved
  * by simply adding 2 or 3 connecting roads to a road*/
 /*
+
+
+
+
+
+
 
  public void checkTurns() {
         for (int i = 0; i < roads.size(); i++) {

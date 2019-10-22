@@ -16,6 +16,7 @@ public class Vehicle {
     private int xinit;
     private int yinit;
     private int roadRef = 0;
+    private int distance = 0;
 
 
     public Vehicle(String direction, int speed, int x, int y) {
@@ -91,6 +92,7 @@ public class Vehicle {
                 xrear = xrear - speed;
                 break;
         }
+        distance += speed;
 
     }
 
@@ -211,24 +213,12 @@ public class Vehicle {
 
 
 
-
+    public void resetDistanceTraveled(){
+        this.distance = 0;
+    }
 
     public int getDistanceTraveled(){
-        int distanceTraveled = 0;
-        switch (direction) {
-            case "North":
-            case "South":
-                distanceTraveled = Math.abs(ypos-yinit);
-                break;
-            case "East":
-            case "West":
-                distanceTraveled = Math.abs(xpos-xinit);
-                break;
-        }
-        return distanceTraveled;
-
-
-    }
+        return distance;}
 }
 
 

@@ -155,6 +155,7 @@ public class Road {
         vehiclesOnRoad++;
     }
 
+
     void addTrafficLight(String which_end) {
         /*Adds a traffic light to the end or beginning of the road */
         if (which_end.equals("Start")) {
@@ -248,6 +249,14 @@ public class Road {
         return status;
     }
 
+    /*private boolean checkMovement(int i) {
+        boolean status = false;
+        if (vehicles.get(i).getDistanceTraveled() > vehicles.get(i).getLength() + 15) {
+            status = true;
+        }
+        return status;
+    }*/
+
 
     boolean lightAtStart() {
         return trafficLightStart;
@@ -267,7 +276,7 @@ public class Road {
 
     private boolean checkMovement(int i) {
 
-        /* Returns true if the vehicle will be moving off the current road*/
+         /*Returns true if the vehicle will be moving off the current road*/
 
         boolean status = false;
 
