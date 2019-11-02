@@ -36,7 +36,7 @@ public class Vehicle {
         return carlength;
     }
 
-   public int getLength() {
+    public int getLength() {
         /*Returns the length of vehicle */
         return length;
     }
@@ -155,96 +155,45 @@ public class Vehicle {
     }
 
 
-    public int getYnorth () {
+    public int getYnorth() {
         int yPosition = 0;
-        if (direction.equals("North")){
+        if (direction.equals("North")) {
             yPosition = ypos;
-        }else if (direction.equals("South")){
+        } else if (direction.equals("South")) {
             yPosition = yrear;
-        }else yPosition = yinit+5;
+        } else yPosition = yinit + 5;
         return yPosition;
     }
 
-    public int getXwest () {
+    public int getXwest() {
         int xPosition = 0;
-        if (direction.equals("East")){
+        if (direction.equals("East")) {
             xPosition = xrear;
-        }else if (direction.equals("West")){
+        } else if (direction.equals("West")) {
             xPosition = xpos;
-        }else xPosition = xinit-5;
+        } else xPosition = xinit - 5;
         return xPosition;
     }
 
 
-
-        public int getRear () {
-            /*Returns rear coordinate of a vehicle based on its direction */
-            int position = 0;
-            if (direction.equals("North") || direction.equals("South")) {
-                position = yrear;
-            } else {
-                position = xrear;
-            }
-            return position;
-
-        }
-
-
-        int getSpeed () {
-            /*Returns the speed of a vehicle*/
-            return speed;
-        }
-
-        public int getRoadRef () {
-            /*Returns the reference road the vehicle is currently on*/
-            return roadRef;
-
-        }
-
-        void setRoadRef ( int num){
-            /*Sets the reference for road that a vehicle is currently on*/
-            this.roadRef = num;
-
-        }
-
-
-
-
-
-
-
-    public void resetDistanceTraveled(){
-        this.distance = 0;
+    int getSpeed() {
+        /*Returns the speed of a vehicle*/
+        return speed;
     }
 
-    public int getDistanceTraveled(){
-        return distance;}
+    public int getRoadRef() {
+        /*Returns the reference road the vehicle is currently on*/
+        return roadRef;
+
+    }
+
+    void setRoadRef(int num) {
+        /*Sets the reference for road that a vehicle is currently on*/
+        this.roadRef = num;
+
+    }
+
+    public int getDistanceTraveled() {
+        return distance;
+    }
 }
-
-
-
-
-/*
-
-    void intiDir() {
-        */
-/*Initiates the front and rear positions of vehicle based on its length and direction *//*
-
-        if (getDirection().equals("North")) {
-            ypos = yinit + this.getLength();
-            yrear = yinit;
-            xpos = xinit;
-        } else if (getDirection().equals("South")) {
-            ypos = yinit - this.getLength();
-            yrear = yinit;
-            xpos = xinit;
-        } else if (getDirection().equals("East")) {
-            xpos = xinit + this.getLength();
-            xrear = xinit;
-            ypos = yinit;
-        } else if (getDirection().equals("West")) {
-            xpos = xinit - this.getLength();
-            xrear = xinit;
-            ypos = yinit;
-        }
-    }*/

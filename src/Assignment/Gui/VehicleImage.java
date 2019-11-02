@@ -3,7 +3,7 @@ package Assignment.Gui;
 import java.awt.*;
 
 public class VehicleImage {
-
+    /*This class is used to draw vehicles on the map*/
 
     String type;
     int xinit;
@@ -19,13 +19,6 @@ public class VehicleImage {
         this.length = length;
         this.width = width;
     }
-
-   /* public void update(int xinit, int yinit, int distanceTraveled){
-        this.xinit = xinit;
-        this.yinit = yinit;
-        this.distanceTraveled = distanceTraveled*10;
-    }*/
-
 
     public void drawTraffic(Graphics g) {
         switch (type) {

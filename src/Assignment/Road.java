@@ -56,7 +56,7 @@ public class Road {
                 ynorth = yinit;
                 xeast = xinit + width;
                 xwest = xinit;
-                trafficLightNorth = ysouth+60;
+                trafficLightNorth = ysouth + 60;
                 trafficLightWest = xeast;
                 break;
             case "East":
@@ -65,7 +65,7 @@ public class Road {
                 ynorth = yinit + width;
                 ysouth = yinit;
                 trafficLightNorth = ynorth + 60;
-                trafficLightWest = xeast-30;
+                trafficLightWest = xeast - 30;
                 break;
             case "West":
                 xwest = xinit - length;
@@ -84,10 +84,12 @@ public class Road {
         this.connectedRoads.add(connectedRoads);
         this.index++;
     }
-    public int getTrafficLightNorth(){
+
+    public int getTrafficLightNorth() {
         return trafficLightNorth;
     }
-    public int getTrafficLightWest(){
+
+    public int getTrafficLightWest() {
         return trafficLightWest;
     }
 
@@ -109,7 +111,7 @@ public class Road {
                 break;
         }
         vehicles.get(vehicles.size() - 1).intiDir();
-        //vehicleRef = vehicles.size();
+
         vehiclesOnRoad++;
     }
 
@@ -130,8 +132,6 @@ public class Road {
                 break;
         }
         vehicles.get(vehicles.size() - 1).intiDir();
-        // vehicles.get(vehicleRef).intiDir();
-        // vehicleRef = vehicles.size();
         vehiclesOnRoad++;
     }
 
@@ -189,7 +189,7 @@ public class Road {
 
         for (int i = 0; i < vehicles.size(); i++) {
             if (checkCollision(i)) {
-                System.out.println("\n\n\n\n...........................................................................Collision with " + vehicles.get(i).getType() + "  " + vehicles.get(i-1).getType());
+                System.out.println("\n\n\n\n...........................................................................Collision with " + vehicles.get(i).getType() + "  " + vehicles.get(i - 1).getType());
                 //vehicles.get(i).setSpeed(vehicles.get(i - 1).getSpeed());
                 //vehicles.get(i).setPos(vehicles.get(i - 1).getRear());
             } else if (checkMovement(i)) {
@@ -204,21 +204,16 @@ public class Road {
         }
     }
 
-    /*boolean freeSpace(){
-        boolean status = false;
-        if (vehicles.get(vehicles.size()-1).getDistanceTraveled()<)
-    }*/
-
     private boolean checkCollision(int vRef) {
         /*Returns true if a vehicle will move past the vehicle
          * in front of it. If it does, position is set to the end of front vehicle
          * and speed is set to the first vehicles speed. Used in move vehicles function */
         boolean status = false;
-        if (vRef != 0){
+        if (vRef != 0) {
 
             if (direction == "North") {
                 if (vehicles.get(vRef).getYpos() + vehicles.get(vRef).getSpeed() >=
-                        vehicles.get(vRef - 1).getYrear()- 20) {
+                        vehicles.get(vRef - 1).getYrear() - 20) {
                     vehicles.get(vRef).setSpeed(vehicles.get(vRef - 1).getSpeed());
                     vehicles.get(vRef).setPos(vehicles.get(vRef - 1).getYrear() - 21);
                     status = true;
@@ -226,7 +221,7 @@ public class Road {
 
             } else if (direction == "East") {
                 if (vehicles.get(vRef).getXpos() + vehicles.get(vRef).getSpeed() >=
-                        vehicles.get(vRef - 1).getXrear()-20) {
+                        vehicles.get(vRef - 1).getXrear() - 20) {
                     vehicles.get(vRef).setSpeed(vehicles.get(vRef - 1).getSpeed());
                     vehicles.get(vRef).setPos(vehicles.get(vRef - 1).getXrear() - 21);
                     status = true;
@@ -234,7 +229,7 @@ public class Road {
 
             } else if (direction == "West") {
                 if (vehicles.get(vRef).getXpos() - vehicles.get(vRef).getSpeed() <=
-                        vehicles.get(vRef - 1).getXrear()+ 20) {
+                        vehicles.get(vRef - 1).getXrear() + 20) {
                     vehicles.get(vRef).setSpeed(vehicles.get(vRef - 1).getSpeed());
                     vehicles.get(vRef).setPos(vehicles.get(vRef - 1).getXrear() + 21);
                     status = true;
@@ -242,7 +237,7 @@ public class Road {
 
             } else if (direction == "South") {
                 if (vehicles.get(vRef).getYpos() - vehicles.get(vRef).getSpeed() <=
-                        vehicles.get(vRef - 1).getYrear()+ 20) {
+                        vehicles.get(vRef - 1).getYrear() + 20) {
                     vehicles.get(vRef).setSpeed(vehicles.get(vRef - 1).getSpeed());
                     vehicles.get(vRef).setPos(vehicles.get(vRef - 1).getYrear() + 21);
                     status = true;
@@ -253,14 +248,6 @@ public class Road {
         }
         return status;
     }
-
-    /*private boolean checkMovement(int i) {
-        boolean status = false;
-        if (vehicles.get(i).getDistanceTraveled() > vehicles.get(i).getLength() + 15) {
-            status = true;
-        }
-        return status;
-    }*/
 
 
     boolean lightAtStart() {
@@ -281,7 +268,7 @@ public class Road {
 
     private boolean checkMovement(int i) {
 
-         /*Returns true if the vehicle will be moving off the current road*/
+        /*Returns true if the vehicle will be moving off the current road*/
 
         boolean status = false;
 
@@ -328,18 +315,11 @@ public class Road {
 
     }
 
-    Vehicle getVehicleOnRoad(int ref_num) {
-        /*Returns a specified vehicle currently on the road*/
-        return vehicles.get(ref_num);
-
-    }
-
 
     private void isOffRoad(int i) {
         /*Adds a vehicle to the liost of vehicles that would be moving off the road*/
         vehiclesOffRoad.add(vehicles.get(i));
     }
-
 
 
     public ArrayList<Vehicle> getVehicles_off_road() {
@@ -362,11 +342,6 @@ public class Road {
     public String getDirection() {
         /*Returns the direction of the road*/
         return direction;
-    }
-
-    int getNum_vehicles() {
-        /*Returns the number of vehicles currently on the road*/
-        return vehiclesOnRoad;
     }
 
 
@@ -394,7 +369,7 @@ public class Road {
         return ysouth;
     }
 
-    public ArrayList<Vehicle> getVehicles(){
+    public ArrayList<Vehicle> getVehicles() {
         return vehicles;
     }
 

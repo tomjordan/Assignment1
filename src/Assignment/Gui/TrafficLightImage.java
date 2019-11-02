@@ -3,7 +3,7 @@ package Assignment.Gui;
 import java.awt.*;
 
 public class TrafficLightImage {
-
+    /*This class is used to draw traffic lights on the map*/
     int xinit;
     int yinit;
     boolean status;
